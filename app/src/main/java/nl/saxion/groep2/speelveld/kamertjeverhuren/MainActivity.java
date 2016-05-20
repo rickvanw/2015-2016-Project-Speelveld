@@ -15,32 +15,40 @@ public class MainActivity extends AppCompatActivity {
 
     private int minSide;
     private ArrayList<Line> lines = new ArrayList<>();
+    GameBoard gameBoard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // initialize gameboard
-        GameBoard gameBoard = new GameBoard(this);
+        // Initialize gameboard
+        gameBoard = new GameBoard(this);
 
-        // get lowest screen width or height to create a square
+        // Set a distance between the edges of the display and the gameboard
+        int gameboardMargin = 40;
+        gameBoard.setTranslationX(gameboardMargin);
+        gameBoard.setTranslationY(gameboardMargin);
+
+        // Get lowest screen width or height to create a square
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        minSide = (Math.min(metrics.heightPixels, metrics.widthPixels));
 
-        // add gameboard
+        // The width of the display used to calculate a square gameboard
+        minSide = (Math.min(metrics.heightPixels, metrics.widthPixels)-gameboardMargin*2);
+
+        // Add gameboard
         ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(minSide, minSide);
         this.addContentView(gameBoard, layoutParams);
 
-        // the amount of boxes on the field
-        int boardSize = 5;
+        // The amount of boxes on the field
+        int boardSize = 3;
 
-        // create lines on the gameboard
+        // Create lines on the gameboard
         drawLines(boardSize);
     }
 
-    // drawlines method, input the amount of boxes which the field should have
+    // Drawlines method, input the amount of boxes which the field should have
     public void drawLines(int boardSize){
 
         // Amount of horizontal lines drawn on the x-axis
@@ -53,21 +61,23 @@ public class MainActivity extends AppCompatActivity {
         // Amount of vertical lines drawn on the y-axis
         int numberOfLinesVerticalY = boardSize;
 
-        // List with al the Line views
-        ArrayList<LineView> lineViews = new ArrayList<>();
-
-        // Initialise boolean to check send, this way the line view knows if it's horizontal or vertical
+        // Initialise boolean horizontal(true) / vertical(false), this way the line view knows if it's horizontal or vertical
         boolean horizontal;
 
         // For every horizontal line on the X axis, create a line on the Y axis
         for (int i = 0; i < numberOfLinesHorizontalX; i++) {
+
+            // All these lines will be horizontal
             horizontal = true;
+
             for (int j = 0; j < numberOfLinesHorizontalY; j++) {
-                Line line = new Line(i,j);
+                Line line = new Line(i,j, horizontal, minSide, boardSize, gameBoard);
+
+                // The line is added to the list of lines
                 lines.add(line);
 
                 // Create a line view
-                LineView lineView = new LineView(this, line, minSide, horizontal, boardSize);
+                LineView lineView = new LineView(this, line);
 
                 // Set the width and height of the view
                 ViewGroup.LayoutParams layoutParamsLine = new ViewGroup.LayoutParams((minSide / boardSize), 20);
@@ -79,13 +89,18 @@ public class MainActivity extends AppCompatActivity {
 
         // For every vertical line on the X axis, create a line on the Y axis
         for (int i = 0; i < numberOfLinesVerticalX; i++) {
+
+            // All these lines will be vertical
             horizontal = false;
+
             for (int j = 0; j < numberOfLinesVerticalY; j++) {
-                Line line = new Line(i,j);
+                Line line = new Line(i,j, horizontal, minSide, boardSize, gameBoard);
+
+                // The line is added to the list of lines
                 lines.add(line);
 
                 // Create a line view
-                LineView lineView = new LineView(this, line, minSide, horizontal, boardSize);
+                LineView lineView = new LineView(this, line);
 
                 // Set the width and height of the view
                 ViewGroup.LayoutParams layoutParamsLine = new ViewGroup.LayoutParams(20, (minSide / boardSize));
