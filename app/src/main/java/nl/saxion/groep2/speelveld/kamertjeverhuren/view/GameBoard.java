@@ -35,9 +35,4 @@ public class GameBoard extends View {
     public void init() {
         this.setBackgroundColor(Color.GRAY);
     }
-
-    @Override
-    public ViewGroup.LayoutParams getLayoutParams() {
-        return super.getLayoutParams();
-    }
 }

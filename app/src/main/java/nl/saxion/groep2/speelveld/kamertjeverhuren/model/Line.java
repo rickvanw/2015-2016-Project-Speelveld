@@ -10,14 +10,13 @@ import nl.saxion.groep2.speelveld.kamertjeverhuren.view.GameBoard;
 public class Line {
     private boolean clicked, horizontal;
 
-    int startX, stopX, startY, stopY, minSide, boardSize;
+    int startX, stopX, startY, stopY, boardSize;
 
     GameBoard gameBoard;
 
-    public Line(int startX, int startY, boolean horizontal, int minSide, int boardSize, GameBoard gameBoard) {
+    public Line(int startX, int startY, boolean horizontal, int boardSize, GameBoard gameBoard) {
         this.startX = startX;
         this.startY = startY;
-        this.minSide = minSide;
         this.horizontal = horizontal;
         this.boardSize = boardSize;
         this.gameBoard = gameBoard;
@@ -59,10 +58,7 @@ public class Line {
     public int getStopY() {
         return stopY;
     }
-    // Method to get the board width/height
-    public int getMinSide() {
-        return minSide;
-    }
+
     // Method to get the board size in boxes per row
     public int getBoardSize() {
         return boardSize;

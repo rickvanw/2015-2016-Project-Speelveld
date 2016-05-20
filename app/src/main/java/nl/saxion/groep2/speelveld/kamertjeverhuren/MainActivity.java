@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
+import nl.saxion.groep2.speelveld.kamertjeverhuren.model.GameModel;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.model.Line;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.view.GameBoard;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.view.LineView;
@@ -36,19 +37,20 @@ public class MainActivity extends AppCompatActivity {
 
         // The width of the display used to calculate a square gameboard
         minSide = (Math.min(metrics.heightPixels, metrics.widthPixels)-gameboardMargin*2);
+        GameModel.getInstance().setGameBoardSize(minSide);
 
         // Add gameboard
         ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(minSide, minSide);
         this.addContentView(gameBoard, layoutParams);
 
-        // The amount of boxes on the field
-        int boardSize = 3;
-
         // Create lines on the gameboard
-        drawLines(boardSize);
+        drawLines(GameModel.getInstance().getAmountOfBoxesInRow());
     }
 
-    // Drawlines method, input the amount of boxes which the field should have
+    /**
+     * Drawlines method, input the amount of boxes which the field should have
+     * @param boardSize
+     */
     public void drawLines(int boardSize){
 
         // Amount of horizontal lines drawn on the x-axis
@@ -71,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
             horizontal = true;
 
             for (int j = 0; j < numberOfLinesHorizontalY; j++) {
-                Line line = new Line(i,j, horizontal, minSide, boardSize, gameBoard);
+                Line line = new Line(i,j, horizontal, boardSize, gameBoard);
 
                 // The line is added to the list of lines
                 lines.add(line);

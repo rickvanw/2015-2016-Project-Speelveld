@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
+import nl.saxion.groep2.speelveld.kamertjeverhuren.model.GameModel;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.model.Line;
 
 /**
@@ -27,7 +28,7 @@ public class LineView extends View {
         // Retrieve the chosen amount of boxes in a row
         this.boardSize = line.getBoardSize();
         // Retrieve the width and height of the board
-        this.minSide = line.getMinSide();
+        this.minSide = GameModel.getInstance().getGameBoardSize();
         // Retrieve if the current line is a vertical line or a horizontal line
         this.horizontal = line.isHorizontal();
         // Get the start position coordinates of the line
