@@ -4,10 +4,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.RelativeLayout;
-
-import nl.saxion.groep2.speelveld.kamertjeverhuren.model.Line;
 
 /**
  * Created by Robert on 18-5-2016.

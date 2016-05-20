@@ -1,11 +1,14 @@
 package nl.saxion.groep2.speelveld.kamertjeverhuren.model;
 
+import nl.saxion.groep2.speelveld.kamertjeverhuren.view.GameBoard;
+
 /**
  * Created by Robert on 20-5-2016.
  */
 public class GameModel {
     private static GameModel ourInstance = new GameModel();
     private int gameBoardSize, amountOfBoxesInRow;
+    private GameBoard gameBoard;
 
     public static GameModel getInstance() {
         return ourInstance;
@@ -13,6 +16,10 @@ public class GameModel {
 
     private GameModel() {
         this.amountOfBoxesInRow = 3;
+    }
+
+    public void setGameBoard(GameBoard gameBoard) {
+        this.gameBoard = gameBoard;
     }
 
     // setters
@@ -36,5 +43,9 @@ public class GameModel {
 
     public int getAmountOfBoxesInRow() {
         return amountOfBoxesInRow;
+    }
+
+    public GameBoard getGameBoard() {
+        return gameBoard;
     }
 }

@@ -1,25 +1,17 @@
 package nl.saxion.groep2.speelveld.kamertjeverhuren.model;
 
-import android.content.Context;
-
-import nl.saxion.groep2.speelveld.kamertjeverhuren.view.GameBoard;
-
 /**
  * Created by Robert on 19-5-2016.
  */
 public class Line {
     private boolean clicked, horizontal;
 
-    int startX, stopX, startY, stopY, boardSize;
+    int startX, stopX, startY, stopY;
 
-    GameBoard gameBoard;
-
-    public Line(int startX, int startY, boolean horizontal, int boardSize, GameBoard gameBoard) {
+    public Line(int startX, int startY, boolean horizontal) {
         this.startX = startX;
         this.startY = startY;
         this.horizontal = horizontal;
-        this.boardSize = boardSize;
-        this.gameBoard = gameBoard;
 
         // The stopping Y and X coordinates are one more then the starting point. They are different for horizontal lines versus vertical lines
         if (horizontal) {
@@ -59,21 +51,8 @@ public class Line {
         return stopY;
     }
 
-    // Method to get the board size in boxes per row
-    public int getBoardSize() {
-        return boardSize;
-    }
     // Method to check if this line is a horizontal line or a vertical line
     public boolean isHorizontal() {
         return horizontal;
     }
-    // Methods to get the gameboard translations
-    public float getTranslationX(){
-        return gameBoard.getTranslationX();
-    }
-
-    public float getTranslationY(){
-        return gameBoard.getTranslationY();
-    }
-
 }

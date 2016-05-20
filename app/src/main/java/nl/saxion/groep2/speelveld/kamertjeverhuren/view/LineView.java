@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 
 import nl.saxion.groep2.speelveld.kamertjeverhuren.model.GameModel;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.model.Line;
@@ -26,7 +25,7 @@ public class LineView extends View {
         // Retrieve the line object
         this.line = line;
         // Retrieve the chosen amount of boxes in a row
-        this.boardSize = line.getBoardSize();
+        this.boardSize = GameModel.getInstance().getAmountOfBoxesInRow();
         // Retrieve the width and height of the board
         this.minSide = GameModel.getInstance().getGameBoardSize();
         // Retrieve if the current line is a vertical line or a horizontal line
@@ -76,8 +75,8 @@ public class LineView extends View {
 
         // The translation of the gameboard is added to the calculated translation to make sure that the lines maintain within the board, then
         // the translation is set
-        setTranslationX(translationX + line.getTranslationX());
-        setTranslationY(translationY + line.getTranslationY());
+        setTranslationX(translationX + GameModel.getInstance().getGameBoard().getTranslationX());
+        setTranslationY(translationY + GameModel.getInstance().getGameBoard().getTranslationY());
     }
 
     public void onDraw(Canvas canvas) {

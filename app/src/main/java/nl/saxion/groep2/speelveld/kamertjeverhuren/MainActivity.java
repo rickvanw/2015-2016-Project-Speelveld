@@ -31,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
         gameBoard.setTranslationX(gameboardMargin);
         gameBoard.setTranslationY(gameboardMargin);
 
+        GameModel.getInstance().setGameBoard(gameBoard);
+
         // Get lowest screen width or height to create a square
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
@@ -73,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
             horizontal = true;
 
             for (int j = 0; j < numberOfLinesHorizontalY; j++) {
-                Line line = new Line(i,j, horizontal, boardSize, gameBoard);
+                Line line = new Line(i,j, horizontal);
 
                 // The line is added to the list of lines
                 lines.add(line);
@@ -96,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
             horizontal = false;
 
             for (int j = 0; j < numberOfLinesVerticalY; j++) {
-                Line line = new Line(i,j, horizontal, minSide, boardSize, gameBoard);
+                Line line = new Line(i,j, horizontal);
 
                 // The line is added to the list of lines
                 lines.add(line);
