@@ -43,7 +43,6 @@ public class LineView extends View {
     }
 
     public void init() {
-        Log.d("RESULT", "LineView init");
         // Create two different styles for the view
         paintBlack = new Paint();
         paintBlack.setColor(Color.BLACK);
@@ -54,7 +53,7 @@ public class LineView extends View {
         paintYellow = new Paint();
         paintYellow.setColor(Color.YELLOW);
         paintYellow.setStyle(Paint.Style.STROKE);
-        paintBlack.setStrokeWidth(20);
+        paintYellow.setStrokeWidth(20);
     }
 
     public void setTranslation() {
@@ -81,17 +80,17 @@ public class LineView extends View {
 
     public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        if (horizontal && !line.getClicked()) {
+        if (horizontal && !line.isClicked()) {
             // The line is drawn to fill the view with the determined color. The 10 is added in the Y (and in the other line X) start and stop
             // point, to make sure the line is drawn correctly in the middle of the view (stroke width 20 will only show half of the stroke width
             // without this)
             canvas.drawLine(0, 10, minSide / boardSize, 10, paintBlack);
-        } else if (!line.getClicked()) {
+        } else if (!line.isClicked()) {
             canvas.drawLine(10, 0, 10, minSide / boardSize, paintBlack);
         }
-        if (line.getClicked() && horizontal) {
+        if (line.isClicked() && horizontal) {
             canvas.drawLine(0, 10, minSide / boardSize, 10, paintYellow);
-        } else if (line.getClicked()) {
+        } else if (line.isClicked()) {
             canvas.drawLine(10, 0, 10, minSide / boardSize, paintYellow);
         }
     }

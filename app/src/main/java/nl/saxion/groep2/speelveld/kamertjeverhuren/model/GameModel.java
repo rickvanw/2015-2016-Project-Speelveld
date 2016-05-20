@@ -1,5 +1,7 @@
 package nl.saxion.groep2.speelveld.kamertjeverhuren.model;
 
+import java.util.ArrayList;
+
 import nl.saxion.groep2.speelveld.kamertjeverhuren.view.GameBoard;
 
 /**
@@ -9,6 +11,8 @@ public class GameModel {
     private static GameModel ourInstance = new GameModel();
     private int gameBoardSize, amountOfBoxesInRow;
     private GameBoard gameBoard;
+    private ArrayList<Line> lines = new ArrayList<>();
+    private ArrayList<Box> boxes = new ArrayList<>();
 
     public static GameModel getInstance() {
         return ourInstance;
@@ -16,16 +20,31 @@ public class GameModel {
 
     private GameModel() {
         this.amountOfBoxesInRow = 3;
+
+        // create boxes based on the amount of boxes in a row
+        for(int vertical = 0; vertical<amountOfBoxesInRow; vertical++)
+        {
+            for(int horiontal = 0; horiontal<amountOfBoxesInRow; horiontal++)
+            {
+                Box box = new Box(horiontal,vertical);
+                boxes.add(box);
+            }
+        }
     }
 
     public void setGameBoard(GameBoard gameBoard) {
         this.gameBoard = gameBoard;
     }
 
+    public void setLine(Line line) {
+        this.lines.add(line);
+    }
+
     // setters
 
     /**
      * This method sets the GameBoard size based on the smallest side of the screen
+     *
      * @param gameBoardSize
      */
     public void setGameBoardSize(int gameBoardSize) {
@@ -33,8 +52,10 @@ public class GameModel {
     }
 
     // getters
+
     /**
      * This method returns the GameBoard size based on the smallest side of the screen
+     *
      * @return gameBoardSize
      */
     public int getGameBoardSize() {
@@ -47,5 +68,13 @@ public class GameModel {
 
     public GameBoard getGameBoard() {
         return gameBoard;
+    }
+
+    public ArrayList<Line> getLines() {
+        return lines;
+    }
+
+    public ArrayList<Box> getBoxes() {
+        return boxes;
     }
 }

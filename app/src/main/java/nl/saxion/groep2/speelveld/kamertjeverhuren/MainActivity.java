@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
+import nl.saxion.groep2.speelveld.kamertjeverhuren.model.Box;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.model.GameModel;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.model.Line;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.view.GameBoard;
@@ -15,7 +16,6 @@ import nl.saxion.groep2.speelveld.kamertjeverhuren.view.LineView;
 public class MainActivity extends AppCompatActivity {
 
     private int minSide;
-    private ArrayList<Line> lines = new ArrayList<>();
     GameBoard gameBoard;
 
     @Override
@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
         // The width of the display used to calculate a square gameboard
-        minSide = (Math.min(metrics.heightPixels, metrics.widthPixels)-gameboardMargin*2);
+        minSide = (Math.min(metrics.heightPixels, metrics.widthPixels) - gameboardMargin * 2);
         GameModel.getInstance().setGameBoardSize(minSide);
 
         // Add gameboard
@@ -47,21 +47,25 @@ public class MainActivity extends AppCompatActivity {
 
         // Create lines on the gameboard
         drawLines(GameModel.getInstance().getAmountOfBoxesInRow());
+
+        // Assign lines to boxes
+        assignLines();
     }
 
     /**
      * Drawlines method, input the amount of boxes which the field should have
+     *
      * @param boardSize
      */
-    public void drawLines(int boardSize){
+    public void drawLines(int boardSize) {
 
         // Amount of horizontal lines drawn on the x-axis
         int numberOfLinesHorizontalX = boardSize;
         // Amount of horizontal lines drawn on the y-axis
-        int numberOfLinesHorizontalY = boardSize+1;
+        int numberOfLinesHorizontalY = boardSize + 1;
 
         // Amount of vertical lines drawn on the x-axis
-        int numberOfLinesVerticalX = boardSize+1;
+        int numberOfLinesVerticalX = boardSize + 1;
         // Amount of vertical lines drawn on the y-axis
         int numberOfLinesVerticalY = boardSize;
 
@@ -75,10 +79,10 @@ public class MainActivity extends AppCompatActivity {
             horizontal = true;
 
             for (int j = 0; j < numberOfLinesHorizontalY; j++) {
-                Line line = new Line(i,j, horizontal);
+                Line line = new Line(i, j, horizontal);
 
                 // The line is added to the list of lines
-                lines.add(line);
+                GameModel.getInstance().setLine(line);
 
                 // Create a line view
                 LineView lineView = new LineView(this, line);
@@ -98,10 +102,10 @@ public class MainActivity extends AppCompatActivity {
             horizontal = false;
 
             for (int j = 0; j < numberOfLinesVerticalY; j++) {
-                Line line = new Line(i,j, horizontal);
+                Line line = new Line(i, j, horizontal);
 
                 // The line is added to the list of lines
-                lines.add(line);
+                GameModel.getInstance().setLine(line);
 
                 // Create a line view
                 LineView lineView = new LineView(this, line);
@@ -111,6 +115,40 @@ public class MainActivity extends AppCompatActivity {
 
                 // Add the parameters to the lineView
                 this.addContentView(lineView, layoutParamsLine);
+            }
+        }
+    }
+
+
+    /**
+     * Every box in the grid should have 4 lines (top, bottom, left, right) assigned
+     * This method assigns the lines to the corresponding box
+     * @author Robert Mekenkamp
+     */
+    public void assignLines() {
+        ArrayList<Box> boxes = GameModel.getInstance().getBoxes();
+        ArrayList<Line> lines = GameModel.getInstance().getLines();
+        // assign lines to boxes
+        for (int b = 0; b < boxes.size(); b++) {
+            Box currentBox = boxes.get(b);
+            for (int l = 0; l < lines.size(); l++) {
+                Line currentLine = lines.get(l);
+                // asign horizontal line above box
+                if (currentLine.getStartX() == currentBox.getX() && currentLine.getStartY() == currentBox.getY() && currentLine.isHorizontal()) {
+                    currentBox.addLineToBox(currentLine);
+                }
+                // assign horizontal line below box
+                else if (currentLine.getStartX() == currentBox.getX() && currentLine.getStartY() == currentBox.getY() + 1 && currentLine.isHorizontal()) {
+                    currentBox.addLineToBox(currentLine);
+                }
+                // assign left vertical line
+                else if (currentLine.getStartX() == currentBox.getX() && currentLine.getStartY() == currentBox.getY() && !currentLine.isHorizontal()) {
+                    currentBox.addLineToBox(currentLine);
+                }
+                // assign right vertical line
+                else if (currentLine.getStartX() == currentBox.getX() + 1 && currentLine.getStartY() == currentBox.getY() && !currentLine.isHorizontal()) {
+                    currentBox.addLineToBox(currentLine);
+                }
             }
         }
     }

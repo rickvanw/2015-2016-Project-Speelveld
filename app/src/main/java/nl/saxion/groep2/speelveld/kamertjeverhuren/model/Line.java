@@ -30,11 +30,11 @@ public class Line {
         this.clicked = true;
     }
     // Method to check if the line is clicked
-    public boolean getClicked()
+    public boolean isClicked()
     {
         return clicked;
     }
-    // Four methods to get the different coordinates
+
     public int getStartX() {
         return startX;
     }
