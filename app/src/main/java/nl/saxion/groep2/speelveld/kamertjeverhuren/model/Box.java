@@ -14,8 +14,16 @@ public class Box {
         this.y = y;
     }
 
-    public void addLineToBox(Line line)
-    {
+    public boolean isSquare() {
+        for (int i = 0; i < lines.size(); i++) {
+            if (!lines.get(i).isClicked()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void addLineToBox(Line line) {
         lines.add(line);
     }
 
@@ -25,9 +33,5 @@ public class Box {
 
     public int getY() {
         return y;
-    }
-
-    public ArrayList<Line> getLines() {
-        return lines;
     }
 }

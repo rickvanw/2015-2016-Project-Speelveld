@@ -15,6 +15,8 @@ import nl.saxion.groep2.speelveld.kamertjeverhuren.model.Line;
  */
 public class LineView extends View {
 
+    public Callbacks callbacks;
+
     private static Paint paintBlack, paintYellow;
     private int minSide, startX, startY, boardSize;
     private boolean horizontal;
@@ -34,12 +36,12 @@ public class LineView extends View {
         startX = line.getStartX();
         startY = line.getStartY();
 
-        this.setOnClickListener(new Click());
         // Set the x, y translation from the top left corner to match the gameboard and to set the distance between lines
         setTranslation();
 
-        // Initialise the line
         init();
+
+        this.setOnClickListener(new Click());
     }
 
     public void init() {
@@ -74,8 +76,8 @@ public class LineView extends View {
 
         // The translation of the gameboard is added to the calculated translation to make sure that the lines maintain within the board, then
         // the translation is set
-        setTranslationX(translationX + GameModel.getInstance().getGameBoard().getTranslationX());
-        setTranslationY(translationY + GameModel.getInstance().getGameBoard().getTranslationY());
+        setTranslationX(translationX + 40);
+        setTranslationY(translationY + 40);
     }
 
     public void onDraw(Canvas canvas) {
@@ -105,6 +107,22 @@ public class LineView extends View {
             line.setClicked();
             // The draw will be invalidated
             v.invalidate();
+            callbacks.clicked();
         }
+    }
+
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        callbacks = (Callbacks) this.getContext();
+    }
+
+    /**
+     * The interface Callbacks is used to notify the main activity when a user have drawn a line
+     *
+     * @author Robert Mekenkamp
+     */
+    public interface Callbacks {
+        void clicked();
     }
 }

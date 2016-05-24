@@ -5,6 +5,8 @@ import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.View;
 
+import nl.saxion.groep2.speelveld.kamertjeverhuren.model.GameModel;
+
 /**
  * Created by Robert on 18-5-2016.
  */
@@ -30,5 +32,7 @@ public class GameBoard extends View {
 
     public void init() {
         this.setBackgroundColor(Color.GRAY);
+        setTranslationX(GameModel.getInstance().getGameBoardMargin());
+        setTranslationY(GameModel.getInstance().getGameBoardMargin());
     }
 }

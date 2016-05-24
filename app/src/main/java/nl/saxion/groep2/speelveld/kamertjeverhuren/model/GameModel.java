@@ -9,8 +9,8 @@ import nl.saxion.groep2.speelveld.kamertjeverhuren.view.GameBoard;
  */
 public class GameModel {
     private static GameModel ourInstance = new GameModel();
-    private int gameBoardSize, amountOfBoxesInRow;
-    private GameBoard gameBoard;
+    private int gameBoardSize, amountOfBoxesInRow, gameBoardMargin;
+
     private ArrayList<Line> lines = new ArrayList<>();
     private ArrayList<Box> boxes = new ArrayList<>();
 
@@ -20,6 +20,7 @@ public class GameModel {
 
     private GameModel() {
         this.amountOfBoxesInRow = 3;
+        this.gameBoardMargin = 40;
 
         // create boxes based on the amount of boxes in a row
         for(int vertical = 0; vertical<amountOfBoxesInRow; vertical++)
@@ -32,11 +33,8 @@ public class GameModel {
         }
     }
 
-    public void setGameBoard(GameBoard gameBoard) {
-        this.gameBoard = gameBoard;
-    }
 
-    public void setLine(Line line) {
+    public void addLine(Line line) {
         this.lines.add(line);
     }
 
@@ -66,15 +64,15 @@ public class GameModel {
         return amountOfBoxesInRow;
     }
 
-    public GameBoard getGameBoard() {
-        return gameBoard;
-    }
-
     public ArrayList<Line> getLines() {
         return lines;
     }
 
     public ArrayList<Box> getBoxes() {
         return boxes;
+    }
+
+    public int getGameBoardMargin() {
+        return gameBoardMargin;
     }
 }
