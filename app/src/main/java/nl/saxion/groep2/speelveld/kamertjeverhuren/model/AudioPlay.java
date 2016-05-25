@@ -4,9 +4,7 @@ package nl.saxion.groep2.speelveld.kamertjeverhuren.model;
  * Created by rubenassink on 25-05-16.
  */
 import android.content.Context;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.media.SoundPool;
 
 public class AudioPlay {
 
