@@ -8,8 +8,6 @@ import android.media.MediaPlayer;
 import android.util.Log;
 import android.view.View;
 
-import nl.saxion.groep2.speelveld.kamertjeverhuren.R;
-import nl.saxion.groep2.speelveld.kamertjeverhuren.model.AudioPlay;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.model.GameModel;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.model.Line;
 

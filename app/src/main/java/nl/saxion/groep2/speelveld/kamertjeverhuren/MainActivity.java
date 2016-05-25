@@ -1,6 +1,5 @@
 package nl.saxion.groep2.speelveld.kamertjeverhuren;
 
-import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -23,7 +22,7 @@ public class MainActivity extends AppCompatActivity implements LineView.Callback
     private int minSide;
     private ArrayList<BoxView> boxViews = new ArrayList<>();
     private static final boolean HORIZONTAL = true;
-    private TextView textCurrentPlayer;
+    private TextView textCurrentPlayer, textPlayerScore;
     private Player player1, player2;
     private Player currentPlayer;
 
@@ -51,6 +50,9 @@ public class MainActivity extends AppCompatActivity implements LineView.Callback
 
         textCurrentPlayer = (TextView) findViewById(R.id.txt_player);
         textCurrentPlayer.setText("Player " + currentPlayer.getPlayerNumber() + " is aan de beurt");
+
+        textPlayerScore = (TextView) findViewById(R.id.txt_score);
+        textPlayerScore.setText("Player 1's score: " + player1.getScore() + ", Player 2's score: " + player2.getScore());
 
         // Draw boxes
         drawBoxes();
@@ -192,21 +194,21 @@ public class MainActivity extends AppCompatActivity implements LineView.Callback
     }
 
     public void checkSquare() {
-        boolean isSquare = false;
+        boolean linesound = true;
         for (int i = 0; i < boxViews.size(); i++) {
-            if (!isSquare) {
-                isSquare = boxViews.get(i).checkSquare();
-                if (isSquare) {
-                    boxViews.remove(i);
-                    i--;
-                    AudioPlay.playAudio(this, R.raw.boxsound);
-                }
-            } else {
-                boxViews.get(i).checkSquare();
+            boolean isSquare = boxViews.get(i).checkSquare();
+            // if square is detected, increase player score, remove boxview from arraylist and play 'victory' sound instead of 'linesound'
+            if (isSquare) {
+                currentPlayer.increaseScore();
+                textPlayerScore.setText("Player 1's score: " + player1.getScore() + ", Player 2's score: " + player2.getScore());
+                boxViews.remove(i);
+                linesound = false;
+                i--;
+                AudioPlay.playAudio(this, R.raw.boxsound);
             }
         }
         // Play sound when line is clicked
-        if (!isSquare) {
+        if (linesound) {
             AudioPlay.playAudio(this, R.raw.linesound);
         }
     }
