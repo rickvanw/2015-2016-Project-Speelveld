@@ -42,8 +42,6 @@ public class MainActivity extends AppCompatActivity implements LineView.Callback
         // Draw boxes
         drawBoxes();
 
-
-
         // Create lines on the gameboard
         drawLines();
 
@@ -56,14 +54,14 @@ public class MainActivity extends AppCompatActivity implements LineView.Callback
         int amountOfBoxesInRow = GameModel.getInstance().getAmountOfBoxesInRow();
         int gameBoardSize = GameModel.getInstance().getGameBoardSize();
 
-        for (int i = 0; i < amountOfBoxesInRow * 3; i++) {
+        for (int i = 0; i < amountOfBoxesInRow * amountOfBoxesInRow; i++) {
             for (int y = 0; y < amountOfBoxesInRow; y++) {
                 for (int x = 0; x < amountOfBoxesInRow; x++) {
                     BoxView boxView = new BoxView(this);
                     boxView.setBox(GameModel.getInstance().getBoxes().get(i));
                     boxView.setPosition(x, y);
 
-                    ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(gameBoardSize / 3, gameBoardSize / 3);
+                    ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(gameBoardSize / amountOfBoxesInRow, gameBoardSize / amountOfBoxesInRow);
                     this.addContentView(boxView, layoutParams);
 
                     boxViews.add(boxView);
