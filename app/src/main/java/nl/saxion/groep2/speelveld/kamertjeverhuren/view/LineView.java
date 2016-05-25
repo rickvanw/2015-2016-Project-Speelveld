@@ -82,9 +82,9 @@ public class LineView extends View {
             // shift up a bit. The necessary shift is calculated by dividing the size of the stroke by the amount of boxes in a row.
             // -20 is added to shift the line for the extra clickable width (60-20= 40 | 40/2 =20) which is 20px on both sides, without this
             // the lines would be shown offset from the gameboard
-            translationY = (((minSide / boardSize) - (20 / boardSize)) * startY)-20;
+            translationY = (((minSide / boardSize) - (20 / boardSize)) * startY)-30;
         } else {
-            translationX = (((minSide / boardSize) - (20 / boardSize)) * startX)-20;
+            translationX = (((minSide / boardSize) - (20 / boardSize)) * startX)-30;
             translationY = ((minSide / boardSize) * startY);
         }
 
@@ -99,14 +99,14 @@ public class LineView extends View {
         if (horizontal && !line.isClicked()) {
             // The line is drawn to fill the view with the determined color. The 30 is added in the Y (and in the other line X) start and stop
             // point, to make sure the line is drawn correctly in the middle of the view (which has a width of 60)
-            canvas.drawLine(0, 30, minSide / boardSize, 30, paintBlack);
+            canvas.drawLine(0, 40, minSide / boardSize, 40, paintBlack);
         } else if (!line.isClicked()) {
-            canvas.drawLine(30, 0, 30, minSide / boardSize, paintBlack);
+            canvas.drawLine(40, 0, 40, minSide / boardSize, paintBlack);
         }
         if (line.isClicked() && horizontal) {
-            canvas.drawLine(0, 30, minSide / boardSize, 30, paintYellow);
+            canvas.drawLine(0, 40, minSide / boardSize, 40, paintYellow);
         } else if (line.isClicked()) {
-            canvas.drawLine(30, 0, 30, minSide / boardSize, paintYellow);
+            canvas.drawLine(40, 0, 40, minSide / boardSize, paintYellow);
         }
     }
 
