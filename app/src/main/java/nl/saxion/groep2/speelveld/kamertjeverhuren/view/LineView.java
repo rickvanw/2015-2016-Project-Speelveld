@@ -8,7 +8,6 @@ import android.media.MediaPlayer;
 import android.util.Log;
 import android.view.View;
 
-import nl.saxion.groep2.speelveld.kamertjeverhuren.MainActivity;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.R;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.model.AudioPlay;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.model.GameModel;
@@ -114,8 +113,6 @@ public class LineView extends View {
                 // The draw will be invalidated
                 v.invalidate();
                 callbacks.clicked();
-                // Play sound when line is clicked
-                AudioPlay.playAudio(getContext(),R.raw.boxsound);
             }
         }
     }

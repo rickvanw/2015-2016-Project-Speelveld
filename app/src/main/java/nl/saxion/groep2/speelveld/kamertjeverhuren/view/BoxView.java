@@ -57,9 +57,11 @@ public class BoxView extends View {
         }
     }
 
-    public void checkSquare() {
+    public boolean checkSquare() {
         if (box.isSquare()) {
             setAlpha(1);
+            return true;
         }
+        return false;
     }
 }

@@ -5,12 +5,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import nl.saxion.groep2.speelveld.kamertjeverhuren.model.AudioPlay;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.model.Box;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.model.GameModel;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.model.Line;
+import nl.saxion.groep2.speelveld.kamertjeverhuren.model.Player;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.view.BoxView;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.view.GameBoard;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.view.LineView;
@@ -20,6 +23,9 @@ public class MainActivity extends AppCompatActivity implements LineView.Callback
     private int minSide;
     private ArrayList<BoxView> boxViews = new ArrayList<>();
     private static final boolean HORIZONTAL = true;
+    private TextView textCurrentPlayer;
+    private Player player1, player2;
+    private Player currentPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +44,13 @@ public class MainActivity extends AppCompatActivity implements LineView.Callback
         GameBoard gameBoard = new GameBoard(this);
         ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(minSide, minSide);
         addContentView(gameBoard, layoutParams);
+
+        player1 = new Player(1);
+        player2 = new Player(2);
+        currentPlayer = player1;
+
+        textCurrentPlayer = (TextView) findViewById(R.id.txt_player);
+        textCurrentPlayer.setText("Player " + currentPlayer.getPlayerNumber() + " is aan de beurt");
 
         // Draw boxes
         drawBoxes();
@@ -71,10 +84,9 @@ public class MainActivity extends AppCompatActivity implements LineView.Callback
         }
     }
 
-    
+
     /**
      * Draw lines method, input the amount of boxes which the field should have
-     *
      */
     public void drawLines() {
         int boardSize = GameModel.getInstance().getAmountOfBoxesInRow();
@@ -166,8 +178,35 @@ public class MainActivity extends AppCompatActivity implements LineView.Callback
 
     @Override
     public void clicked() {
+        checkSquare();
+        switchPlayer();
+    }
+
+    public void switchPlayer() {
+        if (currentPlayer.equals(player1)) {
+            currentPlayer = player2;
+        } else if (currentPlayer.equals(player2)) {
+            currentPlayer = player1;
+        }
+        textCurrentPlayer.setText("Player " + currentPlayer.getPlayerNumber() + " is aan de beurt");
+    }
+
+    public void checkSquare() {
+        boolean isSquare = false;
         for (int i = 0; i < boxViews.size(); i++) {
-            boxViews.get(i).checkSquare();
+            if (!isSquare) {
+                isSquare = boxViews.get(i).checkSquare();
+                if (isSquare) {
+                    boxViews.remove(i);
+                    i--;
+                }
+            } else {
+                boxViews.get(i).checkSquare();
+            }
+        }
+        // Play sound when line is clicked
+        if (!isSquare) {
+            AudioPlay.playAudio(this, R.raw.boxsound);
         }
     }
 }
