@@ -112,17 +112,20 @@ public class LineView extends View {
 
     public class Click implements LineView.OnClickListener {
         public void onClick(View v) {
-            // This will show the starting and stopping coordinates of a line that's clicked in the log
-            Log.d("RESULT", "POSITIE - BEGIN: " + startX + "," + startY + " EIND: " + line.getStopX() + "," + line.getStopY());
-            // When the line is clicked, the background color of the view will be set to yellow to indicate that a click was registered
-            //v.setBackgroundColor(Color.YELLOW);
-            // The line class clicked boolean will be set to true to indicate that the current line was clicked
-            line.setClicked();
-            // The draw will be invalidated
-            v.invalidate();
-            callbacks.clicked();
-            // Play sound when line is clicked
-            mp.start();
+
+            if (!line.isClicked()) {
+                // This will show the starting and stopping coordinates of a line that's clicked in the log
+                Log.d("RESULT", "POSITIE - BEGIN: " + startX + "," + startY + " EIND: " + line.getStopX() + "," + line.getStopY());
+                // When the line is clicked, the background color of the view will be set to yellow to indicate that a click was registered
+                //v.setBackgroundColor(Color.YELLOW);
+                // The line class clicked boolean will be set to true to indicate that the current line was clicked
+                line.setClicked();
+                // The draw will be invalidated
+                v.invalidate();
+                callbacks.clicked();
+                // Play sound when line is clicked
+                mp.start();
+            }
         }
     }
 

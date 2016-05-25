@@ -17,10 +17,7 @@ import nl.saxion.groep2.speelveld.kamertjeverhuren.model.GameModel;
  */
 public class BoxView extends View {
 
-
-
     private Box box;
-    MediaPlayer mp;
 
     public BoxView(Context context) {
         super(context);
