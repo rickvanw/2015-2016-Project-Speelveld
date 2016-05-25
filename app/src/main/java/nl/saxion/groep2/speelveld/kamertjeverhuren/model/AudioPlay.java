@@ -9,21 +9,15 @@ import android.media.MediaPlayer;
 public class AudioPlay {
 
     public static MediaPlayer mediaPlayer;
-    public static boolean isplayingAudio=false;
 
-    public static void playAudio(Context c,int id){
+    public static void playAudio(Context c,int id) {
 
-        mediaPlayer = MediaPlayer.create(c,id);
-        if(!mediaPlayer.isPlaying())
-        {
-            isplayingAudio=true;
-            mediaPlayer.start();
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
         }
-    }
-
-    public static void stopAudio(){
-
-        isplayingAudio=false;
-        mediaPlayer.stop();
+            mediaPlayer = MediaPlayer.create(c, id);
+            if (!mediaPlayer.isPlaying()) {
+                mediaPlayer.start();
+            }
     }
 }
