@@ -2,9 +2,11 @@ package nl.saxion.groep2.speelveld.kamertjeverhuren.view;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.util.AttributeSet;
 import android.view.View;
 
+import nl.saxion.groep2.speelveld.kamertjeverhuren.R;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.model.Box;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.model.GameModel;
 
@@ -15,7 +17,10 @@ import nl.saxion.groep2.speelveld.kamertjeverhuren.model.GameModel;
  */
 public class BoxView extends View {
 
+
+
     private Box box;
+    MediaPlayer mp;
 
     public BoxView(Context context) {
         super(context);

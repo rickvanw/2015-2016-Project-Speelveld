@@ -1,5 +1,6 @@
 package nl.saxion.groep2.speelveld.kamertjeverhuren;
 
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -41,6 +42,8 @@ public class MainActivity extends AppCompatActivity implements LineView.Callback
         // Draw boxes
         drawBoxes();
 
+
+
         // Create lines on the gameboard
         drawLines();
 
@@ -70,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements LineView.Callback
         }
     }
 
+    
     /**
      * Draw lines method, input the amount of boxes which the field should have
      *

@@ -4,9 +4,12 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.media.MediaPlayer;
 import android.util.Log;
 import android.view.View;
 
+import nl.saxion.groep2.speelveld.kamertjeverhuren.MainActivity;
+import nl.saxion.groep2.speelveld.kamertjeverhuren.R;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.model.GameModel;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.model.Line;
 
@@ -21,6 +24,7 @@ public class LineView extends View {
     private int minSide, startX, startY, boardSize;
     private boolean horizontal;
     private Line line;
+    private MediaPlayer mp;
 
     public LineView(Context context, Line line) {
         super(context);
@@ -35,9 +39,17 @@ public class LineView extends View {
         // Get the start position coordinates of the line
         startX = line.getStartX();
         startY = line.getStartY();
-
         // Set the x, y translation from the top left corner to match the gameboard and to set the distance between lines
         setTranslation();
+        //Initialise the MediaPlayer
+        mp = MediaPlayer.create(getContext(), R.raw.boxsound);
+        mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                mp.stop();
+                mp.release();
+            }
+        });
 
         init();
 
@@ -108,6 +120,8 @@ public class LineView extends View {
             // The draw will be invalidated
             v.invalidate();
             callbacks.clicked();
+            // Play sound when line is clicked
+            mp.start();
         }
     }
 
