@@ -10,6 +10,7 @@ import android.view.View;
 
 import nl.saxion.groep2.speelveld.kamertjeverhuren.MainActivity;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.R;
+import nl.saxion.groep2.speelveld.kamertjeverhuren.model.AudioPlay;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.model.GameModel;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.model.Line;
 
@@ -41,16 +42,6 @@ public class LineView extends View {
         startY = line.getStartY();
         // Set the x, y translation from the top left corner to match the gameboard and to set the distance between lines
         setTranslation();
-        //Initialise the MediaPlayer
-        mp = MediaPlayer.create(getContext(), R.raw.boxsound);
-        mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mp) {
-                mp.stop();
-                mp.release();
-            }
-        });
-
         init();
 
         this.setOnClickListener(new Click());
@@ -124,7 +115,7 @@ public class LineView extends View {
                 v.invalidate();
                 callbacks.clicked();
                 // Play sound when line is clicked
-                mp.start();
+                AudioPlay.playAudio(getContext(),R.raw.boxsound);
             }
         }
     }

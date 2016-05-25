@@ -1,7 +1,10 @@
 package nl.saxion.groep2.speelveld.kamertjeverhuren.model;
 
+import android.media.MediaPlayer;
+
 import java.util.ArrayList;
 
+import nl.saxion.groep2.speelveld.kamertjeverhuren.R;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.view.GameBoard;
 
 /**
@@ -11,6 +14,7 @@ public class GameModel {
     private static GameModel ourInstance = new GameModel();
     private int gameBoardSize, amountOfBoxesInRow, gameBoardMargin;
 
+
     private ArrayList<Line> lines = new ArrayList<>();
     private ArrayList<Box> boxes = new ArrayList<>();
 
@@ -19,7 +23,7 @@ public class GameModel {
     }
 
     private GameModel() {
-        this.amountOfBoxesInRow = 3;
+        this.amountOfBoxesInRow = 7;
         this.gameBoardMargin = 40;
 
         // create boxes based on the amount of boxes in a row
