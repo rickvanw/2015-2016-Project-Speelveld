@@ -199,6 +199,7 @@ public class MainActivity extends AppCompatActivity implements LineView.Callback
                 if (isSquare) {
                     boxViews.remove(i);
                     i--;
+                    AudioPlay.playAudio(this, R.raw.boxsound);
                 }
             } else {
                 boxViews.get(i).checkSquare();
@@ -206,7 +207,7 @@ public class MainActivity extends AppCompatActivity implements LineView.Callback
         }
         // Play sound when line is clicked
         if (!isSquare) {
-            AudioPlay.playAudio(this, R.raw.boxsound);
+            AudioPlay.playAudio(this, R.raw.linesound);
         }
     }
 }
