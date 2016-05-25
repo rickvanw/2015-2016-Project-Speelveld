@@ -80,9 +80,11 @@ public class LineView extends View {
             translationX = ((minSide / boardSize) * startX);
             // To make sure the bottom (and right lines) will be within the gameboard, all the lines except from the top (and left) line will
             // shift up a bit. The necessary shift is calculated by dividing the size of the stroke by the amount of boxes in a row.
-            translationY = (((minSide / boardSize) - (20 / boardSize)) * startY);
+            // -20 is added to shift the line for the extra clickable width (60-20= 40 | 40/2 =20) which is 20px on both sides, without this
+            // the lines would be shown offset from the gameboard
+            translationY = (((minSide / boardSize) - (20 / boardSize)) * startY)-20;
         } else {
-            translationX = (((minSide / boardSize) - (20 / boardSize)) * startX);
+            translationX = (((minSide / boardSize) - (20 / boardSize)) * startX)-20;
             translationY = ((minSide / boardSize) * startY);
         }
 
@@ -95,17 +97,16 @@ public class LineView extends View {
     public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         if (horizontal && !line.isClicked()) {
-            // The line is drawn to fill the view with the determined color. The 10 is added in the Y (and in the other line X) start and stop
-            // point, to make sure the line is drawn correctly in the middle of the view (stroke width 20 will only show half of the stroke width
-            // without this)
-            canvas.drawLine(0, 10, minSide / boardSize, 10, paintBlack);
+            // The line is drawn to fill the view with the determined color. The 30 is added in the Y (and in the other line X) start and stop
+            // point, to make sure the line is drawn correctly in the middle of the view (which has a width of 60)
+            canvas.drawLine(0, 30, minSide / boardSize, 30, paintBlack);
         } else if (!line.isClicked()) {
-            canvas.drawLine(10, 0, 10, minSide / boardSize, paintBlack);
+            canvas.drawLine(30, 0, 30, minSide / boardSize, paintBlack);
         }
         if (line.isClicked() && horizontal) {
-            canvas.drawLine(0, 10, minSide / boardSize, 10, paintYellow);
+            canvas.drawLine(0, 30, minSide / boardSize, 30, paintYellow);
         } else if (line.isClicked()) {
-            canvas.drawLine(10, 0, 10, minSide / boardSize, paintYellow);
+            canvas.drawLine(30, 0, 30, minSide / boardSize, paintYellow);
         }
     }
 
@@ -114,7 +115,7 @@ public class LineView extends View {
             // This will show the starting and stopping coordinates of a line that's clicked in the log
             Log.d("RESULT", "POSITIE - BEGIN: " + startX + "," + startY + " EIND: " + line.getStopX() + "," + line.getStopY());
             // When the line is clicked, the background color of the view will be set to yellow to indicate that a click was registered
-            v.setBackgroundColor(Color.YELLOW);
+            //v.setBackgroundColor(Color.YELLOW);
             // The line class clicked boolean will be set to true to indicate that the current line was clicked
             line.setClicked();
             // The draw will be invalidated

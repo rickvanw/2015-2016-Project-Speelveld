@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements LineView.Callback
                 LineView lineView = new LineView(this, line);
 
                 // Set the width and height of the view
-                ViewGroup.LayoutParams layoutParamsLine = new ViewGroup.LayoutParams((minSide / boardSize), 20);
+                ViewGroup.LayoutParams layoutParamsLine = new ViewGroup.LayoutParams((minSide / boardSize), 60);
 
                 // Add the parameters to the lineView
                 this.addContentView(lineView, layoutParamsLine);
@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity implements LineView.Callback
                 LineView lineView = new LineView(this, line);
 
                 // Set the width and height of the view
-                ViewGroup.LayoutParams layoutParamsLine = new ViewGroup.LayoutParams(20, (minSide / boardSize));
+                ViewGroup.LayoutParams layoutParamsLine = new ViewGroup.LayoutParams(60, (minSide / boardSize));
 
                 // Add the parameters to the lineView
                 this.addContentView(lineView, layoutParamsLine);
