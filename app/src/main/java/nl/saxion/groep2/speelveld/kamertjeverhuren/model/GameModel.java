@@ -6,6 +6,7 @@ import java.util.ArrayList;
  * Created by Robert on 20-5-2016.
  */
 public class GameModel {
+
     private static GameModel ourInstance = new GameModel();
     private int gameBoardSize, amountOfBoxesInRow, gameBoardMargin;
 

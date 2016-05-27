@@ -10,6 +10,8 @@ import android.media.MediaPlayer;
 public class AudioPlay {
 
     public static MediaPlayer mediaPlayer;
+    public static boolean isMuted = false;
+
 
     public static void playAudio(Context c, int id) {
 
@@ -21,4 +23,18 @@ public class AudioPlay {
             mediaPlayer.start();
         }
     }
+
+    public static void muteUnmute() {
+
+        if (isMuted) {
+            isMuted = false;
+        } else if (!isMuted) {
+            isMuted = true;
+        }
+    }
+
+    public static boolean isMuted() {
+        return isMuted;
+    }
+
 }

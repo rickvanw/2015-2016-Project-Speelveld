@@ -22,7 +22,6 @@ public class LineView extends View {
     private int minSide, startX, startY, boardSize;
     private boolean horizontal;
     private Line line;
-    private MediaPlayer mp;
 
     public LineView(Context context, Line line) {
         super(context);

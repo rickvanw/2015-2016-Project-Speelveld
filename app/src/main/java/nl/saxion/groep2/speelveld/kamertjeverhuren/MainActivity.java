@@ -3,7 +3,9 @@ package nl.saxion.groep2.speelveld.kamertjeverhuren;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -23,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements LineView.Callback
     private ArrayList<BoxView> boxViews = new ArrayList<>();
     private static final boolean HORIZONTAL = true;
     private TextView textCurrentPlayer, textPlayerScore;
+    private Button mute_button;
     private Player player1, player2;
     private Player currentPlayer;
 
@@ -53,6 +56,15 @@ public class MainActivity extends AppCompatActivity implements LineView.Callback
 
         textPlayerScore = (TextView) findViewById(R.id.txt_score);
         textPlayerScore.setText("Player 1's score: " + player1.getScore() + ", Player 2's score: " + player2.getScore());
+
+        mute_button = (Button) findViewById(R.id.mute_button);
+        mute_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AudioPlay.muteUnmute();
+            }
+        });
+
 
         // Draw boxes
         drawBoxes();
@@ -204,12 +216,16 @@ public class MainActivity extends AppCompatActivity implements LineView.Callback
                 boxViews.remove(i);
                 linesound = false;
                 i--;
-                AudioPlay.playAudio(this, R.raw.boxsound);
+                if(!AudioPlay.isMuted()) {
+                    AudioPlay.playAudio(this, R.raw.boxsound);
+                }
             }
         }
-        // Play sound when line is clicked
+        // If sound isn't muted, play sound when line is clicked
         if (linesound) {
-            AudioPlay.playAudio(this, R.raw.linesound);
+            if(!AudioPlay.isMuted()) {
+                AudioPlay.playAudio(this, R.raw.linesound);
+            }
         }
     }
 }

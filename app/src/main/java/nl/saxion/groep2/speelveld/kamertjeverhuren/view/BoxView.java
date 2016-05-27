@@ -6,6 +6,7 @@ import android.media.MediaPlayer;
 import android.util.AttributeSet;
 import android.view.View;
 
+import nl.saxion.groep2.speelveld.kamertjeverhuren.MainActivity;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.R;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.model.AudioPlay;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.model.Box;
@@ -60,7 +61,6 @@ public class BoxView extends View {
 
     public boolean checkSquare() {
         if (box.isSquare()) {
-            AudioPlay.playAudio(getContext(),R.raw.boxsound);
             setAlpha(1);
             return true;
         }
