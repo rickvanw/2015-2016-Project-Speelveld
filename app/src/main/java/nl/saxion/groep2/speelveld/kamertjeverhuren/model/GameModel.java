@@ -37,8 +37,8 @@ public class GameModel {
         }
 
 
-        player1 = new Player(1, Color.YELLOW ,Color.GREEN);
-        player2 = new Player(2, Color.GREEN, Color.CYAN);
+        player1 = new Player(1, Color.RED ,Color.RED);
+        player2 = new Player(2, Color.BLUE, Color.BLUE);
         currentPlayer = player1;
     }
 

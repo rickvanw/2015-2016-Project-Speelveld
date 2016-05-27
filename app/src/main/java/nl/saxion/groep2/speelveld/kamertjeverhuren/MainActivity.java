@@ -22,6 +22,7 @@ import nl.saxion.groep2.speelveld.kamertjeverhuren.model.Player;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.view.BoxView;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.view.GameBoard;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.view.LineView;
+import nl.saxion.groep2.speelveld.kamertjeverhuren.view.PointView;
 
 public class MainActivity extends AppCompatActivity implements LineView.Callbacks {
 
@@ -65,6 +66,9 @@ public class MainActivity extends AppCompatActivity implements LineView.Callback
 
         // Assign lines to boxes
         assignLinesToBoxes();
+
+        // Create pointa on the gameboard
+        drawPoints();
     }
 
     @Override
@@ -165,6 +169,27 @@ public class MainActivity extends AppCompatActivity implements LineView.Callback
                 this.addContentView(lineView, layoutParamsLine);
             }
         }
+    }
+
+    public void drawPoints(){
+        // The amount of dots in a row = the amount of boxes in a row + 1
+        int amountOfDotsInRow = GameModel.getInstance().getAmountOfBoxesInRow()+1;
+        // Run through every point on the X axis
+        for (int i = 0; i < amountOfDotsInRow; i++) {
+            //Run through every point on the Y axis and create a point on those spotst
+            for (int j = 0; j < amountOfDotsInRow; j++) {
+
+                // Create a point view
+                PointView pointView = new PointView(this, i, j);
+
+                // Set the width and height of the view
+                ViewGroup.LayoutParams layoutParamsPoint = new ViewGroup.LayoutParams(20, 20);
+
+                // Add the parameters to the pointview
+                this.addContentView(pointView, layoutParamsPoint);
+            }
+        }
+
     }
 
     /**

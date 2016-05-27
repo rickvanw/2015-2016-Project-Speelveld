@@ -33,7 +33,7 @@ public class LineView extends View {
     public void init() {
         // Create two different styles for the view
         paint = new Paint();
-        paint.setColor(Color.BLACK);
+        paint.setColor(Color.parseColor("#666666"));
         paint.setStyle(Paint.Style.STROKE);
         //the stroke width is the width of the line
         paint.setStrokeWidth(20);
