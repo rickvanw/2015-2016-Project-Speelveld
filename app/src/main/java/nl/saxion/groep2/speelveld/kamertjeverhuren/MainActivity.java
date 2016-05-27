@@ -3,7 +3,10 @@ package nl.saxion.groep2.speelveld.kamertjeverhuren;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -33,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements LineView.Callback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         // Get lowest screen width or height to create a square
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
@@ -53,14 +57,6 @@ public class MainActivity extends AppCompatActivity implements LineView.Callback
         textPlayerScore = (TextView) findViewById(R.id.txt_score);
         textPlayerScore.setText("Player 1's score: " + GameModel.getInstance().getPlayer1().getScore() + ", Player 2's score: " + GameModel.getInstance().getPlayer2().getScore());
 
-        mute_button = (Button) findViewById(R.id.mute_button);
-        mute_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AudioPlay.muteUnmute();
-            }
-        });
-
         // Draw boxes
         drawBoxes();
 
@@ -69,6 +65,26 @@ public class MainActivity extends AppCompatActivity implements LineView.Callback
 
         // Assign lines to boxes
         assignLinesToBoxes();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_mute, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle presses on the action bar items
+        switch (item.getItemId()) {
+            case R.id.mute:
+                AudioPlay.muteUnmute();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     public void drawBoxes() {
