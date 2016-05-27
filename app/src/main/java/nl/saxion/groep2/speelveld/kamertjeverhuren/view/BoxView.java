@@ -59,7 +59,6 @@ public class BoxView extends View {
 
     public boolean checkSquare() {
         if (box.isSquare()) {
-            AudioPlay.playAudio(getContext(),R.raw.boxsound);
             this.setBackgroundColor(GameModel.getInstance().getCurrentPlayer().getBoxColor());
             setAlpha(1);
             return true;

@@ -4,7 +4,9 @@ import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -23,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements LineView.Callback
     private int minSide;
     private ArrayList<BoxView> boxViews = new ArrayList<>();
     private static final boolean HORIZONTAL = true;
+    private Button mute_button;
     private TextView textCurrentPlayer, textPlayerScore;
 
     @Override
@@ -49,6 +52,14 @@ public class MainActivity extends AppCompatActivity implements LineView.Callback
 
         textPlayerScore = (TextView) findViewById(R.id.txt_score);
         textPlayerScore.setText("Player 1's score: " + GameModel.getInstance().getPlayer1().getScore() + ", Player 2's score: " + GameModel.getInstance().getPlayer2().getScore());
+
+        mute_button = (Button) findViewById(R.id.mute_button);
+        mute_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AudioPlay.muteUnmute();
+            }
+        });
 
         // Draw boxes
         drawBoxes();
@@ -186,13 +197,17 @@ public class MainActivity extends AppCompatActivity implements LineView.Callback
                 boxViews.remove(i);
                 linesound = false;
                 i--;
-                AudioPlay.playAudio(this, R.raw.boxsound);
+                if(!AudioPlay.isMuted) {
+                    AudioPlay.playAudio(this, R.raw.boxsound);
+                }
             }
         }
         // Play sound when line is clicked
         if (linesound) {
             switchPlayer();
-            AudioPlay.playAudio(this, R.raw.linesound);
+            if(!AudioPlay.isMuted) {
+                AudioPlay.playAudio(this, R.raw.linesound);
+            }
         }
     }
 
