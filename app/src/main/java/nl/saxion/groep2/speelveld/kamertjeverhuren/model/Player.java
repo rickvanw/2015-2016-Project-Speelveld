@@ -1,19 +1,21 @@
 package nl.saxion.groep2.speelveld.kamertjeverhuren.model;
 
+import android.graphics.Color;
+
 /**
  * Created by Robert on 25-5-2016.
  */
 public class Player {
-    private int playerNumber, score;
+    private int playerNumber, score, lineColor, boxColor;
 
-    public Player(int playerNumber)
-    {
+    public Player(int playerNumber, int lineColor, int boxColor) {
         this.playerNumber = playerNumber;
+        this.lineColor = lineColor;
+        this.boxColor = boxColor;
         score = 0;
     }
 
-    public void increaseScore()
-    {
+    public void increaseScore() {
         score++;
     }
 
@@ -21,8 +23,15 @@ public class Player {
         return playerNumber;
     }
 
-    public int getScore()
-    {
+    public int getScore() {
         return score;
+    }
+
+    public int getLineColor() {
+        return lineColor;
+    }
+
+    public int getBoxColor() {
+        return boxColor;
     }
 }

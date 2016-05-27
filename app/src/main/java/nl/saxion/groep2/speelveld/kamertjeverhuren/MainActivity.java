@@ -1,11 +1,10 @@
 package nl.saxion.groep2.speelveld.kamertjeverhuren;
 
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -25,9 +24,6 @@ public class MainActivity extends AppCompatActivity implements LineView.Callback
     private ArrayList<BoxView> boxViews = new ArrayList<>();
     private static final boolean HORIZONTAL = true;
     private TextView textCurrentPlayer, textPlayerScore;
-    private Button mute_button;
-    private Player player1, player2;
-    private Player currentPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,24 +43,12 @@ public class MainActivity extends AppCompatActivity implements LineView.Callback
         ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(minSide, minSide);
         addContentView(gameBoard, layoutParams);
 
-        player1 = new Player(1);
-        player2 = new Player(2);
-        currentPlayer = player1;
 
         textCurrentPlayer = (TextView) findViewById(R.id.txt_player);
-        textCurrentPlayer.setText("Player " + currentPlayer.getPlayerNumber() + " is aan de beurt");
+        textCurrentPlayer.setText("Player " + GameModel.getInstance().getCurrentPlayer().getPlayerNumber() + " is aan de beurt");
 
         textPlayerScore = (TextView) findViewById(R.id.txt_score);
-        textPlayerScore.setText("Player 1's score: " + player1.getScore() + ", Player 2's score: " + player2.getScore());
-
-        mute_button = (Button) findViewById(R.id.mute_button);
-        mute_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AudioPlay.muteUnmute();
-            }
-        });
-
+        textPlayerScore.setText("Player 1's score: " + GameModel.getInstance().getPlayer1().getScore() + ", Player 2's score: " + GameModel.getInstance().getPlayer2().getScore());
 
         // Draw boxes
         drawBoxes();
@@ -192,40 +176,32 @@ public class MainActivity extends AppCompatActivity implements LineView.Callback
 
     @Override
     public void clicked() {
-        checkSquare();
-        switchPlayer();
-    }
-
-    public void switchPlayer() {
-        if (currentPlayer.equals(player1)) {
-            currentPlayer = player2;
-        } else if (currentPlayer.equals(player2)) {
-            currentPlayer = player1;
-        }
-        textCurrentPlayer.setText("Player " + currentPlayer.getPlayerNumber() + " is aan de beurt");
-    }
-
-    public void checkSquare() {
         boolean linesound = true;
         for (int i = 0; i < boxViews.size(); i++) {
             boolean isSquare = boxViews.get(i).checkSquare();
             // if square is detected, increase player score, remove boxview from arraylist and play 'victory' sound instead of 'linesound'
             if (isSquare) {
-                currentPlayer.increaseScore();
-                textPlayerScore.setText("Player 1's score: " + player1.getScore() + ", Player 2's score: " + player2.getScore());
+                GameModel.getInstance().getCurrentPlayer().increaseScore();
+                textPlayerScore.setText("Player 1's score: " + GameModel.getInstance().getPlayer1().getScore() + ", Player 2's score: " + GameModel.getInstance().getPlayer2().getScore());
                 boxViews.remove(i);
                 linesound = false;
                 i--;
-                if(!AudioPlay.isMuted()) {
-                    AudioPlay.playAudio(this, R.raw.boxsound);
-                }
+                AudioPlay.playAudio(this, R.raw.boxsound);
             }
         }
-        // If sound isn't muted, play sound when line is clicked
+        // Play sound when line is clicked
         if (linesound) {
-            if(!AudioPlay.isMuted()) {
-                AudioPlay.playAudio(this, R.raw.linesound);
-            }
+            switchPlayer();
+            AudioPlay.playAudio(this, R.raw.linesound);
         }
+    }
+
+    private void switchPlayer() {
+        if (GameModel.getInstance().getCurrentPlayer().equals(GameModel.getInstance().getPlayer1())) {
+            GameModel.getInstance().setCurrentPlayer(GameModel.getInstance().getPlayer2());
+        } else if (GameModel.getInstance().getCurrentPlayer().equals(GameModel.getInstance().getPlayer2())) {
+            GameModel.getInstance().setCurrentPlayer(GameModel.getInstance().getPlayer1());;
+        }
+        textCurrentPlayer.setText("Player " + GameModel.getInstance().getCurrentPlayer().getPlayerNumber() + " is aan de beurt");
     }
 }

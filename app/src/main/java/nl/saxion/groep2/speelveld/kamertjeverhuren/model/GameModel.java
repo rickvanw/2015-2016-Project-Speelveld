@@ -1,5 +1,7 @@
 package nl.saxion.groep2.speelveld.kamertjeverhuren.model;
 
+import android.graphics.Color;
+
 import java.util.ArrayList;
 
 /**
@@ -12,6 +14,9 @@ public class GameModel {
 
     private ArrayList<Line> lines = new ArrayList<>();
     private ArrayList<Box> boxes = new ArrayList<>();
+
+    private Player player1, player2;
+    private Player currentPlayer;
 
     public static GameModel getInstance() {
         return ourInstance;
@@ -30,6 +35,11 @@ public class GameModel {
                 boxes.add(box);
             }
         }
+
+
+        player1 = new Player(1, Color.YELLOW ,Color.GREEN);
+        player2 = new Player(2, Color.GREEN, Color.CYAN);
+        currentPlayer = player1;
     }
 
     public void addLine(Line line) {
@@ -45,6 +55,10 @@ public class GameModel {
      */
     public void setGameBoardSize(int gameBoardSize) {
         this.gameBoardSize = gameBoardSize;
+    }
+
+    public void setCurrentPlayer(Player currentPlayer) {
+        this.currentPlayer = currentPlayer;
     }
 
     // getters
@@ -72,5 +86,17 @@ public class GameModel {
 
     public int getGameBoardMargin() {
         return gameBoardMargin;
+    }
+
+    public Player getPlayer1() {
+        return player1;
+    }
+
+    public Player getPlayer2() {
+        return player2;
+    }
+
+    public Player getCurrentPlayer() {
+        return currentPlayer;
     }
 }
