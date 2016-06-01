@@ -24,18 +24,17 @@ import nl.saxion.groep2.speelveld.kamertjeverhuren.view.GameBoard;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.view.LineView;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.view.PointView;
 
-public class MainActivity extends AppCompatActivity implements LineView.Callbacks {
+public class GameActivity extends AppCompatActivity implements LineView.Callbacks {
 
     private int minSide;
     private ArrayList<BoxView> boxViews = new ArrayList<>();
     private static final boolean HORIZONTAL = true;
-    private Button mute_button;
     private TextView textCurrentPlayer, textPlayerScore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_game);
 
 
         // Get lowest screen width or height to create a square
@@ -228,23 +227,24 @@ public class MainActivity extends AppCompatActivity implements LineView.Callback
 
     @Override
     public void clicked() {
-        boolean linesound = true;
+        boolean line = true;
         for (int i = 0; i < boxViews.size(); i++) {
             boolean isSquare = boxViews.get(i).checkSquare();
-            // if square is detected, increase player score, remove boxview from arraylist and play 'victory' sound instead of 'linesound'
+            // if square is detected, increase player score, remove boxview from arraylist and play 'victory'
             if (isSquare) {
                 GameModel.getInstance().getCurrentPlayer().increaseScore();
+                // update player score
                 textPlayerScore.setText("Player 1's score: " + GameModel.getInstance().getPlayer1().getScore() + ", Player 2's score: " + GameModel.getInstance().getPlayer2().getScore());
                 boxViews.remove(i);
-                linesound = false;
+                line = false;
                 i--;
                 if(!AudioPlay.isMuted) {
                     AudioPlay.playAudio(this, R.raw.boxsound);
                 }
             }
         }
-        // Play sound when line is clicked
-        if (linesound) {
+        // Play 'linesound' if there is no box detected.
+        if (line) {
             switchPlayer();
             if(!AudioPlay.isMuted) {
                 AudioPlay.playAudio(this, R.raw.linesound);
