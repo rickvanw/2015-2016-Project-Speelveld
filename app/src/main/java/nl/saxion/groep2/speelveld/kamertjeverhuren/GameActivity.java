@@ -119,21 +119,11 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
     public void drawLines() {
         int boardSize = GameModel.getInstance().getAmountOfBoxesInRow();
 
-        // Amount of horizontal lines drawn on the x-axis
-        int numberOfLinesHorizontalX = boardSize;
-        // Amount of horizontal lines drawn on the y-axis
-        int numberOfLinesHorizontalY = boardSize + 1;
-
-        // Amount of vertical lines drawn on the x-axis
-        int numberOfLinesVerticalX = boardSize + 1;
-        // Amount of vertical lines drawn on the y-axis
-        int numberOfLinesVerticalY = boardSize;
-
         // For every horizontal line on the X axis, create a line on the Y axis
-        for (int i = 0; i < numberOfLinesHorizontalX; i++) {
+        for (int x = 0; x < boardSize; x++) {
 
-            for (int j = 0; j < numberOfLinesHorizontalY; j++) {
-                Line line = new Line(i, j, HORIZONTAL);
+            for (int y = 0; y <= boardSize; y++) {
+                Line line = new Line(x, y, HORIZONTAL);
 
                 // The line is added to the list of lines
                 GameModel.getInstance().addLine(line);
@@ -150,10 +140,10 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
         }
 
         // For every vertical line on the X axis, create a line on the Y axis
-        for (int i = 0; i < numberOfLinesVerticalX; i++) {
+        for (int x = 0; x <= boardSize; x++) {
 
-            for (int j = 0; j < numberOfLinesVerticalY; j++) {
-                Line line = new Line(i, j, !HORIZONTAL);
+            for (int y = 0; y < boardSize; y++) {
+                Line line = new Line(x, y, !HORIZONTAL);
 
                 // The line is added to the list of lines
                 GameModel.getInstance().addLine(line);
@@ -170,9 +160,9 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
         }
     }
 
-    public void drawPoints(){
+    public void drawPoints() {
         // The amount of dots in a row = the amount of boxes in a row + 1
-        int amountOfDotsInRow = GameModel.getInstance().getAmountOfBoxesInRow()+1;
+        int amountOfDotsInRow = GameModel.getInstance().getAmountOfBoxesInRow() + 1;
         // Run through every point on the X axis
         for (int i = 0; i < amountOfDotsInRow; i++) {
             //Run through every point on the Y axis and create a point on those spotst
@@ -238,7 +228,7 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
                 boxViews.remove(i);
                 line = false;
                 i--;
-                if(!AudioPlay.isMuted) {
+                if (!AudioPlay.isMuted) {
                     AudioPlay.playAudio(this, R.raw.boxsound);
                 }
             }
@@ -246,7 +236,7 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
         // Play 'linesound' if there is no box detected.
         if (line) {
             switchPlayer();
-            if(!AudioPlay.isMuted) {
+            if (!AudioPlay.isMuted) {
                 AudioPlay.playAudio(this, R.raw.linesound);
             }
         }
@@ -256,7 +246,8 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
         if (GameModel.getInstance().getCurrentPlayer().equals(GameModel.getInstance().getPlayer1())) {
             GameModel.getInstance().setCurrentPlayer(GameModel.getInstance().getPlayer2());
         } else if (GameModel.getInstance().getCurrentPlayer().equals(GameModel.getInstance().getPlayer2())) {
-            GameModel.getInstance().setCurrentPlayer(GameModel.getInstance().getPlayer1());;
+            GameModel.getInstance().setCurrentPlayer(GameModel.getInstance().getPlayer1());
+            ;
         }
         textCurrentPlayer.setText("Player " + GameModel.getInstance().getCurrentPlayer().getPlayerNumber() + " is aan de beurt");
     }
