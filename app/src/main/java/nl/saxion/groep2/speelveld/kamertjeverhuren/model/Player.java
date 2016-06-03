@@ -1,7 +1,5 @@
 package nl.saxion.groep2.speelveld.kamertjeverhuren.model;
 
-import android.graphics.Color;
-
 /**
  * Created by Robert on 25-5-2016.
  */

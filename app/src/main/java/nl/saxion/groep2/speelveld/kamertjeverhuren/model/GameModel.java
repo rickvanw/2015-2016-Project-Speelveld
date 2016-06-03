@@ -4,6 +4,8 @@ import android.graphics.Color;
 
 import java.util.ArrayList;
 
+import nl.saxion.groep2.speelveld.kamertjeverhuren.view.BoxView;
+
 /**
  * Created by Robert on 20-5-2016.
  */
@@ -14,6 +16,7 @@ public class GameModel {
 
     private ArrayList<Line> lines = new ArrayList<>();
     private ArrayList<Box> boxes = new ArrayList<>();
+    private ArrayList<BoxView> boxViews = new ArrayList<>();
 
     private Player player1, player2;
     private Player currentPlayer;
@@ -27,17 +30,15 @@ public class GameModel {
         this.gameBoardMargin = 40;
 
         // create boxes based on the amount of boxes in a row
-        for(int vertical = 0; vertical<amountOfBoxesInRow; vertical++)
-        {
-            for(int horiontal = 0; horiontal<amountOfBoxesInRow; horiontal++)
-            {
-                Box box = new Box(horiontal,vertical);
+        for (int vertical = 0; vertical < amountOfBoxesInRow; vertical++) {
+            for (int horiontal = 0; horiontal < amountOfBoxesInRow; horiontal++) {
+                Box box = new Box(horiontal, vertical);
                 boxes.add(box);
             }
         }
 
 
-        player1 = new Player(1, Color.RED ,Color.parseColor("#ff6666"));
+        player1 = new Player(1, Color.RED, Color.parseColor("#ff6666"));
         player2 = new Player(2, Color.BLUE, Color.parseColor("#6666ff"));
         currentPlayer = player1;
     }
@@ -59,6 +60,10 @@ public class GameModel {
 
     public void setCurrentPlayer(Player currentPlayer) {
         this.currentPlayer = currentPlayer;
+    }
+
+    public void addBoxView(BoxView boxView) {
+        boxViews.add(boxView);
     }
 
     // getters
@@ -98,5 +103,9 @@ public class GameModel {
 
     public Player getCurrentPlayer() {
         return currentPlayer;
+    }
+
+    public ArrayList<BoxView> getBoxViews() {
+        return boxViews;
     }
 }

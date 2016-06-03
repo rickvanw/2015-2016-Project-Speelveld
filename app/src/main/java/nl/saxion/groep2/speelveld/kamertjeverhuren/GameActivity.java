@@ -1,15 +1,11 @@
 package nl.saxion.groep2.speelveld.kamertjeverhuren;
 
-import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -18,7 +14,6 @@ import nl.saxion.groep2.speelveld.kamertjeverhuren.model.AudioPlay;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.model.Box;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.model.GameModel;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.model.Line;
-import nl.saxion.groep2.speelveld.kamertjeverhuren.model.Player;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.view.BoxView;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.view.GameBoard;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.view.LineView;
@@ -27,7 +22,7 @@ import nl.saxion.groep2.speelveld.kamertjeverhuren.view.PointView;
 public class GameActivity extends AppCompatActivity implements LineView.Callbacks {
 
     private int minSide;
-    private ArrayList<BoxView> boxViews = new ArrayList<>();
+
     private static final boolean HORIZONTAL = true;
     private TextView textCurrentPlayer, textPlayerScore;
 
@@ -35,7 +30,6 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-
 
         // Get lowest screen width or height to create a square
         DisplayMetrics metrics = new DisplayMetrics();
@@ -105,7 +99,7 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
                     ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(gameBoardSize / amountOfBoxesInRow, gameBoardSize / amountOfBoxesInRow);
                     this.addContentView(boxView, layoutParams);
 
-                    boxViews.add(boxView);
+                    GameModel.getInstance().addBoxView(boxView);
                     i++;
                 }
             }
@@ -218,14 +212,14 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
     @Override
     public void clicked() {
         boolean line = true;
-        for (int i = 0; i < boxViews.size(); i++) {
-            boolean isSquare = boxViews.get(i).checkSquare();
+        for (int i = 0; i < GameModel.getInstance().getBoxViews().size(); i++) {
+            boolean isSquare = GameModel.getInstance().getBoxViews().get(i).checkSquare();
             // if square is detected, increase player score, remove boxview from arraylist and play 'victory'
             if (isSquare) {
                 GameModel.getInstance().getCurrentPlayer().increaseScore();
                 // update player score
                 textPlayerScore.setText("Player 1's score: " + GameModel.getInstance().getPlayer1().getScore() + ", Player 2's score: " + GameModel.getInstance().getPlayer2().getScore());
-                boxViews.remove(i);
+                GameModel.getInstance().getBoxViews().remove(i);
                 line = false;
                 i--;
                 if (!AudioPlay.isMuted) {
