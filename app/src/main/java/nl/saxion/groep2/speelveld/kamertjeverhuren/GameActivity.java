@@ -1,6 +1,7 @@
 package nl.saxion.groep2.speelveld.kamertjeverhuren;
 
 import android.content.Intent;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -24,8 +25,11 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
 
     private int minSide;
     private static final boolean HORIZONTAL = true;
-    private TextView textCurrentPlayer, textPlayerScore;
+    private TextView textCurrentPlayer, textPlayerScore, textViewTimer;
     public static final int REQUEST_CODE = 100;
+    private CountDownTimer countDownTimer;
+    int secondsLeft = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +80,10 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
 
         // Create points on the gameboard
         drawPoints();
+        // initialize countdown timer
+        initCountDownTimer();
+
+        textViewTimer = (TextView)findViewById(R.id.textViewTimer);
     }
 
     @Override
@@ -97,6 +105,29 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
             default:
         }
         return true;
+    }
+
+    public void initCountDownTimer()
+    {
+        countDownTimer = new CountDownTimer(5700, 100) {
+
+            public void onTick(long millisUntilFinished) {
+
+                if (Math.round((float)millisUntilFinished/1000)!=secondsLeft) {
+                    secondsLeft = Math.round((float) millisUntilFinished / 1000);
+
+
+                    textViewTimer.setText("seconds remaining: " + millisUntilFinished / 1000 );
+                }
+            }
+
+            @Override
+            public void onFinish() {
+                textViewTimer.setText("Tijd is om");
+                GameModel.getInstance().getCurrentPlayer().decreaseScore();
+                textPlayerScore.setText("Player 1's score: " + GameModel.getInstance().getPlayer1().gettotalScore() + ", Player 2's score: " + GameModel.getInstance().getPlayer2().gettotalScore());
+            }
+        }.start();
     }
 
     public void drawBoxes() {
@@ -226,6 +257,9 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
 
     @Override
     public void clicked() {
+        countDownTimer.cancel();
+        countDownTimer.start();
+
         boolean line = true;
         for (int i = 0; i < GameModel.getInstance().getBoxViews().size(); i++) {
             boolean isSquare = GameModel.getInstance().getBoxViews().get(i).checkSquare();

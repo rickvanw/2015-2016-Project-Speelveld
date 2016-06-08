@@ -36,4 +36,13 @@
             android:textSize="20sp" />
     </LinearLayout>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:id="@+id/textViewTimer"
+        android:layout_above="@+id/linearLayout"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>
