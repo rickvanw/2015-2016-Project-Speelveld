@@ -21,17 +21,16 @@ public class Line {
             stopY = startY + 1;
             stopX = startX;
         }
-
         clicked = false;
     }
+
     // Method to set if the line is clicked
-    public void setClicked()
-    {
+    public void setClicked() {
         this.clicked = true;
     }
+
     // Method to check if the line is clicked
-    public boolean isClicked()
-    {
+    public boolean isClicked() {
         return clicked;
     }
 

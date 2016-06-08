@@ -25,9 +25,9 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
     private int minSide;
     private static final boolean HORIZONTAL = true;
     private TextView textCurrentPlayer, textPlayerScore;
+    public static final int REQUEST_CODE = 100;
 
     @Override
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
@@ -249,6 +249,11 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
                 AudioPlay.playAudio(this, R.raw.linesound);
             }
         }
+
+        if (GameModel.getInstance().getBoxViews().size() == 0) {
+            Intent endscreen = new Intent(this, EndscreenActivity.class);
+            startActivityForResult(endscreen, REQUEST_CODE);
+        }
     }
 
     private void switchPlayer() {
@@ -258,5 +263,10 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
             GameModel.getInstance().setCurrentPlayer(GameModel.getInstance().getPlayer1());
         }
         textCurrentPlayer.setText("Player " + GameModel.getInstance().getCurrentPlayer().getPlayerNumber() + " is aan de beurt");
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        newGame();
     }
 }

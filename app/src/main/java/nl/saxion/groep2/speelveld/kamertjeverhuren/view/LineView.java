@@ -10,9 +10,6 @@ import android.view.View;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.model.GameModel;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.model.Line;
 
-/**
- * Created by rickv on 18-5-2016.
- */
 public class LineView extends View {
 
     public Callbacks callbacks;
@@ -28,7 +25,6 @@ public class LineView extends View {
         this.line = line;
         init();
     }
-
 
     public void init() {
         // Create two different styles for the view
@@ -124,6 +120,7 @@ public class LineView extends View {
      *
      * @author Robert Mekenkamp
      */
+
     public interface Callbacks {
         void clicked();
     }
