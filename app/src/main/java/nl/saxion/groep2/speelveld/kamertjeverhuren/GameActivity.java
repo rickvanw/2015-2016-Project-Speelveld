@@ -1,5 +1,6 @@
 package nl.saxion.groep2.speelveld.kamertjeverhuren;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -22,7 +23,6 @@ import nl.saxion.groep2.speelveld.kamertjeverhuren.view.PointView;
 public class GameActivity extends AppCompatActivity implements LineView.Callbacks {
 
     private int minSide;
-
     private static final boolean HORIZONTAL = true;
     private TextView textCurrentPlayer, textPlayerScore;
 
@@ -39,17 +39,30 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
         minSide = (Math.min(metrics.heightPixels, metrics.widthPixels) - GameModel.getInstance().getGameBoardMargin() * 2);
         GameModel.getInstance().setGameBoardSize(minSide);
 
+        newGame();
+    }
+
+    public void newGame() {
+        GameModel.getInstance().initNewGame();
+
+        // create boxes based on the amount of boxes in a row
+        for (int vertical = 0; vertical < GameModel.getInstance().getAmountOfBoxesInRow(); vertical++) {
+            for (int horiontal = 0; horiontal < GameModel.getInstance().getAmountOfBoxesInRow(); horiontal++) {
+                Box box = new Box(horiontal, vertical);
+                GameModel.getInstance().getBoxes().add(box);
+            }
+        }
+
         // Add gameboard
         GameBoard gameBoard = new GameBoard(this);
         ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(minSide, minSide);
         addContentView(gameBoard, layoutParams);
 
-
         textCurrentPlayer = (TextView) findViewById(R.id.txt_player);
         textCurrentPlayer.setText("Player " + GameModel.getInstance().getCurrentPlayer().getPlayerNumber() + " is aan de beurt");
 
         textPlayerScore = (TextView) findViewById(R.id.txt_score);
-        textPlayerScore.setText("Player 1's score: " + GameModel.getInstance().getPlayer1().getScore() + ", Player 2's score: " + GameModel.getInstance().getPlayer2().getScore());
+        textPlayerScore.setText("Player 1's score: " + GameModel.getInstance().getPlayer1().getCurrentScore() + ", Player 2's score: " + GameModel.getInstance().getPlayer2().getCurrentScore());
 
         // Draw boxes
         drawBoxes();
@@ -60,7 +73,7 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
         // Assign lines to boxes
         assignLinesToBoxes();
 
-        // Create pointa on the gameboard
+        // Create points on the gameboard
         drawPoints();
     }
 
@@ -77,11 +90,12 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
         switch (item.getItemId()) {
             case R.id.mute:
                 AudioPlay.muteUnmute();
-                return true;
-
+                break;
+            case R.id.new_game:
+                newGame();
             default:
-                return super.onOptionsItemSelected(item);
         }
+        return true;
     }
 
     public void drawBoxes() {
@@ -218,7 +232,7 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
             if (isSquare) {
                 GameModel.getInstance().getCurrentPlayer().increaseScore();
                 // update player score
-                textPlayerScore.setText("Player 1's score: " + GameModel.getInstance().getPlayer1().getScore() + ", Player 2's score: " + GameModel.getInstance().getPlayer2().getScore());
+                textPlayerScore.setText("Player 1's score: " + GameModel.getInstance().getPlayer1().getCurrentScore() + ", Player 2's score: " + GameModel.getInstance().getPlayer2().getCurrentScore());
                 GameModel.getInstance().getBoxViews().remove(i);
                 line = false;
                 i--;
@@ -241,7 +255,6 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
             GameModel.getInstance().setCurrentPlayer(GameModel.getInstance().getPlayer2());
         } else if (GameModel.getInstance().getCurrentPlayer().equals(GameModel.getInstance().getPlayer2())) {
             GameModel.getInstance().setCurrentPlayer(GameModel.getInstance().getPlayer1());
-            ;
         }
         textCurrentPlayer.setText("Player " + GameModel.getInstance().getCurrentPlayer().getPlayerNumber() + " is aan de beurt");
     }

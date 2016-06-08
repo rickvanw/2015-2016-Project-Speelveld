@@ -29,18 +29,18 @@ public class GameModel {
         this.amountOfBoxesInRow = 6;
         this.gameBoardMargin = 40;
 
-        // create boxes based on the amount of boxes in a row
-        for (int vertical = 0; vertical < amountOfBoxesInRow; vertical++) {
-            for (int horiontal = 0; horiontal < amountOfBoxesInRow; horiontal++) {
-                Box box = new Box(horiontal, vertical);
-                boxes.add(box);
-            }
-        }
-
-
         player1 = new Player(1, Color.RED, Color.parseColor("#ff6666"));
         player2 = new Player(2, Color.BLUE, Color.parseColor("#6666ff"));
         currentPlayer = player1;
+    }
+
+    public void initNewGame()
+    {
+        lines = new ArrayList<>();
+        boxes = new ArrayList<>();
+        boxViews = new ArrayList<>();
+        player1.resetCurrentScore();
+        player2.resetCurrentScore();
     }
 
     public void addLine(Line line) {
