@@ -10,7 +10,7 @@
 
     <item
         android:id="@+id/new_game"
-        android:icon="@drawable/mutebutton"
+        android:icon="@drawable/restart_button"
         app:showAsAction="always"
         android:title="Compose">
     </item>

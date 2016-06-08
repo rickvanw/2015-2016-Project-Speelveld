@@ -27,6 +27,7 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
     private TextView textCurrentPlayer, textPlayerScore;
 
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
