@@ -14,7 +14,7 @@ public class LineView extends View {
 
     public Callbacks callbacks;
 
-    private static Paint paint;
+    private static Paint paint, userColor;
     private int minSide, startX, startY, boardSize;
     private boolean horizontal;
     private Line line;
@@ -33,6 +33,10 @@ public class LineView extends View {
         paint.setStyle(Paint.Style.STROKE);
         //the stroke width is the width of the line
         paint.setStrokeWidth(20);
+
+        userColor = new Paint();
+        userColor.setStyle(Paint.Style.STROKE);
+        userColor.setStrokeWidth(20);
 
         // Retrieve the chosen amount of boxes in a row
         this.boardSize = GameModel.getInstance().getAmountOfBoxesInRow();
@@ -75,7 +79,6 @@ public class LineView extends View {
     }
 
     public void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
         if (horizontal && !line.isClicked()) {
             // The line is drawn to fill the view with the determined color. The 30 is added in the Y (and in the other line X) start and stop
             // point, to make sure the line is drawn correctly in the middle of the view (which has a width of 60)
@@ -86,11 +89,11 @@ public class LineView extends View {
 
         if (line.isClicked()) {
             // set paint color
-            paint.setColor(GameModel.getInstance().getCurrentPlayer().getLineColor());
+            userColor.setColor(GameModel.getInstance().getCurrentPlayer().getLineColor());
             if (horizontal) {
-                canvas.drawLine(0, 40, minSide / boardSize, 40, paint);
+                canvas.drawLine(0, 40, minSide / boardSize, 40, userColor);
             } else {
-                canvas.drawLine(40, 0, 40, minSide / boardSize, paint);
+                canvas.drawLine(40, 0, 40, minSide / boardSize, userColor);
             }
             callbacks.clicked();
         }
