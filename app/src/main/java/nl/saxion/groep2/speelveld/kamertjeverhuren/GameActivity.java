@@ -109,6 +109,7 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
 
     public void initCountDownTimer()
     {
+        //ja
         countDownTimer = new CountDownTimer(5700, 100) {
 
             public void onTick(long millisUntilFinished) {
