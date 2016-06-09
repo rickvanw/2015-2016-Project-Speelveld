@@ -30,7 +30,6 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
     private CountDownTimer countDownTimer;
     int secondsLeft = 0;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,7 +82,7 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
         // initialize countdown timer
         initCountDownTimer();
 
-        textViewTimer = (TextView)findViewById(R.id.textViewTimer);
+        textViewTimer = (TextView) findViewById(R.id.textViewTimer);
     }
 
     @Override
@@ -107,26 +106,21 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
         return true;
     }
 
-    public void initCountDownTimer()
-    {
+    public void initCountDownTimer() {
         //ja
         countDownTimer = new CountDownTimer(5700, 100) {
-
             public void onTick(long millisUntilFinished) {
 
-                if (Math.round((float)millisUntilFinished/1000)!=secondsLeft) {
+                if (Math.round((float) millisUntilFinished / 1000) != secondsLeft) {
                     secondsLeft = Math.round((float) millisUntilFinished / 1000);
-
-
-                    textViewTimer.setText("seconds remaining: " + millisUntilFinished / 1000 );
+                    textViewTimer.setText("Seconds remaining: " + millisUntilFinished / 1000);
                 }
             }
-
             @Override
             public void onFinish() {
                 textViewTimer.setText("Tijd is om");
                 GameModel.getInstance().getCurrentPlayer().decreaseScore();
-                textPlayerScore.setText("Player 1's score: " + GameModel.getInstance().getPlayer1().gettotalScore() + ", Player 2's score: " + GameModel.getInstance().getPlayer2().gettotalScore());
+                textPlayerScore.setText("Player 1's score: " + GameModel.getInstance().getPlayer1().getCurrentScore() + ", Player 2's score: " + GameModel.getInstance().getPlayer2().getCurrentScore());
             }
         }.start();
     }

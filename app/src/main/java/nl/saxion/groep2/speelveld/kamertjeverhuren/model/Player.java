@@ -24,13 +24,9 @@ public class Player {
 
     public void decreaseScore() {
         // score should not have a negative value
-        if(totalScore != 0) {
+        if (totalScore != 0) {
             totalScore--;
         }
-    }
-
-    public int gettotalScore(){
-        return totalScore;
     }
 
     public int getPlayerNumber() {

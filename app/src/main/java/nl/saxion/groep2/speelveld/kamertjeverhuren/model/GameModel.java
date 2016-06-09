@@ -34,8 +34,7 @@ public class GameModel {
         currentPlayer = player1;
     }
 
-    public void initNewGame()
-    {
+    public void initNewGame() {
         lines = new ArrayList<>();
         boxes = new ArrayList<>();
         boxViews = new ArrayList<>();
