@@ -5,6 +5,7 @@ import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
@@ -108,6 +109,10 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
 
     public void initCountDownTimer() {
         //ja
+        if (countDownTimer!=null){
+            countDownTimer.cancel();
+        }
+
         countDownTimer = new CountDownTimer(5700, 100) {
             public void onTick(long millisUntilFinished) {
 
@@ -139,7 +144,6 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
 
                     ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(gameBoardSize / amountOfBoxesInRow, gameBoardSize / amountOfBoxesInRow);
                     this.addContentView(boxView, layoutParams);
-
                     GameModel.getInstance().addBoxView(boxView);
                     i++;
                 }
@@ -162,7 +166,6 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
 
                 // The line is added to the list of lines
                 GameModel.getInstance().addLine(line);
-
                 // Create a line view
                 LineView lineView = new LineView(this, line);
 
@@ -297,5 +300,6 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         newGame();
+
     }
 }

@@ -80,7 +80,6 @@ public class EndscreenActivity extends AppCompatActivity  {
     }
 
     public void restartGame() {
-        Log.d("RESULT", "Restart");
         setResult(GameActivity.REQUEST_CODE);
         finish();
     }

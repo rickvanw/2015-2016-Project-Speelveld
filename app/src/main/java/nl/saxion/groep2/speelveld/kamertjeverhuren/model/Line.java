@@ -29,6 +29,10 @@ public class Line {
         this.clicked = true;
     }
 
+    public void setUnClicked() {
+        this.clicked = false;
+    }
+
     // Method to check if the line is clicked
     public boolean isClicked() {
         return clicked;
