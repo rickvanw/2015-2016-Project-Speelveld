@@ -5,7 +5,6 @@ import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
@@ -48,7 +47,10 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
     }
 
     public void newGame() {
+
         GameModel.getInstance().initNewGame();
+
+        //findViewById(android.R.id.).
 
         // create boxes based on the amount of boxes in a row
         for (int vertical = 0; vertical < GameModel.getInstance().getAmountOfBoxesInRow(); vertical++) {
@@ -163,15 +165,14 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
 
             for (int y = 0; y <= boardSize; y++) {
                 Line line = new Line(x, y, HORIZONTAL);
-
                 // The line is added to the list of lines
                 GameModel.getInstance().addLine(line);
                 // Create a line view
                 LineView lineView = new LineView(this, line);
-
+                // Add the lineView to the GameModel for reference. This way the view can be removed later on
+                GameModel.getInstance().addLineView(lineView);
                 // Set the width and height of the view
                 ViewGroup.LayoutParams layoutParamsLine = new ViewGroup.LayoutParams((minSide / boardSize), 80);
-
                 // Add the parameters to the lineView
                 this.addContentView(lineView, layoutParamsLine);
             }
@@ -182,16 +183,14 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
 
             for (int y = 0; y < boardSize; y++) {
                 Line line = new Line(x, y, !HORIZONTAL);
-
                 // The line is added to the list of lines
                 GameModel.getInstance().addLine(line);
-
                 // Create a line view
                 LineView lineView = new LineView(this, line);
-
+                // Add the lineView to the GameModel for reference. This way the view can be removed later on
+                GameModel.getInstance().addLineView(lineView);
                 // Set the width and height of the view
                 ViewGroup.LayoutParams layoutParamsLine = new ViewGroup.LayoutParams(80, (minSide / boardSize));
-
                 // Add the parameters to the lineView
                 this.addContentView(lineView, layoutParamsLine);
             }
@@ -281,11 +280,14 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
                 AudioPlay.playAudio(this, R.raw.linesound);
             }
         }
-
         if (GameModel.getInstance().getBoxViews().size() == 0) {
-            Intent endscreen = new Intent(this, EndscreenActivity.class);
-            startActivityForResult(endscreen, REQUEST_CODE);
+            gameFinished();
         }
+    }
+
+    private void gameFinished(){
+        Intent endscreen = new Intent(this, EndscreenActivity.class);
+        startActivityForResult(endscreen, REQUEST_CODE);
     }
 
     private void switchPlayer() {

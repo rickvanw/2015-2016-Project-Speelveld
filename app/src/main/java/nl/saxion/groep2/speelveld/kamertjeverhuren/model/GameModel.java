@@ -1,10 +1,13 @@
 package nl.saxion.groep2.speelveld.kamertjeverhuren.model;
 
 import android.graphics.Color;
+import android.util.Log;
+import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
 import nl.saxion.groep2.speelveld.kamertjeverhuren.view.BoxView;
+import nl.saxion.groep2.speelveld.kamertjeverhuren.view.LineView;
 
 /**
  * Created by Robert on 20-5-2016.
@@ -17,6 +20,7 @@ public class GameModel {
     private ArrayList<Line> lines = new ArrayList<>();
     private ArrayList<Box> boxes = new ArrayList<>();
     private ArrayList<BoxView> boxViews = new ArrayList<>();
+    private ArrayList<LineView> lineViews = new ArrayList<>();
 
     private Player player1, player2;
     private Player currentPlayer;
@@ -26,7 +30,7 @@ public class GameModel {
     }
 
     private GameModel() {
-        this.amountOfBoxesInRow = 6;
+        this.amountOfBoxesInRow = 2;
         this.gameBoardMargin = 40;
 
         player1 = new Player(1, Color.RED, Color.parseColor("#ff6666"));
@@ -35,6 +39,13 @@ public class GameModel {
     }
 
     public void initNewGame() {
+        // Remove all previous lineViews from the parent view so they won't interfere with the new ones
+        for (int i = 0; i < lineViews.size(); i++) {
+            LineView lineView = lineViews.get(i);
+            ((ViewGroup) lineView.getParent()).removeView(lineView);
+        }
+
+        lineViews = new ArrayList<>();
         lines = new ArrayList<>();
         boxes = new ArrayList<>();
         boxViews = new ArrayList<>();
@@ -64,6 +75,11 @@ public class GameModel {
     public void addBoxView(BoxView boxView) {
         boxViews.add(boxView);
     }
+
+    public void addLineView(LineView lineView) {
+        lineViews.add(lineView);
+    }
+
 
     // getters
 
