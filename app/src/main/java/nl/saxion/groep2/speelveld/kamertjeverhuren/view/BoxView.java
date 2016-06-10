@@ -1,6 +1,9 @@
 package nl.saxion.groep2.speelveld.kamertjeverhuren.view;
 
 import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.view.View;
 
 import nl.saxion.groep2.speelveld.kamertjeverhuren.model.Box;
@@ -22,7 +25,7 @@ public class BoxView extends View {
     }
 
     public void init() {
-        setAlpha(0);
+        this.setBackgroundColor(Color.LTGRAY);
     }
 
     public void setPosition(int x, int y) {
@@ -41,6 +44,15 @@ public class BoxView extends View {
         if (this.box == null) {
             this.box = box;
         }
+        init();
+    }
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        Paint paint = new Paint();
+        paint.setColor(Color.YELLOW);
+        paint.setTextSize(canvas.getHeight() / 4);
+        canvas.drawText("" + box.getBoxScore(), canvas.getWidth() / 4 * 3, canvas.getHeight() / 4 * 1, paint);
     }
 
     public void setOwner(Player owner) {
@@ -49,7 +61,6 @@ public class BoxView extends View {
 
     public void showColor() {
         this.setBackgroundColor(box.getOwner().getBoxColor());
-        setAlpha(1);
     }
 
     public Player getOwner() {

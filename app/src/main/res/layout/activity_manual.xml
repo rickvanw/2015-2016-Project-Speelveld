@@ -10,37 +10,37 @@
     tools:context="nl.saxion.groep2.speelveld.kamertjeverhuren.ManualActivity">
 
     <TextView
+        android:id="@+id/tvManualTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/tvManualTitle"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:text="New Text" />
 
     <TextView
+        android:id="@+id/tvManualText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/tvManualText"
-        android:layout_below="@+id/tvManualTitle"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
         android:layout_alignEnd="@+id/tvManualTitle"
-        android:layout_marginTop="40dp" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/tvManualTitle"
+        android:layout_marginTop="40dp"
+        android:text="New Text" />
 
     <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
         android:id="@+id/ivManual1"
-        android:layout_alignTop="@+id/tvManualText"
-        android:layout_alignParentEnd="true" />
-
-    <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:id="@+id/ivManual2"
-        android:layout_below="@+id/ivManual1"
         android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/tvManualText" />
+
+    <ImageView
+        android:id="@+id/ivManual2"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/ivManual1"
         android:layout_marginTop="35dp" />
 
 </RelativeLayout>
