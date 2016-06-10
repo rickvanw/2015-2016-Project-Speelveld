@@ -41,6 +41,6 @@
         android:id="@+id/ivManual2"
         android:layout_below="@+id/ivManual1"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="35pdp" />
+        android:layout_marginTop="35dp" />
 
 </RelativeLayout>
