@@ -21,8 +21,8 @@ public class Player {
 
     public void decreaseScore() {
         // score should not have a negative value
-        if (totalScore != 0) {
-            totalScore--;
+        if (currentScore != 0) {
+            currentScore--;
         }
     }
 
