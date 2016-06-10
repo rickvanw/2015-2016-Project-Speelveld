@@ -215,7 +215,7 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
 
     @Override
     public void clicked() {
-
+        countDownTimer.cancel();
         countDownTimer.start();
         boolean line = true;
         for (int i = 0; i < GameModel.getInstance().getBoxViews().size(); i++) {
