@@ -60,6 +60,10 @@ public class GameModel {
         this.currentPlayer = currentPlayer;
     }
 
+    public void setAmountOfBoxesInRow(int amountOfBoxesInRow) {
+        this.amountOfBoxesInRow = amountOfBoxesInRow;
+    }
+
     public void addBoxView(BoxView boxView) {
         boxViews.add(boxView);
     }
