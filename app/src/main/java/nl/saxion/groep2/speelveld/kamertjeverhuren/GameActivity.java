@@ -50,6 +50,7 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
         textViewTimer = (TextView) findViewById(R.id.textViewTimer);
 
         newGame();
+        countDownTimer.cancel();
     }
 
 
@@ -214,7 +215,7 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
 
     @Override
     public void clicked() {
-        countDownTimer.cancel();
+
         countDownTimer.start();
 
         boolean line = true;
