@@ -25,12 +25,20 @@ public class Options extends DialogFragment {
         builder.setItems(Options, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 switch (which) {
-                    case 0: AudioPlay.muteUnmute();                                         break;
-                    case 1: ((GameActivity)getActivity()).newGame();                        break;
-                    case 2: Intent i = new Intent(getActivity(), ManualActivity.class);
-                            startActivity(i);                                               break;
-                    case 3: Intent j = new Intent(getActivity(), SettingsActivity.class);
-                            startActivity(j);                                               break;
+                    case 0:
+                        AudioPlay.muteUnmute();
+                        break;
+                    case 1:
+                        ((GameActivity) getActivity()).newGame();
+                        break;
+                    case 2:
+                        Intent manualActivity = new Intent(getActivity(), ManualActivity.class);
+                        startActivityForResult(manualActivity, GameActivity.REQUEST_CODE);
+                        break;
+                    case 3:
+                        Intent settingsActivity = new Intent(getActivity(), SettingsActivity.class);
+                        startActivityForResult(settingsActivity, GameActivity.REQUEST_CODE);
+                        break;
                 }
             }
         });
