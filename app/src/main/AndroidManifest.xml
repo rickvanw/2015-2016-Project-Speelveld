@@ -16,6 +16,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".EndscreenActivity" />
+        <activity android:name=".SettingsActivity"  />
         <activity android:name=".ManualActivity"></activity>
     </application>
 
