@@ -276,11 +276,7 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle presses on the action bar items
         switch (item.getItemId()) {
-            case R.id.mute:
-                AudioPlay.muteUnmute();
-                break;
             case R.id.new_game:
-                newGame();
                 showDialog();
             default:
         }
