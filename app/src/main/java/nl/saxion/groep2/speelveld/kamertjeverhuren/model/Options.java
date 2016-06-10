@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 
+import nl.saxion.groep2.speelveld.kamertjeverhuren.GameActivity;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.ManualActivity;
 
 /**
@@ -23,12 +24,10 @@ public class Options extends DialogFragment {
         builder.setItems(Options, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 switch (which) {
-                    case 0:
-                        AudioPlay.muteUnmute();
-                        break;
-                    case 1: // callback + restart game ;break;
+                    case 0: AudioPlay.muteUnmute();                                     break;
+                    case 1: ((GameActivity)getActivity()).newGame();                    break;
                     case 2: Intent i= new Intent(getActivity(), ManualActivity.class);
-                            startActivity(i);
+                            startActivity(i);                                           break;
                     case 3: // callback + intent settings; break;
                 }
 
