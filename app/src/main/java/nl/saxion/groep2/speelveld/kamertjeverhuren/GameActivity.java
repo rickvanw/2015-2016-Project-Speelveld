@@ -2,6 +2,7 @@ package nl.saxion.groep2.speelveld.kamertjeverhuren;
 
 import android.content.Intent;
 import android.os.CountDownTimer;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -16,6 +17,7 @@ import nl.saxion.groep2.speelveld.kamertjeverhuren.model.AudioPlay;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.model.Box;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.model.GameModel;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.model.Line;
+import nl.saxion.groep2.speelveld.kamertjeverhuren.model.Options;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.view.BoxView;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.view.GameBoard;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.view.LineView;
@@ -49,6 +51,7 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
 
         newGame();
     }
+
 
     public void newGame() {
         GameModel.getInstance().initNewGame();
@@ -256,6 +259,12 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
         startActivityForResult(endscreen, REQUEST_CODE);
     }
 
+    void showDialog() {
+        DialogFragment newFragment = new Options();
+        newFragment.show(getSupportFragmentManager(), "dialog");
+    }
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -272,6 +281,7 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
                 break;
             case R.id.new_game:
                 newGame();
+                showDialog();
             default:
         }
         return true;
