@@ -25,5 +25,22 @@
         android:layout_below="@+id/tvManualTitle"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_alignEnd="@+id/tvManualTitle" />
+        android:layout_alignEnd="@+id/tvManualTitle"
+        android:layout_marginTop="40dp" />
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/ivManual1"
+        android:layout_alignTop="@+id/tvManualText"
+        android:layout_alignParentEnd="true" />
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/ivManual2"
+        android:layout_below="@+id/ivManual1"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="35pdp" />
+
 </RelativeLayout>
