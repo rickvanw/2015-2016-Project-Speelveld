@@ -1,7 +1,6 @@
 package nl.saxion.groep2.speelveld.kamertjeverhuren.model;
 
 import android.graphics.Color;
-import android.util.Log;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
@@ -30,9 +29,8 @@ public class GameModel {
     }
 
     private GameModel() {
-        this.amountOfBoxesInRow = 2;
+        this.amountOfBoxesInRow = 3;
         this.gameBoardMargin = 40;
-
         player1 = new Player(1, Color.RED, Color.parseColor("#ff6666"));
         player2 = new Player(2, Color.BLUE, Color.parseColor("#6666ff"));
         currentPlayer = player1;
@@ -53,17 +51,7 @@ public class GameModel {
         player2.resetCurrentScore();
     }
 
-    public void addLine(Line line) {
-        this.lines.add(line);
-    }
-
-    // setters
-
-    /**
-     * This method sets the GameBoard size based on the smallest side of the screen
-     *
-     * @param gameBoardSize
-     */
+    // This method sets the GameBoard size based on the smallest side of the screen
     public void setGameBoardSize(int gameBoardSize) {
         this.gameBoardSize = gameBoardSize;
     }
@@ -80,16 +68,17 @@ public class GameModel {
         lineViews.add(lineView);
     }
 
+    public void addLine(Line line) {
+        this.lines.add(line);
+    }
 
     // getters
-
-    /**
-     * This method returns the GameBoard size based on the smallest side of the screen
-     *
-     * @return gameBoardSize
-     */
     public int getGameBoardSize() {
         return gameBoardSize;
+    }
+
+    public int getGameBoardMargin() {
+        return gameBoardMargin;
     }
 
     public int getAmountOfBoxesInRow() {
@@ -104,8 +93,8 @@ public class GameModel {
         return boxes;
     }
 
-    public int getGameBoardMargin() {
-        return gameBoardMargin;
+    public ArrayList<BoxView> getBoxViews() {
+        return boxViews;
     }
 
     public Player getPlayer1() {
@@ -118,9 +107,5 @@ public class GameModel {
 
     public Player getCurrentPlayer() {
         return currentPlayer;
-    }
-
-    public ArrayList<BoxView> getBoxViews() {
-        return boxViews;
     }
 }

@@ -1,7 +1,6 @@
 package nl.saxion.groep2.speelveld.kamertjeverhuren.view;
 
 import android.content.Context;
-import android.util.AttributeSet;
 import android.view.View;
 
 import nl.saxion.groep2.speelveld.kamertjeverhuren.model.Box;
@@ -18,16 +17,6 @@ public class BoxView extends View {
 
     public BoxView(Context context) {
         super(context);
-        init();
-    }
-
-    public BoxView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        init();
-    }
-
-    public BoxView(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
         init();
     }
 

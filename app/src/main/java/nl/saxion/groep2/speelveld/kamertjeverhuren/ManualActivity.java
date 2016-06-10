@@ -3,7 +3,6 @@ package nl.saxion.groep2.speelveld.kamertjeverhuren;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.widget.TextView;
 
 public class ManualActivity extends AppCompatActivity {
@@ -13,8 +12,8 @@ public class ManualActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manual);
 
-        TextView tvManualTitle = (TextView)findViewById(R.id.tvManualTitle);
-        TextView tvManualText = (TextView)findViewById(R.id.tvManualText);
+        TextView tvManualTitle = (TextView) findViewById(R.id.tvManualTitle);
+        TextView tvManualText = (TextView) findViewById(R.id.tvManualText);
 
         tvManualTitle.setText("Manual");
         tvManualText.setText("dit is uitleg test test dit is uitleg test test dit is uitleg test test dit is uitleg test test");

@@ -1,8 +1,5 @@
 package nl.saxion.groep2.speelveld.kamertjeverhuren.model;
 
-/**
- * Created by Robert on 25-5-2016.
- */
 public class Player {
     private int playerNumber, currentScore, totalScore, lineColor, boxColor;
 

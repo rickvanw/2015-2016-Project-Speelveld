@@ -1,16 +1,11 @@
 package nl.saxion.groep2.speelveld.kamertjeverhuren.view;
 
 import android.content.Context;
-import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.view.View;
 
 import nl.saxion.groep2.speelveld.kamertjeverhuren.model.GameModel;
 
-/**
- * Created by rickv on 27-5-2016.
- */
 public class PointView extends View {
 
     private int pointX;
@@ -25,7 +20,6 @@ public class PointView extends View {
         // Set the translation of the points to make sure they stay within the gameboard
         setTranslation();
         setBackgroundColor(Color.BLACK);
-
     }
 
     public void setTranslation() {
@@ -37,10 +31,10 @@ public class PointView extends View {
         int amountOfBoxesInRow = GameModel.getInstance().getAmountOfBoxesInRow();
         // Calculate the translation from the x axis to where the point should be placed. ((20/amountOfBoxesInRow) makes sure that
         // the bottom and right points stay within the gameboard)
-        translationX = (((gameBoardSize / amountOfBoxesInRow)-(20/amountOfBoxesInRow)) * pointX);
+        translationX = (((gameBoardSize / amountOfBoxesInRow) - (20 / amountOfBoxesInRow)) * pointX);
         // Calculate the translation from the y axis to where the point should be placed ((20/amountOfBoxesInRow) makes sure that
         // the bottom and right points stay within the gameboard)
-        translationY = (((gameBoardSize / amountOfBoxesInRow)-(20/amountOfBoxesInRow)) * pointY);
+        translationY = (((gameBoardSize / amountOfBoxesInRow) - (20 / amountOfBoxesInRow)) * pointY);
 
         // The translation of the gameboard is added to the calculated translation to make sure that the points maintain within the board, then
         // 40 is added to compensate for the margins around the gameboard

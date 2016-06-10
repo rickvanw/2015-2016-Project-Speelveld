@@ -7,11 +7,7 @@ import android.view.View;
 
 import nl.saxion.groep2.speelveld.kamertjeverhuren.model.GameModel;
 
-/**
- * Created by Robert on 18-5-2016.
- */
 public class GameBoard extends View {
-
     Context context;
 
     public GameBoard(Context context) {

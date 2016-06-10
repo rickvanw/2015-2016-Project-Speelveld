@@ -2,9 +2,6 @@ package nl.saxion.groep2.speelveld.kamertjeverhuren.model;
 
 import java.util.ArrayList;
 
-/**
- * Created by Robert on 20-5-2016.
- */
 public class Box {
     private int x, y;
     public ArrayList<Line> lines = new ArrayList<>();

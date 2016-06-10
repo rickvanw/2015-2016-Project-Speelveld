@@ -24,7 +24,6 @@ import nl.saxion.groep2.speelveld.kamertjeverhuren.view.PointView;
 public class GameActivity extends AppCompatActivity implements LineView.Callbacks {
 
     private int minSide;
-    private static final boolean HORIZONTAL = true;
     private TextView textCurrentPlayer, textPlayerScore, textViewTimer;
     public static final int REQUEST_CODE = 100;
     private CountDownTimer countDownTimer;
@@ -43,32 +42,22 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
         minSide = (Math.min(metrics.heightPixels, metrics.widthPixels) - GameModel.getInstance().getGameBoardMargin() * 2);
         GameModel.getInstance().setGameBoardSize(minSide);
 
+        // Initialize data fields
+        textPlayerScore = (TextView) findViewById(R.id.txt_score);
+        textCurrentPlayer = (TextView) findViewById(R.id.txt_player);
+        textViewTimer = (TextView) findViewById(R.id.textViewTimer);
+
         newGame();
     }
 
     public void newGame() {
-
         GameModel.getInstance().initNewGame();
 
-        //findViewById(android.R.id.).
-
-        // create boxes based on the amount of boxes in a row
-        for (int vertical = 0; vertical < GameModel.getInstance().getAmountOfBoxesInRow(); vertical++) {
-            for (int horiontal = 0; horiontal < GameModel.getInstance().getAmountOfBoxesInRow(); horiontal++) {
-                Box box = new Box(horiontal, vertical);
-                GameModel.getInstance().getBoxes().add(box);
-            }
-        }
-
-        // Add gameboard
         GameBoard gameBoard = new GameBoard(this);
         ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(minSide, minSide);
         addContentView(gameBoard, layoutParams);
 
-        textCurrentPlayer = (TextView) findViewById(R.id.txt_player);
         textCurrentPlayer.setText("Player " + GameModel.getInstance().getCurrentPlayer().getPlayerNumber() + " is aan de beurt");
-
-        textPlayerScore = (TextView) findViewById(R.id.txt_score);
         textPlayerScore.setText("Player 1's score: " + GameModel.getInstance().getPlayer1().getCurrentScore() + ", Player 2's score: " + GameModel.getInstance().getPlayer2().getCurrentScore());
 
         // Draw boxes
@@ -82,47 +71,24 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
 
         // Create points on the gameboard
         drawPoints();
+
         // initialize countdown timer
         initCountDownTimer();
-
-        textViewTimer = (TextView) findViewById(R.id.textViewTimer);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_mute, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle presses on the action bar items
-        switch (item.getItemId()) {
-            case R.id.mute:
-                AudioPlay.muteUnmute();
-                break;
-            case R.id.new_game:
-                newGame();
-            default:
-        }
-        return true;
     }
 
     public void initCountDownTimer() {
-        //ja
-        if (countDownTimer!=null){
+        if (countDownTimer != null) {
             countDownTimer.cancel();
         }
 
         countDownTimer = new CountDownTimer(5700, 100) {
             public void onTick(long millisUntilFinished) {
-
                 if (Math.round((float) millisUntilFinished / 1000) != secondsLeft) {
                     secondsLeft = Math.round((float) millisUntilFinished / 1000);
                     textViewTimer.setText("Seconds remaining: " + millisUntilFinished / 1000);
                 }
             }
+
             @Override
             public void onFinish() {
                 textViewTimer.setText("Tijd is om");
@@ -133,26 +99,27 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
     }
 
     public void drawBoxes() {
-        // amount of boxes in a row
         int amountOfBoxesInRow = GameModel.getInstance().getAmountOfBoxesInRow();
         int gameBoardSize = GameModel.getInstance().getGameBoardSize();
-
         for (int i = 0; i < amountOfBoxesInRow * amountOfBoxesInRow; i++) {
             for (int y = 0; y < amountOfBoxesInRow; y++) {
                 for (int x = 0; x < amountOfBoxesInRow; x++) {
+                    Box box = new Box(x, y);
+                    GameModel.getInstance().getBoxes().add(box);
+
                     BoxView boxView = new BoxView(this);
-                    boxView.setBox(GameModel.getInstance().getBoxes().get(i));
+                    boxView.setBox(box);
                     boxView.setPosition(x, y);
 
                     ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(gameBoardSize / amountOfBoxesInRow, gameBoardSize / amountOfBoxesInRow);
                     this.addContentView(boxView, layoutParams);
+
                     GameModel.getInstance().addBoxView(boxView);
                     i++;
                 }
             }
         }
     }
-
 
     /**
      * Draw lines method, input the amount of boxes which the field should have
@@ -162,13 +129,13 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
 
         // For every horizontal line on the X axis, create a line on the Y axis
         for (int x = 0; x < boardSize; x++) {
-
             for (int y = 0; y <= boardSize; y++) {
-                Line line = new Line(x, y, HORIZONTAL);
+                Line line = new Line(x, y, x + 1, y);
                 // The line is added to the list of lines
                 GameModel.getInstance().addLine(line);
                 // Create a line view
-                LineView lineView = new LineView(this, line);
+                LineView lineView = new LineView(this);
+                lineView.init(line);
                 // Add the lineView to the GameModel for reference. This way the view can be removed later on
                 GameModel.getInstance().addLineView(lineView);
                 // Set the width and height of the view
@@ -180,13 +147,13 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
 
         // For every vertical line on the X axis, create a line on the Y axis
         for (int x = 0; x <= boardSize; x++) {
-
             for (int y = 0; y < boardSize; y++) {
-                Line line = new Line(x, y, !HORIZONTAL);
+                Line line = new Line(x, y, x, y + 1);
                 // The line is added to the list of lines
                 GameModel.getInstance().addLine(line);
                 // Create a line view
-                LineView lineView = new LineView(this, line);
+                LineView lineView = new LineView(this);
+                lineView.init(line);
                 // Add the lineView to the GameModel for reference. This way the view can be removed later on
                 GameModel.getInstance().addLineView(lineView);
                 // Set the width and height of the view
@@ -202,9 +169,8 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
         int amountOfDotsInRow = GameModel.getInstance().getAmountOfBoxesInRow() + 1;
         // Run through every point on the X axis
         for (int i = 0; i < amountOfDotsInRow; i++) {
-            //Run through every point on the Y axis and create a point on those spotst
+            // Walk through every point on the Y axis and create a point on those spotst
             for (int j = 0; j < amountOfDotsInRow; j++) {
-
                 // Create a point view
                 PointView pointView = new PointView(this, i, j);
 
@@ -215,7 +181,6 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
                 this.addContentView(pointView, layoutParamsPoint);
             }
         }
-
     }
 
     /**
@@ -232,20 +197,12 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
             Box currentBox = boxes.get(b);
             for (int l = 0; l < lines.size(); l++) {
                 Line currentLine = lines.get(l);
-                // asign horizontal line above box
-                if (currentLine.getStartX() == currentBox.getX() && currentLine.getStartY() == currentBox.getY() && currentLine.isHorizontal()) {
+                // asign horizontal lines above and below box
+                if (currentLine.getStartX() == currentBox.getX() && (currentLine.getStartY() == currentBox.getY() || currentLine.getStartY() == currentBox.getY() + 1) && currentLine.getStopX() - 1 == currentBox.getX()) {
                     currentBox.addLineToBox(currentLine);
                 }
-                // assign horizontal line below box
-                else if (currentLine.getStartX() == currentBox.getX() && currentLine.getStartY() == currentBox.getY() + 1 && currentLine.isHorizontal()) {
-                    currentBox.addLineToBox(currentLine);
-                }
-                // assign left vertical line
-                else if (currentLine.getStartX() == currentBox.getX() && currentLine.getStartY() == currentBox.getY() && !currentLine.isHorizontal()) {
-                    currentBox.addLineToBox(currentLine);
-                }
-                // assign right vertical line
-                else if (currentLine.getStartX() == currentBox.getX() + 1 && currentLine.getStartY() == currentBox.getY() && !currentLine.isHorizontal()) {
+                // assign vertical lines to the right and left side of the box
+                else if ((currentLine.getStartX() == currentBox.getX() || currentLine.getStartX() == currentBox.getX() + 1) && currentLine.getStartY() == currentBox.getY() && currentLine.getStopY() - 1 == currentBox.getY()) {
                     currentBox.addLineToBox(currentLine);
                 }
             }
@@ -285,11 +242,6 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
         }
     }
 
-    private void gameFinished(){
-        Intent endscreen = new Intent(this, EndscreenActivity.class);
-        startActivityForResult(endscreen, REQUEST_CODE);
-    }
-
     private void switchPlayer() {
         if (GameModel.getInstance().getCurrentPlayer().equals(GameModel.getInstance().getPlayer1())) {
             GameModel.getInstance().setCurrentPlayer(GameModel.getInstance().getPlayer2());
@@ -299,9 +251,34 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
         textCurrentPlayer.setText("Player " + GameModel.getInstance().getCurrentPlayer().getPlayerNumber() + " is aan de beurt");
     }
 
+    private void gameFinished() {
+        Intent endscreen = new Intent(this, EndscreenActivity.class);
+        startActivityForResult(endscreen, REQUEST_CODE);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_mute, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle presses on the action bar items
+        switch (item.getItemId()) {
+            case R.id.mute:
+                AudioPlay.muteUnmute();
+                break;
+            case R.id.new_game:
+                newGame();
+            default:
+        }
+        return true;
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         newGame();
-
     }
 }

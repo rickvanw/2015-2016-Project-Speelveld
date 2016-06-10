@@ -3,7 +3,6 @@ package nl.saxion.groep2.speelveld.kamertjeverhuren;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -11,7 +10,7 @@ import android.widget.TextView;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.model.GameModel;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.model.Player;
 
-public class EndscreenActivity extends AppCompatActivity  {
+public class EndscreenActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
