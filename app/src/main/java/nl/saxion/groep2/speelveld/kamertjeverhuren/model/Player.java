@@ -11,8 +11,8 @@ public class Player {
         this.totalScore = 0;
     }
 
-    public void increaseScore() {
-        currentScore++;
+    public void increaseScore(int amount) {
+        currentScore += amount;
     }
 
     public void resetCurrentScore() {

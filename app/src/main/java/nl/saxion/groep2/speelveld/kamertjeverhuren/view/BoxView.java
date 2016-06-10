@@ -5,6 +5,7 @@ import android.view.View;
 
 import nl.saxion.groep2.speelveld.kamertjeverhuren.model.Box;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.model.GameModel;
+import nl.saxion.groep2.speelveld.kamertjeverhuren.model.Player;
 
 /**
  * The BoxView is a physical representation of a box.
@@ -42,10 +43,25 @@ public class BoxView extends View {
         }
     }
 
+    public void setOwner(Player owner) {
+        box.setOwner(owner);
+    }
+
+    public void showColor() {
+        this.setBackgroundColor(box.getOwner().getBoxColor());
+        setAlpha(1);
+    }
+
+    public Player getOwner() {
+        return box.getOwner();
+    }
+
+    public int getBoxScore() {
+        return box.getBoxScore();
+    }
+
     public boolean checkSquare() {
         if (box.isSquare()) {
-            this.setBackgroundColor(GameModel.getInstance().getCurrentPlayer().getBoxColor());
-            setAlpha(1);
             return true;
         }
         return false;

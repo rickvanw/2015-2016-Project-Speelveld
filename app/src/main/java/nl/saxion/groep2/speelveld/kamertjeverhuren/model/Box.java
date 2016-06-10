@@ -3,12 +3,14 @@ package nl.saxion.groep2.speelveld.kamertjeverhuren.model;
 import java.util.ArrayList;
 
 public class Box {
-    private int x, y;
-    public ArrayList<Line> lines = new ArrayList<>();
+    private int x, y, boxScore;
+    private ArrayList<Line> lines = new ArrayList<>();
+    private Player owner = null;
 
     public Box(int x, int y) {
         this.x = x;
         this.y = y;
+        this.boxScore = (int) (Math.random() * 3) + 1;
     }
 
     public boolean isSquare() {
@@ -24,11 +26,23 @@ public class Box {
         lines.add(line);
     }
 
+    public void setOwner(Player owner) {
+        this.owner = owner;
+    }
+
+    public Player getOwner() {
+        return owner;
+    }
+
     public int getX() {
         return x;
     }
 
     public int getY() {
         return y;
+    }
+
+    public int getBoxScore() {
+        return boxScore;
     }
 }

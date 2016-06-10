@@ -217,18 +217,18 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
     public void clicked() {
 
         countDownTimer.start();
-
         boolean line = true;
         for (int i = 0; i < GameModel.getInstance().getBoxViews().size(); i++) {
             boolean isSquare = GameModel.getInstance().getBoxViews().get(i).checkSquare();
             // if square is detected, increase player score, remove boxview from arraylist and play 'victory'
-            if (isSquare) {
-                GameModel.getInstance().getCurrentPlayer().increaseScore();
-                // update player score
+            if (isSquare && GameModel.getInstance().getBoxViews().get(i).getOwner() == null) {
+                GameModel.getInstance().getCurrentPlayer().increaseScore(GameModel.getInstance().getBoxViews().get(i).getBoxScore());
+
                 textPlayerScore.setText("Player 1's score: " + GameModel.getInstance().getPlayer1().getCurrentScore() + ", Player 2's score: " + GameModel.getInstance().getPlayer2().getCurrentScore());
-                GameModel.getInstance().getBoxViews().remove(i);
+
+                GameModel.getInstance().getBoxViews().get(i).setOwner(GameModel.getInstance().getCurrentPlayer());
+                GameModel.getInstance().getBoxViews().get(i).showColor();
                 line = false;
-                i--;
                 if (!AudioPlay.isMuted) {
                     AudioPlay.playAudio(this, R.raw.boxsound);
                 }
@@ -241,7 +241,15 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
                 AudioPlay.playAudio(this, R.raw.linesound);
             }
         }
-        if (GameModel.getInstance().getBoxViews().size() == 0) {
+        boolean endGame = false;
+        for (int i = 0; i < GameModel.getInstance().getBoxViews().size(); i++) {
+            if (GameModel.getInstance().getBoxViews().get(i).getOwner() == null) {
+                endGame = false;
+                break;
+            }
+            endGame = true;
+        }
+        if (endGame) {
             gameFinished();
         }
     }
