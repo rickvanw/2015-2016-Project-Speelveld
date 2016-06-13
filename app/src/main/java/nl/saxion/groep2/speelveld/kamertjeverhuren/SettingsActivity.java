@@ -39,15 +39,18 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
 
         switch (pos) {
             case 0:
-                GameModel.getInstance().setAmountOfBoxesInRow(4);
+                GameModel.getInstance().setAmountOfBoxesInRow(2);
                 break;
             case 1:
-                GameModel.getInstance().setAmountOfBoxesInRow(5);
+                GameModel.getInstance().setAmountOfBoxesInRow(4);
                 break;
             case 2:
-                GameModel.getInstance().setAmountOfBoxesInRow(6);
+                GameModel.getInstance().setAmountOfBoxesInRow(5);
                 break;
             case 3:
+                GameModel.getInstance().setAmountOfBoxesInRow(6);
+                break;
+            case 4:
                 GameModel.getInstance().setAmountOfBoxesInRow(7);
                 break;
         }
