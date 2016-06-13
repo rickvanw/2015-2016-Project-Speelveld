@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.util.Log;
 import android.view.View;
 
 import nl.saxion.groep2.speelveld.kamertjeverhuren.model.Box;
@@ -17,6 +18,8 @@ import nl.saxion.groep2.speelveld.kamertjeverhuren.model.Player;
  */
 public class BoxView extends View {
 
+    public Callbacks callbacks;
+
     private Box box;
 
     public BoxView(Context context) {
@@ -26,6 +29,32 @@ public class BoxView extends View {
 
     public void init() {
         this.setBackgroundColor(Color.LTGRAY);
+
+        this.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (GameModel.getInstance().isPowerUpSwitchActive()) {
+                    Log.d("RESULT", "clickBox");
+                    if (box.getOwner() != null) {
+                        Player player = box.getOwner();
+                        if (player.getPlayerNumber() != GameModel.getInstance().getCurrentPlayer().getPlayerNumber()) {
+                            Log.d("RESULT", "box tegenstander geklikt");
+                            box.setOwner(GameModel.getInstance().getCurrentPlayer());
+                            showColor();
+                            for (int i = 0; i < box.getBoxScore(); i++) {
+                                player.decreaseScore();
+                            }
+                            GameModel.getInstance().getCurrentPlayer().increaseScore(box.getBoxScore());
+                            callbacks.clickedBox();
+                        }
+                    }
+                    GameModel.getInstance().getCurrentPlayer().decreasePowerUpSwitch();
+                    GameModel.getInstance().setPowerUpSwitchActive(false);
+                }
+            }
+        });
+
     }
 
     public void setPosition(int x, int y) {
@@ -76,5 +105,15 @@ public class BoxView extends View {
             return true;
         }
         return false;
+    }
+
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        callbacks = (Callbacks) this.getContext();
+    }
+
+    public interface Callbacks {
+        void clickedBox();
     }
 }

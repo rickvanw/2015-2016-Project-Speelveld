@@ -1,7 +1,7 @@
 package nl.saxion.groep2.speelveld.kamertjeverhuren.model;
 
 public class Player {
-    private int playerNumber, currentScore, totalScore, lineColor, boxColor;
+    private int playerNumber, currentScore, totalScore, lineColor, boxColor, powerUpSwitch;
 
     public Player(int playerNumber, int lineColor, int boxColor) {
         this.playerNumber = playerNumber;
@@ -9,6 +9,7 @@ public class Player {
         this.boxColor = boxColor;
         this.currentScore = 0;
         this.totalScore = 0;
+        this.powerUpSwitch = 1;
     }
 
     public void increaseScore(int amount) {
@@ -41,4 +42,23 @@ public class Player {
     public int getBoxColor() {
         return boxColor;
     }
+
+    public int getPowerUpSwitch() {
+        return powerUpSwitch;
+    }
+
+    public void increasePowerUpSwitch(int amount) {
+        powerUpSwitch += amount;
+    }
+
+    public void decreasePowerUpSwitch() {
+        if (powerUpSwitch != 0) {
+            powerUpSwitch--;
+        }
+    }
+
+    public void resetPowerUpSwitch(){
+        powerUpSwitch=1;
+    }
+
 }

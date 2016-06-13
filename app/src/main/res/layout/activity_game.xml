@@ -44,4 +44,13 @@
         android:layout_above="@+id/linearLayout"
         android:layout_centerHorizontal="true" />
 
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:text="New Button"
+        android:id="@+id/buttonPowerUpSwitch"
+        android:layout_above="@+id/textViewTimer"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentEnd="false" />
+
 </RelativeLayout>

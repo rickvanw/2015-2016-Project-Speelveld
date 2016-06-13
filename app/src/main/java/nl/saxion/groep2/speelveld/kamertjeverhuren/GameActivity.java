@@ -6,9 +6,12 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -23,7 +26,7 @@ import nl.saxion.groep2.speelveld.kamertjeverhuren.view.GameBoard;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.view.LineView;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.view.PointView;
 
-public class GameActivity extends AppCompatActivity implements LineView.Callbacks {
+public class GameActivity extends AppCompatActivity implements LineView.Callbacks, BoxView.Callbacks {
 
     private int minSide;
     private TextView textCurrentPlayer, textPlayerScore, textViewTimer;
@@ -49,8 +52,22 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
         textCurrentPlayer = (TextView) findViewById(R.id.txt_player);
         textViewTimer = (TextView) findViewById(R.id.textViewTimer);
 
+        Button buttonPowerUpSwitch = (Button)findViewById(R.id.buttonPowerUpSwitch);
+        buttonPowerUpSwitch.setOnClickListener(new buttonPowerUpSwitchOnClickListener());
+
         newGame();
-        countDownTimer.cancel();
+        //countDownTimer.cancel();
+    }
+
+    public class buttonPowerUpSwitchOnClickListener implements View.OnClickListener{
+        @Override
+        public void onClick(View v) {
+            if(GameModel.getInstance().getCurrentPlayer().getPowerUpSwitch()>0){
+                if(!GameModel.getInstance().isPowerUpSwitchActive()){
+                    GameModel.getInstance().setPowerUpSwitchActive(true);
+                }else{GameModel.getInstance().setPowerUpSwitchActive(false);}
+            }
+        }
     }
 
 
@@ -215,8 +232,8 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
 
     @Override
     public void clicked() {
-        countDownTimer.cancel();
-        countDownTimer.start();
+        //countDownTimer.cancel();
+        //countDownTimer.start();
         boolean line = true;
         for (int i = 0; i < GameModel.getInstance().getBoxViews().size(); i++) {
             boolean isSquare = GameModel.getInstance().getBoxViews().get(i).checkSquare();
@@ -254,12 +271,19 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
         }
     }
 
+    public void clickedBox(){
+        Log.d("RESULT","clickedBox");
+        textPlayerScore.setText("Player 1's score: " + GameModel.getInstance().getPlayer1().getCurrentScore() + ", Player 2's score: " + GameModel.getInstance().getPlayer2().getCurrentScore());
+
+    }
+
     private void switchPlayer() {
         if (GameModel.getInstance().getCurrentPlayer().equals(GameModel.getInstance().getPlayer1())) {
             GameModel.getInstance().setCurrentPlayer(GameModel.getInstance().getPlayer2());
         } else if (GameModel.getInstance().getCurrentPlayer().equals(GameModel.getInstance().getPlayer2())) {
             GameModel.getInstance().setCurrentPlayer(GameModel.getInstance().getPlayer1());
         }
+        GameModel.getInstance().setPowerUpSwitchActive(false);
         textCurrentPlayer.setText("Player " + GameModel.getInstance().getCurrentPlayer().getPlayerNumber() + " is aan de beurt");
     }
 

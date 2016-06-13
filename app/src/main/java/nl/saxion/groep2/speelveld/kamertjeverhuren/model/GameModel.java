@@ -15,6 +15,7 @@ public class GameModel {
 
     private static GameModel ourInstance = new GameModel();
     private int gameBoardSize, amountOfBoxesInRow, gameBoardMargin;
+    private boolean powerUpSwitchActive;
 
     private ArrayList<Line> lines = new ArrayList<>();
     private ArrayList<Box> boxes = new ArrayList<>();
@@ -31,6 +32,7 @@ public class GameModel {
     private GameModel() {
         this.amountOfBoxesInRow = 2;
         this.gameBoardMargin = 40;
+        this.powerUpSwitchActive = false;
         player1 = new Player(1, Color.RED, Color.parseColor("#ff6666"));
         player2 = new Player(2, Color.BLUE, Color.parseColor("#6666ff"));
         currentPlayer = player1;
@@ -42,13 +44,15 @@ public class GameModel {
             LineView lineView = lineViews.get(i);
             ((ViewGroup) lineView.getParent()).removeView(lineView);
         }
-
+        powerUpSwitchActive = false;
         lineViews = new ArrayList<>();
         lines = new ArrayList<>();
         boxes = new ArrayList<>();
         boxViews = new ArrayList<>();
         player1.resetCurrentScore();
         player2.resetCurrentScore();
+        player1.resetPowerUpSwitch();
+        player2.resetPowerUpSwitch();
     }
 
     // This method sets the GameBoard size based on the smallest side of the screen
@@ -107,5 +111,13 @@ public class GameModel {
 
     public Player getCurrentPlayer() {
         return currentPlayer;
+    }
+
+    public boolean isPowerUpSwitchActive() {
+        return powerUpSwitchActive;
+    }
+
+    public void setPowerUpSwitchActive(boolean powerUpSwitchActive) {
+        this.powerUpSwitchActive = powerUpSwitchActive;
     }
 }
