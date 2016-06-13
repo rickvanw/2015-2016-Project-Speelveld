@@ -32,7 +32,6 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         spinnerBoardSize.setAdapter(adapter);
-
     }
 
     public void onItemSelected(AdapterView<?> parent, View view,
@@ -48,7 +47,9 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
             case 2:
                 GameModel.getInstance().setAmountOfBoxesInRow(6);
                 break;
-
+            case 3:
+                GameModel.getInstance().setAmountOfBoxesInRow(7);
+                break;
         }
     }
 
