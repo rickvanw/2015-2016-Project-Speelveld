@@ -2,14 +2,18 @@ package nl.saxion.groep2.speelveld.kamertjeverhuren;
 
 import android.content.Intent;
 import android.os.CountDownTimer;
+import android.os.SystemClock;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Layout;
 import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
+import android.widget.Chronometer;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -26,10 +30,12 @@ import nl.saxion.groep2.speelveld.kamertjeverhuren.view.PointView;
 public class GameActivity extends AppCompatActivity implements LineView.Callbacks {
 
     private int minSide;
-    private TextView textCurrentPlayer, textPlayerScore, textViewTimer;
+    private TextView textCurrentPlayer, textPlayerScore, textViewTimer, chronometerView;
     public static final int REQUEST_CODE = 100;
     private CountDownTimer countDownTimer;
     int secondsLeft = 0;
+    Chronometer chronometer;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,10 +55,10 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
         textCurrentPlayer = (TextView) findViewById(R.id.txt_player);
         textViewTimer = (TextView) findViewById(R.id.textViewTimer);
 
+        chronometer = (Chronometer)findViewById(R.id.chronometer);
         newGame();
         countDownTimer.cancel();
     }
-
 
     public void newGame() {
         GameModel.getInstance().initNewGame();
@@ -78,6 +84,9 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
 
         // initialize countdown timer
         initCountDownTimer();
+
+        chronometer.setBase(SystemClock.elapsedRealtime());
+        chronometer.start();
     }
 
     public void initCountDownTimer() {
@@ -266,6 +275,7 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
     private void gameFinished() {
         Intent endscreen = new Intent(this, EndscreenActivity.class);
         startActivityForResult(endscreen, REQUEST_CODE);
+        chronometer.stop();
     }
 
     void showDialog() {

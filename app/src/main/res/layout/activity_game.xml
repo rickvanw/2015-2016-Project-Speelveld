@@ -44,4 +44,12 @@
         android:layout_above="@+id/linearLayout"
         android:layout_centerHorizontal="true" />
 
+    <Chronometer
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/chronometer"
+        android:layout_above="@+id/linearLayout"
+        android:layout_alignParentStart="true" />
+
+
 </RelativeLayout>
