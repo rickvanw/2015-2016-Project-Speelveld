@@ -2,9 +2,11 @@ package nl.saxion.groep2.speelveld.kamertjeverhuren;
 
 import android.content.Intent;
 import android.os.CountDownTimer;
+import android.os.SystemClock;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Layout;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
@@ -12,7 +14,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Chronometer;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -26,13 +30,15 @@ import nl.saxion.groep2.speelveld.kamertjeverhuren.view.GameBoard;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.view.LineView;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.view.PointView;
 
-public class GameActivity extends AppCompatActivity implements LineView.Callbacks, BoxView.Callbacks {
+public class GameActivity extends AppCompatActivity implements LineView.Callbacks {
 
     private int minSide;
     private TextView textCurrentPlayer, textPlayerScore, textViewTimer;
     public static final int REQUEST_CODE = 100;
     private CountDownTimer countDownTimer;
     int secondsLeft = 0;
+    private Chronometer chronometer;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,8 +61,9 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
         Button buttonPowerUpSwitch = (Button)findViewById(R.id.buttonPowerUpSwitch);
         buttonPowerUpSwitch.setOnClickListener(new buttonPowerUpSwitchOnClickListener());
 
+        chronometer = (Chronometer)findViewById(R.id.chronometer);
         newGame();
-        //countDownTimer.cancel();
+        countDownTimer.cancel();
     }
 
     public class buttonPowerUpSwitchOnClickListener implements View.OnClickListener{
@@ -95,6 +102,9 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
 
         // initialize countdown timer
         initCountDownTimer();
+
+        chronometer.setBase(SystemClock.elapsedRealtime());
+        chronometer.start();
     }
 
     public void initCountDownTimer() {
@@ -232,8 +242,8 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
 
     @Override
     public void clicked() {
-        //countDownTimer.cancel();
-        //countDownTimer.start();
+        countDownTimer.cancel();
+        countDownTimer.start();
         boolean line = true;
         for (int i = 0; i < GameModel.getInstance().getBoxViews().size(); i++) {
             boolean isSquare = GameModel.getInstance().getBoxViews().get(i).checkSquare();
@@ -290,6 +300,7 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
     private void gameFinished() {
         Intent endscreen = new Intent(this, EndscreenActivity.class);
         startActivityForResult(endscreen, REQUEST_CODE);
+        chronometer.stop();
     }
 
     void showDialog() {

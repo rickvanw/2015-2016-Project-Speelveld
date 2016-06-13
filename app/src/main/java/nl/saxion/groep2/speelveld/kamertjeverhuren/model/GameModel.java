@@ -30,7 +30,7 @@ public class GameModel {
     }
 
     private GameModel() {
-        this.amountOfBoxesInRow = 2;
+        this.amountOfBoxesInRow = 4;
         this.gameBoardMargin = 40;
         this.powerUpSwitchActive = false;
         player1 = new Player(1, Color.RED, Color.parseColor("#ff6666"));
@@ -62,6 +62,10 @@ public class GameModel {
 
     public void setCurrentPlayer(Player currentPlayer) {
         this.currentPlayer = currentPlayer;
+    }
+
+    public void setAmountOfBoxesInRow(int amountOfBoxesInRow) {
+        this.amountOfBoxesInRow = amountOfBoxesInRow;
     }
 
     public void addBoxView(BoxView boxView) {

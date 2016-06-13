@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Kamertje Verhuren</string>
     <string name="placeholder">Placeholder</string>
+    <string name="boardsize">BoardSize</string>
 </resources>
