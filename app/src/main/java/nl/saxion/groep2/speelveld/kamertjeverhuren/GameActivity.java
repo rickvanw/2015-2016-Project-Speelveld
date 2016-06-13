@@ -30,7 +30,7 @@ import nl.saxion.groep2.speelveld.kamertjeverhuren.view.GameBoard;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.view.LineView;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.view.PointView;
 
-public class GameActivity extends AppCompatActivity implements LineView.Callbacks {
+public class GameActivity extends AppCompatActivity implements LineView.Callbacks, BoxView.Callbacks {
 
     private int minSide;
     private TextView textCurrentPlayer, textPlayerScore, textViewTimer;
