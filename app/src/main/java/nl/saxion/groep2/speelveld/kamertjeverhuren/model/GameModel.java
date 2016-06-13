@@ -22,6 +22,8 @@ public class GameModel {
     private ArrayList<BoxView> boxViews = new ArrayList<>();
     private ArrayList<LineView> lineViews = new ArrayList<>();
 
+    private String endGameTime;
+
     private Player player1, player2;
     private Player currentPlayer;
 
@@ -80,6 +82,10 @@ public class GameModel {
         this.lines.add(line);
     }
 
+    public void setEndGameTime(String endGameTime) {
+        this.endGameTime = endGameTime;
+    }
+
     // getters
     public int getGameBoardSize() {
         return gameBoardSize;
@@ -123,5 +129,9 @@ public class GameModel {
 
     public void setPowerUpSwitchActive(boolean powerUpSwitchActive) {
         this.powerUpSwitchActive = powerUpSwitchActive;
+    }
+
+    public String getEndGameTime() {
+        return endGameTime;
     }
 }

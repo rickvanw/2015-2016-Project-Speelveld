@@ -34,7 +34,7 @@ public class EndscreenActivity extends AppCompatActivity {
         });
         restartButton.setTextSize(30);
 
-        tvEndTime.setText("05:55");
+        tvEndTime.setText(GameModel.getInstance().getEndGameTime());
         tvEndTime.setTextSize(20);
         tvEndTime.setTextColor(Color.BLACK);
 
