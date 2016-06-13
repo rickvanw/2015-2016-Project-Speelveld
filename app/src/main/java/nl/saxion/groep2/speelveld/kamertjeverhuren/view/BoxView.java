@@ -34,7 +34,7 @@ public class BoxView extends View {
             @Override
             public void onClick(View v) {
 
-                if (GameModel.getInstance().isPowerUpSwitchActive()) {
+                if (GameModel.getInstance().getCurrentPlayer().isPowerUpSwitchActive()) {
                     Log.d("RESULT", "clickBox");
                     if (box.getOwner() != null) {
                         Player player = box.getOwner();
@@ -47,10 +47,10 @@ public class BoxView extends View {
                             }
                             GameModel.getInstance().getCurrentPlayer().increaseScore(box.getBoxScore());
                             callbacks.clickedBox();
+                            GameModel.getInstance().getCurrentPlayer().decreasePowerUpSwitch();
+                            GameModel.getInstance().getCurrentPlayer().setPowerUpSwitchActive(false);
                         }
                     }
-                    GameModel.getInstance().getCurrentPlayer().decreasePowerUpSwitch();
-                    GameModel.getInstance().setPowerUpSwitchActive(false);
                 }
             }
         });

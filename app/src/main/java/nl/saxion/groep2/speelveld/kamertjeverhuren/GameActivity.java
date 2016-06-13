@@ -6,7 +6,6 @@ import android.os.SystemClock;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Layout;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
@@ -16,7 +15,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -70,9 +68,9 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
         @Override
         public void onClick(View v) {
             if(GameModel.getInstance().getCurrentPlayer().getPowerUpSwitch()>0){
-                if(!GameModel.getInstance().isPowerUpSwitchActive()){
-                    GameModel.getInstance().setPowerUpSwitchActive(true);
-                }else{GameModel.getInstance().setPowerUpSwitchActive(false);}
+                if(!GameModel.getInstance().getCurrentPlayer().isPowerUpSwitchActive()){
+                    GameModel.getInstance().getCurrentPlayer().setPowerUpSwitchActive(true);
+                }else{GameModel.getInstance().getCurrentPlayer().setPowerUpSwitchActive(false);}
             }
         }
     }
@@ -293,7 +291,7 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
         } else if (GameModel.getInstance().getCurrentPlayer().equals(GameModel.getInstance().getPlayer2())) {
             GameModel.getInstance().setCurrentPlayer(GameModel.getInstance().getPlayer1());
         }
-        GameModel.getInstance().setPowerUpSwitchActive(false);
+        GameModel.getInstance().getCurrentPlayer().setPowerUpSwitchActive(false);
         textCurrentPlayer.setText("Player " + GameModel.getInstance().getCurrentPlayer().getPlayerNumber() + " is aan de beurt");
     }
 
