@@ -298,6 +298,10 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
         Intent endscreen = new Intent(this, EndscreenActivity.class);
         startActivityForResult(endscreen, REQUEST_CODE);
         chronometer.stop();
+        String endTime = "" + chronometer.getText();
+
+        GameModel.getInstance().setEndTime(endTime);
+
     }
 
     void showDialog() {

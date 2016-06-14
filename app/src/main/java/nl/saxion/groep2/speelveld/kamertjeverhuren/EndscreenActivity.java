@@ -39,9 +39,11 @@ public class EndscreenActivity extends AppCompatActivity {
         tvEndTime.setText(GameModel.getInstance().getEndGameTime());
         tvEndTime.setTextSize(20);
         tvEndTime.setTextColor(Color.BLACK);
+        tvEndTime.setText(GameModel.getInstance().getEndTime());
 
         tvEnd.setTextColor(Color.BLACK);
         tvEnd.setTextSize(40);
+
 
         tvScore2.setTextSize(20);
 
