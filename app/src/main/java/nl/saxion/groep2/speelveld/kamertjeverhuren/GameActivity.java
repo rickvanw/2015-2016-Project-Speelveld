@@ -299,7 +299,7 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
         startActivityForResult(endscreen, REQUEST_CODE);
         chronometer.stop();
         String endTime = "" + chronometer.getText();
-
+        //set eindtime
         GameModel.getInstance().setEndTime(endTime);
 
     }
