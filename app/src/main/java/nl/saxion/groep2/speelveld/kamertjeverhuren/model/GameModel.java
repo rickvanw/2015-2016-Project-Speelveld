@@ -18,10 +18,8 @@ public class GameModel {
     private ArrayList<BoxView> boxViews = new ArrayList<>();
     private ArrayList<LineView> lineViews = new ArrayList<>();
     private String endTime;
-    private String endGameTime;
 
-    private Player player1, player2;
-    private Player currentPlayer;
+    private Player player1, player2, currentPlayer;
 
     public static GameModel getInstance() {
         return ourInstance;
@@ -79,10 +77,6 @@ public class GameModel {
         this.lines.add(line);
     }
 
-    public void setEndGameTime(String endGameTime) {
-        this.endGameTime = endGameTime;
-    }
-
     public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
@@ -124,13 +118,7 @@ public class GameModel {
         return currentPlayer;
     }
 
-    public String getEndGameTime() {
-        return endGameTime;
-    }
-
     public String getEndTime() {
         return endTime;
     }
-
-
 }
