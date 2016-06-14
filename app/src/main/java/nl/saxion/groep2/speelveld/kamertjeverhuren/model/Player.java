@@ -24,11 +24,9 @@ public class Player {
         currentScore = 0;
     }
 
-    public void decreaseScore() {
+    public void decreaseScore(int amount) {
         // score should not have a negative value
-        if (currentScore != 0) {
-            currentScore--;
-        }
+        currentScore = Math.max(currentScore -= amount, 0);
     }
 
     public int getPlayerNumber() {
@@ -50,15 +48,15 @@ public class Player {
     public int getPowerUpSwitch() {
         return powerUpSwitch;
     }
-    
+
     public void decreasePowerUpSwitch() {
         if (powerUpSwitch != 0) {
             powerUpSwitch--;
         }
     }
 
-    public void resetPowerUpSwitch(){
-        powerUpSwitch=1;
+    public void resetPowerUpSwitch() {
+        powerUpSwitch = 1;
     }
 
     public boolean isPowerUpSwitchActive() {

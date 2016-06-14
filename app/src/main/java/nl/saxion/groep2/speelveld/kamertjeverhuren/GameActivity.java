@@ -121,7 +121,7 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
             @Override
             public void onFinish() {
                 textViewTimer.setText("Tijd is om");
-                GameModel.getInstance().getCurrentPlayer().decreaseScore();
+                GameModel.getInstance().getCurrentPlayer().decreaseScore(1);
                 textPlayerScore.setText("Player 1's score: " + GameModel.getInstance().getPlayer1().getCurrentScore() + ", Player 2's score: " + GameModel.getInstance().getPlayer2().getCurrentScore());
             }
         }.start();
@@ -252,7 +252,7 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
                 textPlayerScore.setText("Player 1's score: " + GameModel.getInstance().getPlayer1().getCurrentScore() + ", Player 2's score: " + GameModel.getInstance().getPlayer2().getCurrentScore());
 
                 GameModel.getInstance().getBoxViews().get(i).setOwner(GameModel.getInstance().getCurrentPlayer());
-                GameModel.getInstance().getBoxViews().get(i).showColor();
+
                 line = false;
                 if (!AudioPlay.isMuted) {
                     AudioPlay.playAudio(this, R.raw.boxsound);

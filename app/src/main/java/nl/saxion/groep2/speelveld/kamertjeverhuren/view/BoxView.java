@@ -11,11 +11,6 @@ import nl.saxion.groep2.speelveld.kamertjeverhuren.model.Box;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.model.GameModel;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.model.Player;
 
-/**
- * The BoxView is a physical representation of a box.
- *
- * @author Robert Mekenkamp
- */
 public class BoxView extends View {
 
     public Callbacks callbacks;
@@ -24,27 +19,19 @@ public class BoxView extends View {
 
     public BoxView(Context context) {
         super(context);
-        init();
-    }
-
-    public void init() {
         this.setBackgroundColor(Color.LTGRAY);
 
         this.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 if (GameModel.getInstance().getCurrentPlayer().isPowerUpSwitchActive()) {
                     Log.d("RESULT", "clickBox");
                     if (box.getOwner() != null) {
                         Player player = box.getOwner();
                         if (player.getPlayerNumber() != GameModel.getInstance().getCurrentPlayer().getPlayerNumber()) {
                             Log.d("RESULT", "box tegenstander geklikt");
-                            box.setOwner(GameModel.getInstance().getCurrentPlayer());
-                            showColor();
-                            for (int i = 0; i < box.getBoxScore(); i++) {
-                                player.decreaseScore();
-                            }
+                            setOwner(GameModel.getInstance().getCurrentPlayer());
+                            player.decreaseScore(box.getBoxScore());
                             GameModel.getInstance().getCurrentPlayer().increaseScore(box.getBoxScore());
                             callbacks.clickedBox();
                             GameModel.getInstance().getCurrentPlayer().decreasePowerUpSwitch();
@@ -54,7 +41,6 @@ public class BoxView extends View {
                 }
             }
         });
-
     }
 
     public void setPosition(int x, int y) {
@@ -73,7 +59,6 @@ public class BoxView extends View {
         if (this.box == null) {
             this.box = box;
         }
-        init();
     }
 
     @Override
@@ -86,9 +71,6 @@ public class BoxView extends View {
 
     public void setOwner(Player owner) {
         box.setOwner(owner);
-    }
-
-    public void showColor() {
         this.setBackgroundColor(box.getOwner().getBoxColor());
     }
 
