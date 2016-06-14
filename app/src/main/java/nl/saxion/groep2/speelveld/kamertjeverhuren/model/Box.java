@@ -13,6 +13,16 @@ public class Box {
         this.boxScore = (int) (Math.random() * 3) + 1;
     }
 
+    // Setters
+    public void addLineToBox(Line line) {
+        lines.add(line);
+    }
+
+    public void setOwner(Player owner) {
+        this.owner = owner;
+    }
+
+    // Getters
     public boolean isSquare() {
         for (int i = 0; i < lines.size(); i++) {
             if (!lines.get(i).isClicked()) {
@@ -20,14 +30,6 @@ public class Box {
             }
         }
         return true;
-    }
-
-    public void addLineToBox(Line line) {
-        lines.add(line);
-    }
-
-    public void setOwner(Player owner) {
-        this.owner = owner;
     }
 
     public Player getOwner() {

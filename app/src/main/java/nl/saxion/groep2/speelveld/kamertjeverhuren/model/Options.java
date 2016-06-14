@@ -11,12 +11,9 @@ import nl.saxion.groep2.speelveld.kamertjeverhuren.GameActivity;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.ManualActivity;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.SettingsActivity;
 
-/**
- * Created by rubenassink on 08-06-16.
- */
 public class Options extends DialogFragment {
 
-    String[] Options = {"Mute", "Restart", "Manual", "Settings"};
+    private String[] Options = {"Mute", "Restart", "Manual", "Settings"};
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {

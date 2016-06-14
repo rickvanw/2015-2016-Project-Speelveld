@@ -9,9 +9,6 @@ import android.widget.Spinner;
 
 import nl.saxion.groep2.speelveld.kamertjeverhuren.model.GameModel;
 
-/**
- * Created by rubenassink on 10-06-16.
- */
 public class SettingsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     Spinner spinnerBoardSize;
@@ -34,9 +31,7 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
         spinnerBoardSize.setAdapter(adapter);
     }
 
-    public void onItemSelected(AdapterView<?> parent, View view,
-                               int pos, long id) {
-
+    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
         switch (pos) {
             case 0:
                 GameModel.getInstance().setAmountOfBoxesInRow(2);
@@ -58,5 +53,4 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
 
     public void onNothingSelected(AdapterView<?> parent) {
     }
-
 }

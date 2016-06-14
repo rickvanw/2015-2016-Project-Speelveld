@@ -14,13 +14,12 @@ import nl.saxion.groep2.speelveld.kamertjeverhuren.model.Player;
 public class BoxView extends View {
 
     public Callbacks callbacks;
-
     private Box box;
 
     public BoxView(Context context) {
         super(context);
-        this.setBackgroundColor(Color.LTGRAY);
-
+        setBackgroundColor(Color.LTGRAY);
+        // TODO: voeg comments toe, waarom wordt de callbacks methode aangeroepen als er nog meer dingen worden uitgevoerd?
         this.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,32 +60,21 @@ public class BoxView extends View {
         }
     }
 
+    public Box getBox() {
+        return box;
+    }
+
+    public void setOwner(Player owner) {
+        box.setOwner(owner);
+        setBackgroundColor(box.getOwner().getBoxColor());
+    }
+
     @Override
     protected void onDraw(Canvas canvas) {
         Paint paint = new Paint();
         paint.setColor(Color.YELLOW);
         paint.setTextSize(canvas.getHeight() / 4);
         canvas.drawText("" + box.getBoxScore(), canvas.getWidth() / 4 * 3, canvas.getHeight() / 4 * 1, paint);
-    }
-
-    public void setOwner(Player owner) {
-        box.setOwner(owner);
-        this.setBackgroundColor(box.getOwner().getBoxColor());
-    }
-
-    public Player getOwner() {
-        return box.getOwner();
-    }
-
-    public int getBoxScore() {
-        return box.getBoxScore();
-    }
-
-    public boolean checkSquare() {
-        if (box.isSquare()) {
-            return true;
-        }
-        return false;
     }
 
     @Override

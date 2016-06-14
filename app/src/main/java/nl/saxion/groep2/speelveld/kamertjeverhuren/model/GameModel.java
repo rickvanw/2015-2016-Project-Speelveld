@@ -8,9 +8,6 @@ import java.util.ArrayList;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.view.BoxView;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.view.LineView;
 
-/**
- * Created by Robert on 20-5-2016.
- */
 public class GameModel {
 
     private static GameModel ourInstance = new GameModel();
@@ -38,6 +35,7 @@ public class GameModel {
         currentPlayer = player1;
     }
 
+    // Setters
     public void initNewGame() {
         // Remove all previous lineViews from the parent view so they won't interfere with the new ones
         for (int i = 0; i < lineViews.size(); i++) {
@@ -85,7 +83,7 @@ public class GameModel {
         this.endGameTime = endGameTime;
     }
 
-    // getters
+    // Getters
     public int getGameBoardSize() {
         return gameBoardSize;
     }

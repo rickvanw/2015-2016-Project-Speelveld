@@ -37,7 +37,6 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
     int secondsLeft = 0;
     private Chronometer chronometer;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,25 +55,24 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
         textCurrentPlayer = (TextView) findViewById(R.id.txt_player);
         textViewTimer = (TextView) findViewById(R.id.textViewTimer);
 
-        Button buttonPowerUpSwitch = (Button)findViewById(R.id.buttonPowerUpSwitch);
-        buttonPowerUpSwitch.setOnClickListener(new buttonPowerUpSwitchOnClickListener());
+        Button buttonPowerUpSwitch = (Button) findViewById(R.id.buttonPowerUpSwitch);
+        buttonPowerUpSwitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (GameModel.getInstance().getCurrentPlayer().getPowerUpSwitch() > 0) {
+                    if (!GameModel.getInstance().getCurrentPlayer().isPowerUpSwitchActive()) {
+                        GameModel.getInstance().getCurrentPlayer().setPowerUpSwitchActive(true);
+                    } else {
+                        GameModel.getInstance().getCurrentPlayer().setPowerUpSwitchActive(false);
+                    }
+                }
+            }
+        });
 
-        chronometer = (Chronometer)findViewById(R.id.chronometer);
+        chronometer = (Chronometer) findViewById(R.id.chronometer);
         newGame();
         countDownTimer.cancel();
     }
-
-    public class buttonPowerUpSwitchOnClickListener implements View.OnClickListener{
-        @Override
-        public void onClick(View v) {
-            if(GameModel.getInstance().getCurrentPlayer().getPowerUpSwitch()>0){
-                if(!GameModel.getInstance().getCurrentPlayer().isPowerUpSwitchActive()){
-                    GameModel.getInstance().getCurrentPlayer().setPowerUpSwitchActive(true);
-                }else{GameModel.getInstance().getCurrentPlayer().setPowerUpSwitchActive(false);}
-            }
-        }
-    }
-
 
     public void newGame() {
         GameModel.getInstance().initNewGame();
@@ -244,10 +242,10 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
         countDownTimer.start();
         boolean line = true;
         for (int i = 0; i < GameModel.getInstance().getBoxViews().size(); i++) {
-            boolean isSquare = GameModel.getInstance().getBoxViews().get(i).checkSquare();
+            boolean isSquare = GameModel.getInstance().getBoxViews().get(i).getBox().isSquare();
             // if square is detected, increase player score, remove boxview from arraylist and play 'victory'
-            if (isSquare && GameModel.getInstance().getBoxViews().get(i).getOwner() == null) {
-                GameModel.getInstance().getCurrentPlayer().increaseScore(GameModel.getInstance().getBoxViews().get(i).getBoxScore());
+            if (isSquare && GameModel.getInstance().getBoxViews().get(i).getBox().getOwner() == null) {
+                GameModel.getInstance().getCurrentPlayer().increaseScore(GameModel.getInstance().getBoxViews().get(i).getBox().getBoxScore());
 
                 textPlayerScore.setText("Player 1's score: " + GameModel.getInstance().getPlayer1().getCurrentScore() + ", Player 2's score: " + GameModel.getInstance().getPlayer2().getCurrentScore());
 
@@ -268,7 +266,7 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
         }
         boolean endGame = false;
         for (int i = 0; i < GameModel.getInstance().getBoxViews().size(); i++) {
-            if (GameModel.getInstance().getBoxViews().get(i).getOwner() == null) {
+            if (GameModel.getInstance().getBoxViews().get(i).getBox().getOwner() == null) {
                 endGame = false;
                 break;
             }
@@ -279,8 +277,9 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
         }
     }
 
-    public void clickedBox(){
-        Log.d("RESULT","clickedBox");
+    @Override
+    public void clickedBox() {
+        Log.d("RESULT", "clickedBox");
         textPlayerScore.setText("Player 1's score: " + GameModel.getInstance().getPlayer1().getCurrentScore() + ", Player 2's score: " + GameModel.getInstance().getPlayer2().getCurrentScore());
 
     }

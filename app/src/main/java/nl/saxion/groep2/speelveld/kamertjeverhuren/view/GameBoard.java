@@ -8,11 +8,8 @@ import android.view.View;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.model.GameModel;
 
 public class GameBoard extends View {
-    Context context;
-
     public GameBoard(Context context) {
         super(context);
-        this.context = context;
         init();
     }
 

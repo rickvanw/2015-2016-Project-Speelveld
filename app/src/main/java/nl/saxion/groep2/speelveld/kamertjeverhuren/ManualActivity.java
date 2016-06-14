@@ -15,20 +15,19 @@ public class ManualActivity extends AppCompatActivity {
 
         TextView tvManualTitle = (TextView) findViewById(R.id.tvManualTitle);
         TextView tvManualText = (TextView) findViewById(R.id.tvManualText);
-        ImageView ivManaul1 = (ImageView) findViewById(R.id.ivManual1);
-        ImageView ivManaul2 = (ImageView) findViewById(R.id.ivManual2);
+        ImageView ivManual1 = (ImageView) findViewById(R.id.ivManual1);
+        ImageView ivManual2 = (ImageView) findViewById(R.id.ivManual2);
 
-        ivManaul1.setImageResource(R.drawable.manual_place_lines);
-        ivManaul2.setImageResource(R.drawable.manual_box_done);
+        ivManual1.setImageResource(R.drawable.manual_place_lines);
+        ivManual2.setImageResource(R.drawable.manual_box_done);
 
         tvManualTitle.setText("Manual");
-        tvManualText.setText("The players have to take turns in tapping a line."+"\n"+"\n"+"Once the last line of a box is tapped, the point belongs to the player that placed the last line. "+ "\n" + "\n" + "If a player has claimed a box, the same player can place another line.");
+        tvManualText.setText("The players have to take turns in tapping a line." + "\n" + "\n" + "Once the last line of a box is tapped, the point belongs to the player that placed the last line. " + "\n" + "\n" + "If a player has claimed a box, the same player can place another line.");
 
         tvManualTitle.setTextColor(Color.BLACK);
         tvManualText.setTextColor(Color.BLACK);
 
         tvManualTitle.setTextSize(30);
         tvManualText.setTextSize(20);
-
     }
 }

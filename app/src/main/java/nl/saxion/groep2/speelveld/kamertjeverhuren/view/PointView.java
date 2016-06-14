@@ -41,6 +41,4 @@ public class PointView extends View {
         setTranslationX(translationX + 40);
         setTranslationY(translationY + 40);
     }
-
-
 }

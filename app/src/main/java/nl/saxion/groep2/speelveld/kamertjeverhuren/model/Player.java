@@ -4,7 +4,6 @@ public class Player {
     private int playerNumber, currentScore, totalScore, lineColor, boxColor, powerUpSwitch;
     private boolean powerUpSwitchActive;
 
-
     public Player(int playerNumber, int lineColor, int boxColor) {
         this.playerNumber = playerNumber;
         this.lineColor = lineColor;
@@ -16,6 +15,7 @@ public class Player {
 
     }
 
+    // Setters
     public void increaseScore(int amount) {
         currentScore += amount;
     }
@@ -29,6 +29,21 @@ public class Player {
         currentScore = Math.max(currentScore -= amount, 0);
     }
 
+    public void decreasePowerUpSwitch() {
+        if (powerUpSwitch != 0) {
+            powerUpSwitch--;
+        }
+    }
+
+    public void resetPowerUpSwitch() {
+        powerUpSwitch = 1;
+    }
+
+    public void setPowerUpSwitchActive(boolean powerUpSwitchActive) {
+        this.powerUpSwitchActive = powerUpSwitchActive;
+    }
+
+    // Getters
     public int getPlayerNumber() {
         return playerNumber;
     }
@@ -49,21 +64,7 @@ public class Player {
         return powerUpSwitch;
     }
 
-    public void decreasePowerUpSwitch() {
-        if (powerUpSwitch != 0) {
-            powerUpSwitch--;
-        }
-    }
-
-    public void resetPowerUpSwitch() {
-        powerUpSwitch = 1;
-    }
-
     public boolean isPowerUpSwitchActive() {
         return powerUpSwitchActive;
-    }
-
-    public void setPowerUpSwitchActive(boolean powerUpSwitchActive) {
-        this.powerUpSwitchActive = powerUpSwitchActive;
     }
 }

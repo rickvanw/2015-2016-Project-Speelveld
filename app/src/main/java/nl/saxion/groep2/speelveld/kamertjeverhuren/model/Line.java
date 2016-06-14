@@ -2,7 +2,7 @@ package nl.saxion.groep2.speelveld.kamertjeverhuren.model;
 
 public class Line {
     private boolean clicked;
-    int startX, stopX, startY, stopY;
+    private int startX, stopX, startY, stopY;
 
     public Line(int startX, int startY, int stopX, int stopY) {
         this.startX = startX;
@@ -11,10 +11,12 @@ public class Line {
         this.stopY = stopY;
     }
 
+    // Setters
     public void setClicked() {
         this.clicked = true;
     }
 
+    // Getters
     public boolean isClicked() {
         return clicked;
     }
