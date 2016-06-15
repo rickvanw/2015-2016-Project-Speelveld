@@ -7,16 +7,18 @@ import java.util.ArrayList;
 
 import nl.saxion.groep2.speelveld.kamertjeverhuren.view.BoxView;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.view.LineView;
+import nl.saxion.groep2.speelveld.kamertjeverhuren.view.PointView;
 
 public class GameModel {
 
     private static GameModel ourInstance = new GameModel();
     private int gameBoardSize, amountOfBoxesInRow, gameBoardMargin;
 
-    private ArrayList<Line> lines = new ArrayList<>();
-    private ArrayList<Box> boxes = new ArrayList<>();
-    private ArrayList<BoxView> boxViews = new ArrayList<>();
-    private ArrayList<LineView> lineViews = new ArrayList<>();
+    private ArrayList<Line> lines;
+    private ArrayList<Box> boxes;
+    private ArrayList<BoxView> boxViews;
+    private ArrayList<LineView> lineViews;
+    private ArrayList<PointView> pointViews;
     private String endTime;
 
     private Player player1, player2, currentPlayer;
@@ -44,6 +46,11 @@ public class GameModel {
             BoxView boxView = boxViews.get(i);
             ((ViewGroup) boxView.getParent()).removeView(boxView);
         }
+        for (int i = 0; i < pointViews.size(); i++) {
+            PointView pointView = pointViews.get(i);
+            ((ViewGroup) pointView.getParent()).removeView(pointView);
+        }
+        pointViews = new ArrayList<>();
         lineViews = new ArrayList<>();
         lines = new ArrayList<>();
         boxes = new ArrayList<>();
@@ -79,6 +86,10 @@ public class GameModel {
 
     public void addLine(Line line) {
         this.lines.add(line);
+    }
+
+    public void addPointView(PointView pointView) {
+        pointViews.add(pointView);
     }
 
     public void setEndTime(String endTime) {

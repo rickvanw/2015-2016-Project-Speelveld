@@ -7,7 +7,6 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -201,6 +200,8 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
             for (int j = 0; j < amountOfDotsInRow; j++) {
                 // Create a point view
                 PointView pointView = new PointView(this, i, j);
+
+                GameModel.getInstance().addPointView(pointView);
 
                 // Set the width and height of the view
                 ViewGroup.LayoutParams layoutParamsPoint = new ViewGroup.LayoutParams(20, 20);
