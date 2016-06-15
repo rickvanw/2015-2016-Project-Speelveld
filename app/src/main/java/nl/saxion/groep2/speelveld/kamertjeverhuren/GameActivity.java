@@ -69,9 +69,7 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
             }
         });
 
-        chronometer = (Chronometer) findViewById(R.id.chronometer);
         newGame();
-        countDownTimer.cancel();
     }
 
     public void newGame() {
@@ -99,16 +97,12 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
         // initialize countdown timer
         initCountDownTimer();
 
-        chronometer.setBase(SystemClock.elapsedRealtime());
-        chronometer.start();
+        // Initialize gametime
+        initGameTimer();
     }
 
     public void initCountDownTimer() {
-        if (countDownTimer != null) {
-            countDownTimer.cancel();
-        }
-
-        countDownTimer = new CountDownTimer(5700, 100) {
+        countDownTimer = new CountDownTimer(15700, 100) {
             public void onTick(long millisUntilFinished) {
                 if (Math.round((float) millisUntilFinished / 1000) != secondsLeft) {
                     secondsLeft = Math.round((float) millisUntilFinished / 1000);
@@ -122,7 +116,14 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
                 GameModel.getInstance().getCurrentPlayer().decreaseScore(1);
                 textPlayerScore.setText("Player 1's score: " + GameModel.getInstance().getPlayer1().getCurrentScore() + ", Player 2's score: " + GameModel.getInstance().getPlayer2().getCurrentScore());
             }
-        }.start();
+        };
+    }
+
+    public void initGameTimer() {
+        chronometer = (Chronometer) findViewById(R.id.chronometer);
+        chronometer.setVisibility(View.INVISIBLE);
+        chronometer.setBase(SystemClock.elapsedRealtime());
+        chronometer.start();
     }
 
     public void drawBoxes() {
