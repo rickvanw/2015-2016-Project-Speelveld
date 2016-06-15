@@ -51,8 +51,6 @@ public class BoxView extends View {
         int amountOfBoxesInRow = GameModel.getInstance().getAmountOfBoxesInRow();
         int gameBoardMargin = GameModel.getInstance().getGameBoardMargin();
 
-        //translationX = (((gameBoardSize / amountOfBoxesInRow) - (20 / amountOfBoxesInRow)) * line.getStartX()) - 30;
-
         int translationX = gameBoardMargin + (((gameBoardSize / amountOfBoxesInRow) - (20 / amountOfBoxesInRow)) * x);
         int translationY = gameBoardMargin + (((gameBoardSize / amountOfBoxesInRow) - (20 / amountOfBoxesInRow)) * y);
 
