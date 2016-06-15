@@ -63,7 +63,6 @@ public class GameModel {
         player2.setPowerUpTakeBoxActive(false);
     }
 
-    // This method sets the GameBoard size based on the smallest side of the screen
     public void setGameBoardSize(int gameBoardSize) {
         this.gameBoardSize = gameBoardSize;
     }
