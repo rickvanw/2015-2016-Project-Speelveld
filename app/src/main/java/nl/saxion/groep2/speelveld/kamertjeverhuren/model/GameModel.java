@@ -46,10 +46,10 @@ public class GameModel {
         boxViews = new ArrayList<>();
         player1.resetCurrentScore();
         player2.resetCurrentScore();
-        player1.resetPowerUpSwitch();
-        player2.resetPowerUpSwitch();
-        player1.setPowerUpSwitchActive(false);
-        player2.setPowerUpSwitchActive(true);
+        player1.resetPowerUpTakeBox();
+        player2.resetPowerUpTakeBox();
+        player1.setPowerUpTakeBoxActive(false);
+        player2.setPowerUpTakeBoxActive(false);
     }
 
     // This method sets the GameBoard size based on the smallest side of the screen

@@ -19,22 +19,25 @@ public class BoxView extends View {
     public BoxView(Context context) {
         super(context);
         setBackgroundColor(Color.LTGRAY);
-        // TODO: voeg comments toe, waarom wordt de callbacks methode aangeroepen als er nog meer dingen worden uitgevoerd?
+        // Listen for clicks on the boxes
         this.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (GameModel.getInstance().getCurrentPlayer().isPowerUpSwitchActive()) {
-                    Log.d("RESULT", "clickBox");
+                // Only continue if user pressed the powerup button to take a box
+                if (GameModel.getInstance().getCurrentPlayer().isPowerUpTakeBoxActive()) {
+                    // Check if the clicked box has a owner
                     if (box.getOwner() != null) {
                         Player player = box.getOwner();
+                        // The player who clicked the box should not be the owner of the box
                         if (player.getPlayerNumber() != GameModel.getInstance().getCurrentPlayer().getPlayerNumber()) {
-                            Log.d("RESULT", "box tegenstander geklikt");
                             setOwner(GameModel.getInstance().getCurrentPlayer());
+                            // Transfer the score from the previous box owner to the current player
                             player.decreaseScore(box.getBoxScore());
                             GameModel.getInstance().getCurrentPlayer().increaseScore(box.getBoxScore());
+                            GameModel.getInstance().getCurrentPlayer().decreasePowerUpTakeBox();
+                            GameModel.getInstance().getCurrentPlayer().setPowerUpTakeBoxActive(false);
+                            // Callback to the GameActivity to notify that the score has been changed
                             callbacks.clickedBox();
-                            GameModel.getInstance().getCurrentPlayer().decreasePowerUpSwitch();
-                            GameModel.getInstance().getCurrentPlayer().setPowerUpSwitchActive(false);
                         }
                     }
                 }

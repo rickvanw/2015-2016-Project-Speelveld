@@ -17,8 +17,6 @@ public class EndscreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_endscreen);
 
-        //TODO: Waarom setTextSize in code en niet in xml? volgorde van initializeren textviews en plaatsen van tekst.
-
         TextView tvEnd = (TextView) findViewById(R.id.tvEnd);
         TextView tvScore1 = (TextView) findViewById(R.id.tvScore1);
         TextView tvScore2 = (TextView) findViewById(R.id.tvScore2);
@@ -42,7 +40,6 @@ public class EndscreenActivity extends AppCompatActivity {
 
         tvEnd.setTextColor(Color.BLACK);
         tvEnd.setTextSize(40);
-
 
         tvScore2.setTextSize(20);
 

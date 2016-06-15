@@ -1,8 +1,8 @@
 package nl.saxion.groep2.speelveld.kamertjeverhuren.model;
 
 public class Player {
-    private int playerNumber, currentScore, totalScore, lineColor, boxColor, powerUpSwitch;
-    private boolean powerUpSwitchActive;
+    private int playerNumber, currentScore, totalScore, lineColor, boxColor, powerUpTakeBox;
+    private boolean powerUpTakeBoxActive;
 
     public Player(int playerNumber, int lineColor, int boxColor) {
         this.playerNumber = playerNumber;
@@ -10,8 +10,8 @@ public class Player {
         this.boxColor = boxColor;
         this.currentScore = 0;
         this.totalScore = 0;
-        this.powerUpSwitch = 1;
-        this.powerUpSwitchActive = false;
+        this.powerUpTakeBox = 1;
+        this.powerUpTakeBoxActive = false;
 
     }
 
@@ -29,18 +29,18 @@ public class Player {
         currentScore = Math.max(currentScore -= amount, 0);
     }
 
-    public void decreasePowerUpSwitch() {
-        if (powerUpSwitch != 0) {
-            powerUpSwitch--;
+    public void decreasePowerUpTakeBox() {
+        if (powerUpTakeBox != 0) {
+            powerUpTakeBox--;
         }
     }
 
-    public void resetPowerUpSwitch() {
-        powerUpSwitch = 1;
+    public void resetPowerUpTakeBox() {
+        powerUpTakeBox = 1;
     }
 
-    public void setPowerUpSwitchActive(boolean powerUpSwitchActive) {
-        this.powerUpSwitchActive = powerUpSwitchActive;
+    public void setPowerUpTakeBoxActive(boolean powerUpTakeBoxActive) {
+        this.powerUpTakeBoxActive = powerUpTakeBoxActive;
     }
 
     // Getters
@@ -60,11 +60,11 @@ public class Player {
         return boxColor;
     }
 
-    public int getPowerUpSwitch() {
-        return powerUpSwitch;
+    public int getPowerUpTakeBox() {
+        return powerUpTakeBox;
     }
 
-    public boolean isPowerUpSwitchActive() {
-        return powerUpSwitchActive;
+    public boolean isPowerUpTakeBoxActive() {
+        return powerUpTakeBoxActive;
     }
 }

@@ -59,11 +59,11 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
         buttonPowerUpSwitch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (GameModel.getInstance().getCurrentPlayer().getPowerUpSwitch() > 0) {
-                    if (!GameModel.getInstance().getCurrentPlayer().isPowerUpSwitchActive()) {
-                        GameModel.getInstance().getCurrentPlayer().setPowerUpSwitchActive(true);
+                if (GameModel.getInstance().getCurrentPlayer().getPowerUpTakeBox() > 0) {
+                    if (!GameModel.getInstance().getCurrentPlayer().isPowerUpTakeBoxActive()) {
+                        GameModel.getInstance().getCurrentPlayer().setPowerUpTakeBoxActive(true);
                     } else {
-                        GameModel.getInstance().getCurrentPlayer().setPowerUpSwitchActive(false);
+                        GameModel.getInstance().getCurrentPlayer().setPowerUpTakeBoxActive(false);
                     }
                 }
             }
@@ -247,9 +247,7 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
             // if square is detected, increase player score, remove boxview from arraylist and play 'victory'
             if (isSquare && GameModel.getInstance().getBoxViews().get(i).getBox().getOwner() == null) {
                 GameModel.getInstance().getCurrentPlayer().increaseScore(GameModel.getInstance().getBoxViews().get(i).getBox().getBoxScore());
-
-                textPlayerScore.setText("Player 1's score: " + GameModel.getInstance().getPlayer1().getCurrentScore() + ", Player 2's score: " + GameModel.getInstance().getPlayer2().getCurrentScore());
-
+                setTextPlayerScore();
                 GameModel.getInstance().getBoxViews().get(i).setOwner(GameModel.getInstance().getCurrentPlayer());
 
                 line = false;
@@ -280,9 +278,13 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
 
     @Override
     public void clickedBox() {
-        Log.d("RESULT", "clickedBox");
-        textPlayerScore.setText("Player 1's score: " + GameModel.getInstance().getPlayer1().getCurrentScore() + ", Player 2's score: " + GameModel.getInstance().getPlayer2().getCurrentScore());
+        // After the owner of a box has been changed, the
+        setTextPlayerScore();
+    }
 
+    private void setTextPlayerScore(){
+        // The player scores on the display
+        textPlayerScore.setText("Player 1's score: " + GameModel.getInstance().getPlayer1().getCurrentScore() + ", Player 2's score: " + GameModel.getInstance().getPlayer2().getCurrentScore());
     }
 
     private void switchPlayer() {
@@ -291,7 +293,7 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
         } else if (GameModel.getInstance().getCurrentPlayer().equals(GameModel.getInstance().getPlayer2())) {
             GameModel.getInstance().setCurrentPlayer(GameModel.getInstance().getPlayer1());
         }
-        GameModel.getInstance().getCurrentPlayer().setPowerUpSwitchActive(false);
+        GameModel.getInstance().getCurrentPlayer().setPowerUpTakeBoxActive(false);
         textCurrentPlayer.setText("Player " + GameModel.getInstance().getCurrentPlayer().getPlayerNumber() + " is aan de beurt");
     }
 
