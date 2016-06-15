@@ -50,8 +50,10 @@ public class BoxView extends View {
         int amountOfBoxesInRow = GameModel.getInstance().getAmountOfBoxesInRow();
         int gameBoardMargin = GameModel.getInstance().getGameBoardMargin();
 
-        int translationX = gameBoardMargin + ((gameBoardSize / amountOfBoxesInRow) * x);
-        int translationY = gameBoardMargin + ((gameBoardSize / amountOfBoxesInRow) * y);
+        //translationX = (((gameBoardSize / amountOfBoxesInRow) - (20 / amountOfBoxesInRow)) * line.getStartX()) - 30;
+
+        int translationX = gameBoardMargin + (((gameBoardSize / amountOfBoxesInRow)- (20 / amountOfBoxesInRow)) * x);
+        int translationY = gameBoardMargin + (((gameBoardSize / amountOfBoxesInRow)- (20 / amountOfBoxesInRow)) * y);
 
         setTranslationX(translationX);
         setTranslationY(translationY);
@@ -86,6 +88,7 @@ public class BoxView extends View {
         callbacks = (Callbacks) this.getContext();
     }
 
+    // Callback method which calls the clickedBox in the GameActivity to notify a score change.
     public interface Callbacks {
         void clickedBox();
     }
