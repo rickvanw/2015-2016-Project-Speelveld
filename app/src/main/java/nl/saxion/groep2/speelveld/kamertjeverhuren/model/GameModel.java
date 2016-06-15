@@ -14,11 +14,11 @@ public class GameModel {
     private static GameModel ourInstance = new GameModel();
     private int gameBoardSize, amountOfBoxesInRow, gameBoardMargin;
 
-    private ArrayList<Line> lines;
-    private ArrayList<Box> boxes;
-    private ArrayList<BoxView> boxViews;
-    private ArrayList<LineView> lineViews;
-    private ArrayList<PointView> pointViews;
+    private ArrayList<Line> lines = new ArrayList<>();
+    private ArrayList<Box> boxes = new ArrayList<>();
+    private ArrayList<BoxView> boxViews = new ArrayList<>();
+    private ArrayList<LineView> lineViews = new ArrayList<>();
+    private ArrayList<PointView> pointViews = new ArrayList<>();
     private String endTime;
 
     private Player player1, player2, currentPlayer;
