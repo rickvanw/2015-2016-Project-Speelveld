@@ -102,6 +102,11 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
     }
 
     public void initCountDownTimer() {
+        if(countDownTimer != null)
+        {
+            countDownTimer.cancel();
+        }
+
         countDownTimer = new CountDownTimer(15700, 100) {
             public void onTick(long millisUntilFinished) {
                 if (Math.round((float) millisUntilFinished / 1000) != secondsLeft) {
@@ -272,6 +277,8 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
             endGame = true;
         }
         if (endGame) {
+            countDownTimer.cancel();
+            textViewTimer.setText("");
             gameFinished();
         }
     }
