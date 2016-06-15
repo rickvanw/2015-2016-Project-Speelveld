@@ -1,5 +1,7 @@
 package nl.saxion.groep2.speelveld.kamertjeverhuren.view;
 
+import android.animation.ArgbEvaluator;
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -7,6 +9,7 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewAnimationUtils;
 
 import nl.saxion.groep2.speelveld.kamertjeverhuren.model.Box;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.model.GameModel;
@@ -70,7 +73,15 @@ public class BoxView extends View {
 
     public void setOwner(Player owner) {
         box.setOwner(owner);
-        setBackgroundColor(box.getOwner().getBoxColor());
+
+        // Color fades into player color when a player claims a box
+        final ObjectAnimator backgroundColorAnimator = ObjectAnimator.ofObject(this,
+                "backgroundColor",
+                new ArgbEvaluator(),
+                0xFFFFFFFF,
+                box.getOwner().getBoxColor());
+        backgroundColorAnimator.setDuration(900);
+        backgroundColorAnimator.start();
     }
 
     @Override
