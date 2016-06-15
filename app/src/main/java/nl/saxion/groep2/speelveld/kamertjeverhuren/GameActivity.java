@@ -31,6 +31,7 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
 
     private int minSide;
     private TextView textCurrentPlayer, textPlayerScore, textViewTimer;
+    Button buttonPowerTakeBox;
     public static final int REQUEST_CODE = 100;
     private CountDownTimer countDownTimer;
     int secondsLeft = 0;
@@ -54,10 +55,12 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
         textCurrentPlayer = (TextView) findViewById(R.id.txt_player);
         textViewTimer = (TextView) findViewById(R.id.textViewTimer);
 
-        Button buttonPowerUpSwitch = (Button) findViewById(R.id.buttonPowerUpSwitch);
-        buttonPowerUpSwitch.setOnClickListener(new View.OnClickListener() {
+        // Button to activate the take box powerup for the current player
+        buttonPowerTakeBox = (Button) findViewById(R.id.buttonPowerUpTakeBox);
+        buttonPowerTakeBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Check if user has take box powerups left
                 if (GameModel.getInstance().getCurrentPlayer().getPowerUpTakeBox() > 0) {
                     if (!GameModel.getInstance().getCurrentPlayer().isPowerUpTakeBoxActive()) {
                         GameModel.getInstance().getCurrentPlayer().setPowerUpTakeBoxActive(true);
@@ -75,8 +78,7 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
         GameModel.getInstance().initNewGame();
 
         textCurrentPlayer.setText("Player " + GameModel.getInstance().getCurrentPlayer().getPlayerNumber() + " is aan de beurt");
-        textPlayerScore.setText("Player 1's score: " + GameModel.getInstance().getPlayer1().getCurrentScore() + ", Player 2's score: " + GameModel.getInstance().getPlayer2().getCurrentScore());
-
+        setTextPlayerScore();
         // Draw boxes
         drawBoxes();
 
@@ -94,6 +96,8 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
 
         // Initialize gametime
         initGameTimer();
+
+        checkIfPowerUpButtonShouldBeActive();
     }
 
     public void initCountDownTimer() {
@@ -114,7 +118,7 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
             public void onFinish() {
                 textViewTimer.setText("Tijd is om");
                 GameModel.getInstance().getCurrentPlayer().decreaseScore(1);
-                textPlayerScore.setText("Player 1's score: " + GameModel.getInstance().getPlayer1().getCurrentScore() + ", Player 2's score: " + GameModel.getInstance().getPlayer2().getCurrentScore());
+                setTextPlayerScore();
             }
         };
     }
@@ -280,13 +284,34 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
 
     @Override
     public void clickedBox() {
-        // After the owner of a box has been changed, the
+        // After the owner of a box has been changed, the score text is refreshed
         setTextPlayerScore();
+        checkIfPowerUpButtonShouldBeActive();
     }
 
+    // Set the player scores on the display
     private void setTextPlayerScore(){
-        // The player scores on the display
-        textPlayerScore.setText("Player 1's score: " + GameModel.getInstance().getPlayer1().getCurrentScore() + ", Player 2's score: " + GameModel.getInstance().getPlayer2().getCurrentScore());
+        textPlayerScore.setText("Player 1: " + GameModel.getInstance().getPlayer1().getCurrentScore() + " - Player 2: " + GameModel.getInstance().getPlayer2().getCurrentScore());
+    }
+
+    private void checkIfPowerUpButtonShouldBeActive(){
+        if(GameModel.getInstance().getPlayer1()==GameModel.getInstance().getCurrentPlayer()) {
+            if (GameModel.getInstance().getPlayer1().getPowerUpTakeBox() == 0) {
+                buttonPowerTakeBox.setClickable(false);
+                buttonPowerTakeBox.setAlpha((float)0.5);
+            }else{
+                buttonPowerTakeBox.setClickable(true);
+                buttonPowerTakeBox.setAlpha(1);
+            }
+        }else{
+            if (GameModel.getInstance().getPlayer2().getPowerUpTakeBox() == 0) {
+                buttonPowerTakeBox.setClickable(false);
+                buttonPowerTakeBox.setAlpha((float)0.5);
+            }else{
+                buttonPowerTakeBox.setClickable(true);
+                buttonPowerTakeBox.setAlpha(1);
+            }
+        }
     }
 
     private void switchPlayer() {
@@ -295,7 +320,9 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
         } else if (GameModel.getInstance().getCurrentPlayer().equals(GameModel.getInstance().getPlayer2())) {
             GameModel.getInstance().setCurrentPlayer(GameModel.getInstance().getPlayer1());
         }
+        // The powerups will be deactivated when the players will switch
         GameModel.getInstance().getCurrentPlayer().setPowerUpTakeBoxActive(false);
+        checkIfPowerUpButtonShouldBeActive();
         textCurrentPlayer.setText("Player " + GameModel.getInstance().getCurrentPlayer().getPlayerNumber() + " is aan de beurt");
     }
 

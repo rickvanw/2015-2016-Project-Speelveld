@@ -10,7 +10,9 @@ public class Player {
         this.boxColor = boxColor;
         this.currentScore = 0;
         this.totalScore = 0;
+        // Amount of takeBox PowerUps available for this player at start
         this.powerUpTakeBox = 1;
+        // Boolean which will be set to true if the user pressed the powerup take box button
         this.powerUpTakeBoxActive = false;
 
     }
