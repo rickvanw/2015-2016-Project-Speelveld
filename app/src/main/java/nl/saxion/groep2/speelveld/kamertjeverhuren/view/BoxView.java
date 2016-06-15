@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.util.Log;
 import android.view.View;
 
@@ -52,8 +53,8 @@ public class BoxView extends View {
 
         //translationX = (((gameBoardSize / amountOfBoxesInRow) - (20 / amountOfBoxesInRow)) * line.getStartX()) - 30;
 
-        int translationX = gameBoardMargin + (((gameBoardSize / amountOfBoxesInRow)- (20 / amountOfBoxesInRow)) * x);
-        int translationY = gameBoardMargin + (((gameBoardSize / amountOfBoxesInRow)- (20 / amountOfBoxesInRow)) * y);
+        int translationX = gameBoardMargin + (((gameBoardSize / amountOfBoxesInRow) - (20 / amountOfBoxesInRow)) * x);
+        int translationY = gameBoardMargin + (((gameBoardSize / amountOfBoxesInRow) - (20 / amountOfBoxesInRow)) * y);
 
         setTranslationX(translationX);
         setTranslationY(translationY);
@@ -76,10 +77,19 @@ public class BoxView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
+        Rect r = new Rect();
         Paint paint = new Paint();
+        String text = "" + box.getBoxScore();
+        paint.setTextSize(getHeight() / 3);
+        canvas.getClipBounds(r);
+        int cHeight = r.height();
+        int cWidth = r.width();
+        paint.setTextAlign(Paint.Align.LEFT);
+        paint.getTextBounds(text, 0, text.length(), r);
         paint.setColor(Color.YELLOW);
-        paint.setTextSize(canvas.getHeight() / 4);
-        canvas.drawText("" + box.getBoxScore(), canvas.getWidth() / 4 * 3, canvas.getHeight() / 4 * 1, paint);
+        float x = cWidth / 2f - r.width() / 2f - r.left;
+        float y = cHeight / 2f + r.height() / 2f - r.bottom;
+        canvas.drawText(text, x, y, paint);
     }
 
     @Override
