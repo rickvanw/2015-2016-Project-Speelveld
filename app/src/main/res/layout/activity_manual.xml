@@ -15,7 +15,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="New Text" />
+        android:text="Manual"
+        android:textColor="@color/black"
+        android:textSize="30sp" />
 
     <TextView
         android:id="@+id/tvManualText"
@@ -26,14 +28,17 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/tvManualTitle"
         android:layout_marginTop="40dp"
-        android:text="New Text" />
+        android:text="@string/txt_manual"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
 
     <ImageView
         android:id="@+id/ivManual1"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/tvManualText" />
+        android:layout_alignTop="@+id/tvManualText"
+        android:background="@drawable/manual_place_lines" />
 
     <ImageView
         android:id="@+id/ivManual2"
@@ -41,6 +46,7 @@
         android:layout_height="100dp"
         android:layout_alignParentEnd="true"
         android:layout_below="@+id/ivManual1"
-        android:layout_marginTop="35dp" />
+        android:layout_marginTop="35dp"
+        android:background="@drawable/manual_box_done" />
 
 </RelativeLayout>
