@@ -24,7 +24,6 @@ import nl.saxion.groep2.speelveld.kamertjeverhuren.model.GameModel;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.model.Line;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.model.Options;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.view.BoxView;
-import nl.saxion.groep2.speelveld.kamertjeverhuren.view.GameBoard;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.view.LineView;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.view.PointView;
 
@@ -74,10 +73,6 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
 
     public void newGame() {
         GameModel.getInstance().initNewGame();
-
-        GameBoard gameBoard = new GameBoard(this);
-        ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(minSide, minSide);
-        addContentView(gameBoard, layoutParams);
 
         textCurrentPlayer.setText("Player " + GameModel.getInstance().getCurrentPlayer().getPlayerNumber() + " is aan de beurt");
         textPlayerScore.setText("Player 1's score: " + GameModel.getInstance().getPlayer1().getCurrentScore() + ", Player 2's score: " + GameModel.getInstance().getPlayer2().getCurrentScore());

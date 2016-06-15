@@ -35,10 +35,14 @@ public class GameModel {
 
     // Setters
     public void initNewGame() {
-        // Remove all previous lineViews from the parent view so they won't interfere with the new ones
+        // Remove all previous lineViews and boxviews from the parent view so they won't interfere with the new ones
         for (int i = 0; i < lineViews.size(); i++) {
             LineView lineView = lineViews.get(i);
             ((ViewGroup) lineView.getParent()).removeView(lineView);
+        }
+        for (int i = 0; i < boxViews.size(); i++) {
+            BoxView boxView = boxViews.get(i);
+            ((ViewGroup) boxView.getParent()).removeView(boxView);
         }
         lineViews = new ArrayList<>();
         lines = new ArrayList<>();

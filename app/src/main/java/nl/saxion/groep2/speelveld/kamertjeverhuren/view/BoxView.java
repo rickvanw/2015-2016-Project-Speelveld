@@ -7,9 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.util.Log;
 import android.view.View;
-import android.view.ViewAnimationUtils;
 
 import nl.saxion.groep2.speelveld.kamertjeverhuren.model.Box;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.model.GameModel;
@@ -23,6 +21,7 @@ public class BoxView extends View {
     public BoxView(Context context) {
         super(context);
         setBackgroundColor(Color.LTGRAY);
+        setAlpha((float) 0.80);
         // Listen for clicks on the boxes
         this.setOnClickListener(new OnClickListener() {
             @Override
@@ -80,7 +79,7 @@ public class BoxView extends View {
                 new ArgbEvaluator(),
                 0xFFFFFFFF,
                 box.getOwner().getBoxColor());
-        backgroundColorAnimator.setDuration(900);
+        backgroundColorAnimator.setDuration(1600);
         backgroundColorAnimator.start();
     }
 
