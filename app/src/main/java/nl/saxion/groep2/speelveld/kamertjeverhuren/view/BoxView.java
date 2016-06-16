@@ -32,13 +32,12 @@ public class BoxView extends View {
                 // Only continue if user pressed the powerup button to take a box
                 if (GameModel.getInstance().getCurrentPlayer().isPowerUpTakeBoxActive()) {
                     // Check if the clicked box has a owner
-                    if (getOwner() != null) {
-                        Player player = getOwner();
+                    if (owner != null) {
                         // The player who clicked the box should not be the owner of the box
-                        if (player.getPlayerNumber() != GameModel.getInstance().getCurrentPlayer().getPlayerNumber()) {
-                            setOwner(GameModel.getInstance().getCurrentPlayer());
+                        if (owner.getPlayerNumber() != GameModel.getInstance().getCurrentPlayer().getPlayerNumber()) {
                             // Transfer the score from the previous box owner to the current player
-                            player.decreaseScore(getBoxScore());
+                            owner.decreaseScore(getBoxScore());
+                            setOwner(GameModel.getInstance().getCurrentPlayer());
                             GameModel.getInstance().getCurrentPlayer().increaseScore(getBoxScore());
                             GameModel.getInstance().getCurrentPlayer().decreasePowerUpTakeBox();
                             GameModel.getInstance().getCurrentPlayer().setPowerUpTakeBoxActive(false);
@@ -46,6 +45,11 @@ public class BoxView extends View {
                             callbacks.clickedBox();
                         }
                     }
+                } else if (GameModel.getInstance().getCurrentPlayer().isPowerUpPlaceBombActive()) {
+                    setBomb();
+                    GameModel.getInstance().getCurrentPlayer().decreasePowerUpPlaceBomb();
+                    GameModel.getInstance().getCurrentPlayer().setPowerUpPlaceBombActive(false);
+                    callbacks.clickedBox();
                 }
             }
         });
@@ -124,21 +128,17 @@ public class BoxView extends View {
     }
 
     public void setBomb() {
-        if(owner != null)
-        {
+        if (owner != null) {
             owner.decreaseScore(boxScore);
         }
         setOwner(null);
-        for(int i = 0; i<lineViews.size(); i++)
-        {
+        for (int i = 0; i < lineViews.size(); i++) {
             lineViews.get(i).setUnclicked();
         }
     }
 
-    public void checkNeighbours()
-    {
-        if(owner!=null)
-        {
+    public void checkNeighbours() {
+        if (owner != null) {
             owner.decreaseScore(boxScore);
             setOwner(null);
         }

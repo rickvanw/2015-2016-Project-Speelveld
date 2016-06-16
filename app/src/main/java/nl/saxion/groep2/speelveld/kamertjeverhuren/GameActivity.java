@@ -28,7 +28,7 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
 
     private int minSide;
     private TextView textCurrentPlayer, textPlayerScore, textViewTimer;
-    Button buttonPowerTakeBox;
+    Button buttonPowerTakeBox, buttonPlaceBomb;
     public static final int REQUEST_CODE = 100;
     private CountDownTimer countDownTimer;
     int secondsLeft = 0;
@@ -58,15 +58,28 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
             @Override
             public void onClick(View v) {
                 // Check if user has take box powerups left
-                /*if (GameModel.getInstance().getCurrentPlayer().getPowerUpTakeBox() > 0) {
+                if (GameModel.getInstance().getCurrentPlayer().getPowerUpTakeBox() > 0) {
                     if (!GameModel.getInstance().getCurrentPlayer().isPowerUpTakeBoxActive()) {
                         GameModel.getInstance().getCurrentPlayer().setPowerUpTakeBoxActive(true);
                     } else {
                         GameModel.getInstance().getCurrentPlayer().setPowerUpTakeBoxActive(false);
                     }
-                }*/
-                GameModel.getInstance().getBoxViews().get(7).setBomb();
-                setTextPlayerScore();
+                }
+            }
+        });
+
+        // Button to activate the bomb for the current player
+        buttonPlaceBomb = (Button) findViewById(R.id.button_place_bomb);
+        buttonPlaceBomb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (GameModel.getInstance().getCurrentPlayer().getPowerUpPlaceBomb() > 0) {
+                    if (!GameModel.getInstance().getCurrentPlayer().isPowerUpPlaceBombActive()) {
+                        GameModel.getInstance().getCurrentPlayer().setPowerUpPlaceBombActive(true);
+                    } else {
+                        GameModel.getInstance().getCurrentPlayer().setPowerUpPlaceBombActive(false);
+                    }
+                }
             }
         });
 
@@ -294,6 +307,13 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
                 buttonPowerTakeBox.setClickable(true);
                 buttonPowerTakeBox.setAlpha(1);
             }
+            if (GameModel.getInstance().getPlayer1().getPowerUpPlaceBomb() == 0) {
+                buttonPlaceBomb.setClickable(false);
+                buttonPlaceBomb.setAlpha((float) 0.5);
+            } else {
+                buttonPlaceBomb.setClickable(true);
+                buttonPlaceBomb.setAlpha(1);
+            }
         } else {
             if (GameModel.getInstance().getPlayer2().getPowerUpTakeBox() == 0) {
                 buttonPowerTakeBox.setClickable(false);
@@ -302,7 +322,15 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
                 buttonPowerTakeBox.setClickable(true);
                 buttonPowerTakeBox.setAlpha(1);
             }
+            if (GameModel.getInstance().getPlayer2().getPowerUpPlaceBomb() == 0) {
+                buttonPlaceBomb.setClickable(false);
+                buttonPlaceBomb.setAlpha((float) 0.5);
+            } else {
+                buttonPlaceBomb.setClickable(true);
+                buttonPlaceBomb.setAlpha(1);
+            }
         }
+
     }
 
     private void switchPlayer() {

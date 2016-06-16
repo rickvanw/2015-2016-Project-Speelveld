@@ -51,10 +51,10 @@ public class GameModel {
         boxViews = new ArrayList<>();
         player1.resetCurrentScore();
         player2.resetCurrentScore();
-        player1.resetPowerUpTakeBox();
-        player2.resetPowerUpTakeBox();
-        player1.setPowerUpTakeBoxActive(false);
-        player2.setPowerUpTakeBoxActive(false);
+
+        // Reset Power Ups
+        player1.resetPowerUps();
+        player2.resetPowerUps();
     }
 
     public void setGameBoardSize(int gameBoardSize) {

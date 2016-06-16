@@ -1,19 +1,16 @@
 package nl.saxion.groep2.speelveld.kamertjeverhuren.model;
 
 public class Player {
-    private int playerNumber, currentScore, lineColor, boxColor, powerUpTakeBox;
-    private boolean powerUpTakeBoxActive;
+    private int playerNumber, currentScore, lineColor, boxColor, powerUpTakeBox, powerUpPlaceBomb;
+    private boolean powerUpTakeBoxActive = false;
+    private boolean powerUpPlaceBombActive = false;
 
     public Player(int playerNumber, int lineColor, int boxColor) {
         this.playerNumber = playerNumber;
         this.lineColor = lineColor;
         this.boxColor = boxColor;
         this.currentScore = 0;
-        // Amount of takeBox PowerUps available for this player at start
-        this.powerUpTakeBox = 1;
-        // Boolean which will be set to true if the user pressed the powerup take box button
-        this.powerUpTakeBoxActive = false;
-
+        resetPowerUps();
     }
 
     // Setters
@@ -36,12 +33,26 @@ public class Player {
         }
     }
 
-    public void resetPowerUpTakeBox() {
-        powerUpTakeBox = 1;
+    public void decreasePowerUpPlaceBomb() {
+        if (powerUpPlaceBomb != 0) {
+            powerUpPlaceBomb--;
+        }
     }
 
-    public void setPowerUpTakeBoxActive(boolean powerUpTakeBoxActive) {
-        this.powerUpTakeBoxActive = powerUpTakeBoxActive;
+    public void resetPowerUps() {
+        // Amount of takeBox PowerUps available for this player at start
+        powerUpTakeBox = 1;
+        powerUpPlaceBomb = 1;
+        powerUpTakeBoxActive = false;
+        powerUpPlaceBombActive = false;
+    }
+
+    public void setPowerUpTakeBoxActive(boolean active) {
+        powerUpTakeBoxActive = active;
+    }
+
+    public void setPowerUpPlaceBombActive(boolean active) {
+        powerUpPlaceBombActive = active;
     }
 
     // Getters
@@ -65,7 +76,15 @@ public class Player {
         return powerUpTakeBox;
     }
 
+    public int getPowerUpPlaceBomb() {
+        return powerUpPlaceBomb;
+    }
+
     public boolean isPowerUpTakeBoxActive() {
         return powerUpTakeBoxActive;
+    }
+
+    public boolean isPowerUpPlaceBombActive() {
+        return powerUpPlaceBombActive;
     }
 }
