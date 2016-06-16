@@ -10,12 +10,8 @@ import nl.saxion.groep2.speelveld.kamertjeverhuren.view.LineView;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.view.PointView;
 
 public class GameModel {
-
     private static GameModel ourInstance = new GameModel();
     private int gameBoardSize, amountOfBoxesInRow, gameBoardMargin;
-
-    private ArrayList<Line> lines = new ArrayList<>();
-    private ArrayList<Box> boxes = new ArrayList<>();
     private ArrayList<BoxView> boxViews = new ArrayList<>();
     private ArrayList<LineView> lineViews = new ArrayList<>();
     private ArrayList<PointView> pointViews = new ArrayList<>();
@@ -52,8 +48,6 @@ public class GameModel {
         }
         pointViews = new ArrayList<>();
         lineViews = new ArrayList<>();
-        lines = new ArrayList<>();
-        boxes = new ArrayList<>();
         boxViews = new ArrayList<>();
         player1.resetCurrentScore();
         player2.resetCurrentScore();
@@ -83,10 +77,6 @@ public class GameModel {
         lineViews.add(lineView);
     }
 
-    public void addLine(Line line) {
-        this.lines.add(line);
-    }
-
     public void addPointView(PointView pointView) {
         pointViews.add(pointView);
     }
@@ -108,16 +98,12 @@ public class GameModel {
         return amountOfBoxesInRow;
     }
 
-    public ArrayList<Line> getLines() {
-        return lines;
-    }
-
-    public ArrayList<Box> getBoxes() {
-        return boxes;
-    }
-
     public ArrayList<BoxView> getBoxViews() {
         return boxViews;
+    }
+
+    public ArrayList<LineView> getLineViews() {
+        return lineViews;
     }
 
     public Player getPlayer1() {

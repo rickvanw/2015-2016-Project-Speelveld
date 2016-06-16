@@ -1,7 +1,7 @@
 package nl.saxion.groep2.speelveld.kamertjeverhuren.model;
 
 public class Player {
-    private int playerNumber, currentScore, totalScore, lineColor, boxColor, powerUpTakeBox;
+    private int playerNumber, currentScore, lineColor, boxColor, powerUpTakeBox;
     private boolean powerUpTakeBoxActive;
 
     public Player(int playerNumber, int lineColor, int boxColor) {
@@ -9,7 +9,6 @@ public class Player {
         this.lineColor = lineColor;
         this.boxColor = boxColor;
         this.currentScore = 0;
-        this.totalScore = 0;
         // Amount of takeBox PowerUps available for this player at start
         this.powerUpTakeBox = 1;
         // Boolean which will be set to true if the user pressed the powerup take box button

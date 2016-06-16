@@ -18,9 +18,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import nl.saxion.groep2.speelveld.kamertjeverhuren.model.AudioPlay;
-import nl.saxion.groep2.speelveld.kamertjeverhuren.model.Box;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.model.GameModel;
-import nl.saxion.groep2.speelveld.kamertjeverhuren.model.Line;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.model.Options;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.view.BoxView;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.view.LineView;
@@ -60,13 +58,15 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
             @Override
             public void onClick(View v) {
                 // Check if user has take box powerups left
-                if (GameModel.getInstance().getCurrentPlayer().getPowerUpTakeBox() > 0) {
+                /*if (GameModel.getInstance().getCurrentPlayer().getPowerUpTakeBox() > 0) {
                     if (!GameModel.getInstance().getCurrentPlayer().isPowerUpTakeBoxActive()) {
                         GameModel.getInstance().getCurrentPlayer().setPowerUpTakeBoxActive(true);
                     } else {
                         GameModel.getInstance().getCurrentPlayer().setPowerUpTakeBoxActive(false);
                     }
-                }
+                }*/
+                GameModel.getInstance().getBoxViews().get(7).setBomb();
+                setTextPlayerScore();
             }
         });
 
@@ -100,8 +100,7 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
     }
 
     public void initCountDownTimer() {
-        if(countDownTimer != null)
-        {
+        if (countDownTimer != null) {
             countDownTimer.cancel();
         }
 
@@ -135,11 +134,8 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
         for (int i = 0; i < amountOfBoxesInRow * amountOfBoxesInRow; i++) {
             for (int y = 0; y < amountOfBoxesInRow; y++) {
                 for (int x = 0; x < amountOfBoxesInRow; x++) {
-                    Box box = new Box(x, y);
-                    GameModel.getInstance().getBoxes().add(box);
 
                     BoxView boxView = new BoxView(this);
-                    boxView.setBox(box);
                     boxView.setPosition(x, y);
 
                     ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(gameBoardSize / amountOfBoxesInRow, gameBoardSize / amountOfBoxesInRow);
@@ -161,12 +157,10 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
         // For every horizontal line on the X axis, create a line on the Y axis
         for (int x = 0; x < boardSize; x++) {
             for (int y = 0; y <= boardSize; y++) {
-                Line line = new Line(x, y, x + 1, y);
                 // The line is added to the list of lines
-                GameModel.getInstance().addLine(line);
                 // Create a line view
                 LineView lineView = new LineView(this);
-                lineView.init(line);
+                lineView.init(x, y, x + 1, y);
                 // Add the lineView to the GameModel for reference. This way the view can be removed later on
                 GameModel.getInstance().addLineView(lineView);
                 // Set the width and height of the view
@@ -179,12 +173,10 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
         // For every vertical line on the X axis, create a line on the Y axis
         for (int x = 0; x <= boardSize; x++) {
             for (int y = 0; y < boardSize; y++) {
-                Line line = new Line(x, y, x, y + 1);
                 // The line is added to the list of lines
-                GameModel.getInstance().addLine(line);
                 // Create a line view
                 LineView lineView = new LineView(this);
-                lineView.init(line);
+                lineView.init(x, y, x, y + 1);
                 // Add the lineView to the GameModel for reference. This way the view can be removed later on
                 GameModel.getInstance().addLineView(lineView);
                 // Set the width and height of the view
@@ -204,12 +196,9 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
             for (int j = 0; j < amountOfDotsInRow; j++) {
                 // Create a point view
                 PointView pointView = new PointView(this, i, j);
-
                 GameModel.getInstance().addPointView(pointView);
-
                 // Set the width and height of the view
                 ViewGroup.LayoutParams layoutParamsPoint = new ViewGroup.LayoutParams(20, 20);
-
                 // Add the parameters to the pointview
                 this.addContentView(pointView, layoutParamsPoint);
             }
@@ -223,20 +212,22 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
      * @author Robert Mekenkamp
      */
     public void assignLinesToBoxes() {
-        ArrayList<Box> boxes = GameModel.getInstance().getBoxes();
-        ArrayList<Line> lines = GameModel.getInstance().getLines();
+        ArrayList<BoxView> boxViews = GameModel.getInstance().getBoxViews();
+        ArrayList<LineView> lineViews = GameModel.getInstance().getLineViews();
         // assign lines to boxes
-        for (int b = 0; b < boxes.size(); b++) {
-            Box currentBox = boxes.get(b);
-            for (int l = 0; l < lines.size(); l++) {
-                Line currentLine = lines.get(l);
+        for (int b = 0; b < boxViews.size(); b++) {
+            BoxView currentBox = boxViews.get(b);
+            for (int l = 0; l < lineViews.size(); l++) {
+                LineView currentLine = lineViews.get(l);
                 // asign horizontal lines above and below box
-                if (currentLine.getStartX() == currentBox.getX() && (currentLine.getStartY() == currentBox.getY() || currentLine.getStartY() == currentBox.getY() + 1) && currentLine.getStopX() - 1 == currentBox.getX()) {
+                if (currentLine.getStartX() == currentBox.getXPosition() && (currentLine.getStartY() == currentBox.getYPosition() || currentLine.getStartY() == currentBox.getYPosition() + 1) && currentLine.getStopX() - 1 == currentBox.getXPosition()) {
                     currentBox.addLineToBox(currentLine);
+                    currentLine.addBoxView(currentBox);
                 }
                 // assign vertical lines to the right and left side of the box
-                else if ((currentLine.getStartX() == currentBox.getX() || currentLine.getStartX() == currentBox.getX() + 1) && currentLine.getStartY() == currentBox.getY() && currentLine.getStopY() - 1 == currentBox.getY()) {
+                else if ((currentLine.getStartX() == currentBox.getXPosition() || currentLine.getStartX() == currentBox.getXPosition() + 1) && currentLine.getStartY() == currentBox.getYPosition() && currentLine.getStopY() - 1 == currentBox.getYPosition()) {
                     currentBox.addLineToBox(currentLine);
+                    currentLine.addBoxView(currentBox);
                 }
             }
         }
@@ -248,10 +239,10 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
         countDownTimer.start();
         boolean line = true;
         for (int i = 0; i < GameModel.getInstance().getBoxViews().size(); i++) {
-            boolean isSquare = GameModel.getInstance().getBoxViews().get(i).getBox().isSquare();
+            boolean isSquare = GameModel.getInstance().getBoxViews().get(i).isSquare();
             // if square is detected, increase player score, remove boxview from arraylist and play 'victory'
-            if (isSquare && GameModel.getInstance().getBoxViews().get(i).getBox().getOwner() == null) {
-                GameModel.getInstance().getCurrentPlayer().increaseScore(GameModel.getInstance().getBoxViews().get(i).getBox().getBoxScore());
+            if (isSquare && GameModel.getInstance().getBoxViews().get(i).getOwner() == null) {
+                GameModel.getInstance().getCurrentPlayer().increaseScore(GameModel.getInstance().getBoxViews().get(i).getBoxScore());
                 setTextPlayerScore();
                 GameModel.getInstance().getBoxViews().get(i).setOwner(GameModel.getInstance().getCurrentPlayer());
 
@@ -268,13 +259,12 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
                 AudioPlay.playAudio(this, R.raw.linesound);
             }
         }
-        boolean endGame = false;
+        boolean endGame = true;
         for (int i = 0; i < GameModel.getInstance().getBoxViews().size(); i++) {
-            if (GameModel.getInstance().getBoxViews().get(i).getBox().getOwner() == null) {
+            if (GameModel.getInstance().getBoxViews().get(i).getOwner() == null) {
                 endGame = false;
                 break;
             }
-            endGame = true;
         }
         if (endGame) {
             countDownTimer.cancel();
@@ -291,24 +281,24 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
     }
 
     // Set the player scores on the display
-    private void setTextPlayerScore(){
+    private void setTextPlayerScore() {
         textPlayerScore.setText("Player 1: " + GameModel.getInstance().getPlayer1().getCurrentScore() + " - Player 2: " + GameModel.getInstance().getPlayer2().getCurrentScore());
     }
 
-    private void checkIfPowerUpButtonShouldBeActive(){
-        if(GameModel.getInstance().getPlayer1()==GameModel.getInstance().getCurrentPlayer()) {
+    private void checkIfPowerUpButtonShouldBeActive() {
+        if (GameModel.getInstance().getPlayer1() == GameModel.getInstance().getCurrentPlayer()) {
             if (GameModel.getInstance().getPlayer1().getPowerUpTakeBox() == 0) {
                 buttonPowerTakeBox.setClickable(false);
-                buttonPowerTakeBox.setAlpha((float)0.5);
-            }else{
+                buttonPowerTakeBox.setAlpha((float) 0.5);
+            } else {
                 buttonPowerTakeBox.setClickable(true);
                 buttonPowerTakeBox.setAlpha(1);
             }
-        }else{
+        } else {
             if (GameModel.getInstance().getPlayer2().getPowerUpTakeBox() == 0) {
                 buttonPowerTakeBox.setClickable(false);
-                buttonPowerTakeBox.setAlpha((float)0.5);
-            }else{
+                buttonPowerTakeBox.setAlpha((float) 0.5);
+            } else {
                 buttonPowerTakeBox.setClickable(true);
                 buttonPowerTakeBox.setAlpha(1);
             }
