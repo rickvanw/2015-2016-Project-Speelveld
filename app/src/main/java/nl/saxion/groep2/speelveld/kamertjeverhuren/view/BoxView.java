@@ -139,6 +139,7 @@ public class BoxView extends View {
     {
         if(owner!=null)
         {
+            owner.decreaseScore(boxScore);
             setOwner(null);
         }
     }
