@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Chronometer;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -33,11 +34,14 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
     private CountDownTimer countDownTimer;
     int secondsLeft = 0;
     private Chronometer chronometer;
+    private LinearLayout llGameInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+        llGameInfo = (LinearLayout) findViewById(R.id.linearlayout_game);
 
         // Get lowest screen width or height to create a square
         DisplayMetrics metrics = new DisplayMetrics();
@@ -91,6 +95,7 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
 
         textCurrentPlayer.setText("Player " + GameModel.getInstance().getCurrentPlayer().getPlayerNumber() + " is aan de beurt");
         setTextPlayerScore();
+
         // Draw boxes
         drawBoxes();
 
@@ -110,6 +115,8 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
         initGameTimer();
 
         checkIfPowerUpButtonShouldBeActive();
+
+        llGameInfo.setBackgroundColor(GameModel.getInstance().getCurrentPlayer().getBoxColor());
     }
 
     public void initCountDownTimer() {
@@ -330,14 +337,15 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
                 buttonPlaceBomb.setAlpha(1);
             }
         }
-
     }
 
     private void switchPlayer() {
         if (GameModel.getInstance().getCurrentPlayer().equals(GameModel.getInstance().getPlayer1())) {
             GameModel.getInstance().setCurrentPlayer(GameModel.getInstance().getPlayer2());
+            llGameInfo.setBackgroundColor(GameModel.getInstance().getCurrentPlayer().getBoxColor());
         } else if (GameModel.getInstance().getCurrentPlayer().equals(GameModel.getInstance().getPlayer2())) {
             GameModel.getInstance().setCurrentPlayer(GameModel.getInstance().getPlayer1());
+            llGameInfo.setBackgroundColor(GameModel.getInstance().getCurrentPlayer().getBoxColor());
         }
         // The powerups will be deactivated when the players will switch
         GameModel.getInstance().getCurrentPlayer().setPowerUpTakeBoxActive(false);
@@ -352,14 +360,12 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
         String endTime = "" + chronometer.getText();
         //set eindtime
         GameModel.getInstance().setEndTime(endTime);
-
     }
 
     void showDialog() {
         DialogFragment newFragment = new Options();
         newFragment.show(getSupportFragmentManager(), "dialog");
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
