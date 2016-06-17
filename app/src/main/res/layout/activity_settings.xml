@@ -22,4 +22,6 @@
         android:layout_alignParentEnd="true"
         android:layout_toEndOf="@+id/textView"
         android:spinnerMode="dropdown" />
+
+
 </RelativeLayout>
