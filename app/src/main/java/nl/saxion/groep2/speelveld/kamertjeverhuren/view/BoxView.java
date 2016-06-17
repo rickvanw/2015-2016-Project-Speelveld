@@ -11,6 +11,8 @@ import android.view.View;
 
 import java.util.ArrayList;
 
+import nl.saxion.groep2.speelveld.kamertjeverhuren.R;
+import nl.saxion.groep2.speelveld.kamertjeverhuren.model.AudioPlay;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.model.GameModel;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.model.Player;
 
@@ -87,11 +89,15 @@ public class BoxView extends View {
             final ObjectAnimator backgroundColorAnimator = ObjectAnimator.ofObject(this,
                     "backgroundColor",
                     new ArgbEvaluator(),
-                    0xFFFFFFFF,
+                    Color.rgb(0, 0, 0),
                     Color.LTGRAY);
             backgroundColorAnimator.setDuration(1600);
             backgroundColorAnimator.start();
+
+            AudioPlay.playAudio(getContext(), R.raw.explosion);
+
         }
+
     }
 
     @Override

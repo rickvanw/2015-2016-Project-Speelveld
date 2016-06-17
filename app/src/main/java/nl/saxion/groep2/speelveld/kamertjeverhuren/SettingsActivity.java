@@ -45,9 +45,6 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
             case 3:
                 GameModel.getInstance().setAmountOfBoxesInRow(6);
                 break;
-            case 4:
-                GameModel.getInstance().setAmountOfBoxesInRow(7);
-                break;
         }
     }
 

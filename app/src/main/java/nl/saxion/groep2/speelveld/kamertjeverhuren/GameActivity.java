@@ -1,6 +1,7 @@
 package nl.saxion.groep2.speelveld.kamertjeverhuren;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.CountDownTimer;
 import android.os.SystemClock;
 import android.support.v4.app.DialogFragment;
