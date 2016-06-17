@@ -400,7 +400,7 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
 
             @Override
             public void onFinish() {
-                //
+                //ja
                 int amountOfBoxes = GameModel.getInstance().getBoxViews().size();
                 int placeBomb = (int) (Math.random()*amountOfBoxes);
                 GameModel.getInstance().getBoxViews().get(placeBomb).setBomb();
