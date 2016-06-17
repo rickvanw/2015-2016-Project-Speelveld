@@ -23,5 +23,21 @@
         android:layout_toEndOf="@+id/textView"
         android:spinnerMode="dropdown" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Theme"
+        android:id="@+id/textView3"
+        android:layout_marginTop="39dp"
+        android:layout_below="@+id/spinnerBoardSize"
+        android:layout_toStartOf="@+id/spinnerBoardSize" />
 
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonTheme"
+        android:layout_alignTop="@+id/textView3"
+        android:layout_toEndOf="@+id/textView3"
+        android:layout_marginLeft="15dp" />
 </RelativeLayout>

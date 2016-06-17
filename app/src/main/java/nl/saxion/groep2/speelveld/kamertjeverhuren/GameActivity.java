@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -96,6 +97,13 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
     public void newGame() {
         GameModel.getInstance().initNewGame();
 
+        // Set theme if activated in settings
+        RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.relativeLayout);
+        if(GameModel.getInstance().getTheme()==0) {
+            relativeLayout.setBackgroundResource(R.drawable.background);
+        }else{
+            relativeLayout.setBackgroundResource(R.drawable.background_2);
+        }
         textCurrentPlayer.setText("Player " + GameModel.getInstance().getCurrentPlayer().getPlayerNumber() + " is aan de beurt");
         setTextPlayerScore();
 
@@ -273,7 +281,11 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
 
                 line = false;
                 if (!AudioPlay.isMuted) {
-                    AudioPlay.playAudio(this, R.raw.boxsound);
+                    if(GameModel.getInstance().getTheme()==0) {
+                        AudioPlay.playAudio(this, R.raw.boxsound);
+                    }else{
+                        AudioPlay.playAudio(this, R.raw.boxsound_2);
+                    }
                 }
             }
         }
@@ -281,7 +293,11 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
         if (line) {
             switchPlayer();
             if (!AudioPlay.isMuted) {
-                AudioPlay.playAudio(this, R.raw.linesound);
+                if(GameModel.getInstance().getTheme()==0){
+                    AudioPlay.playAudio(this, R.raw.linesound);
+                } else{
+                    AudioPlay.playAudio(this, R.raw.linesound_2);
+                }
             }
         }
         boolean endGame = true;
@@ -310,37 +326,27 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
         textPlayerScore.setText("Player 1: " + GameModel.getInstance().getPlayer1().getCurrentScore() + " - Player 2: " + GameModel.getInstance().getPlayer2().getCurrentScore());
     }
 
+    // This methods makes sure that the powerUp button is only available when it's not already used for the current player.
     private void checkIfPowerUpButtonShouldBeActive() {
-        if (GameModel.getInstance().getPlayer1() == GameModel.getInstance().getCurrentPlayer()) {
-            if (GameModel.getInstance().getPlayer1().getPowerUpTakeBox() == 0) {
+            // Checks if the user still has the take box powerup or not
+        if (GameModel.getInstance().getCurrentPlayer().getPowerUpTakeBox() == 0) {
+                // Makes the button unavailable
                 buttonPowerTakeBox.setClickable(false);
                 buttonPowerTakeBox.setAlpha((float) 0.5);
-            } else {
-                buttonPowerTakeBox.setClickable(true);
-                buttonPowerTakeBox.setAlpha(1);
-            }
-            if (GameModel.getInstance().getPlayer1().getPowerUpPlaceBomb() == 0) {
-                buttonPlaceBomb.setClickable(false);
-                buttonPlaceBomb.setAlpha((float) 0.5);
-            } else {
-                buttonPlaceBomb.setClickable(true);
-                buttonPlaceBomb.setAlpha(1);
-            }
         } else {
-            if (GameModel.getInstance().getPlayer2().getPowerUpTakeBox() == 0) {
-                buttonPowerTakeBox.setClickable(false);
-                buttonPowerTakeBox.setAlpha((float) 0.5);
-            } else {
+                // Makes the button available
                 buttonPowerTakeBox.setClickable(true);
                 buttonPowerTakeBox.setAlpha(1);
-            }
-            if (GameModel.getInstance().getPlayer2().getPowerUpPlaceBomb() == 0) {
-                buttonPlaceBomb.setClickable(false);
+        }
+            // Checks if the user still has the place bomb powerup or not
+        if (GameModel.getInstance().getCurrentPlayer().getPowerUpPlaceBomb() == 0) {
+            // Makes the button unavailable
+            buttonPlaceBomb.setClickable(false);
                 buttonPlaceBomb.setAlpha((float) 0.5);
-            } else {
-                buttonPlaceBomb.setClickable(true);
+        } else {
+            // Makes the button available
+            buttonPlaceBomb.setClickable(true);
                 buttonPlaceBomb.setAlpha(1);
-            }
         }
     }
 

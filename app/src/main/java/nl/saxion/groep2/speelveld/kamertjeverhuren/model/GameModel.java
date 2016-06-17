@@ -11,7 +11,7 @@ import nl.saxion.groep2.speelveld.kamertjeverhuren.view.PointView;
 
 public class GameModel {
     private static GameModel ourInstance = new GameModel();
-    private int gameBoardSize, amountOfBoxesInRow, gameBoardMargin;
+    private int gameBoardSize, amountOfBoxesInRow, gameBoardMargin, theme;
     private ArrayList<BoxView> boxViews = new ArrayList<>();
     private ArrayList<LineView> lineViews = new ArrayList<>();
     private ArrayList<PointView> pointViews = new ArrayList<>();
@@ -29,6 +29,7 @@ public class GameModel {
         player1 = new Player(1, Color.RED, Color.parseColor("#ff6666"));
         player2 = new Player(2, Color.BLUE, Color.parseColor("#6666ff"));
         currentPlayer = player1;
+        theme = 0;
     }
 
     // Setters
@@ -85,6 +86,10 @@ public class GameModel {
         this.endTime = endTime;
     }
 
+    public void setTheme(int theme) {
+        this.theme = theme;
+    }
+
     // Getters
     public int getGameBoardSize() {
         return gameBoardSize;
@@ -120,5 +125,9 @@ public class GameModel {
 
     public String getEndTime() {
         return endTime;
+    }
+
+    public int getTheme() {
+        return theme;
     }
 }

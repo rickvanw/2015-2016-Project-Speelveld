@@ -12,11 +12,13 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Text"
+        android:text="Draw"
         android:id="@+id/tvEnd"
         android:layout_marginTop="46dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:textSize="40dp"
+        android:textColor="#000000" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -25,7 +27,9 @@
         android:id="@+id/tvScore1"
         android:layout_below="@+id/tvEnd"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="65dp" />
+        android:layout_marginTop="65dp"
+        android:textSize="30dp"
+        android:textColor="#000000" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -33,16 +37,19 @@
         android:text="New Text"
         android:id="@+id/tvScore2"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:textSize="20dp"
+        android:textColor="#000000" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Button"
+        android:text="Restart"
         android:id="@+id/restartButton"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="37dp" />
+        android:layout_marginBottom="37dp"
+        android:textSize="30dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -51,5 +58,7 @@
         android:id="@+id/tvEndTime"
         android:layout_above="@+id/restartButton"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="48dp" />
+        android:layout_marginBottom="48dp"
+        android:textSize="20dp"
+        android:textColor="#000000" />
 </RelativeLayout>

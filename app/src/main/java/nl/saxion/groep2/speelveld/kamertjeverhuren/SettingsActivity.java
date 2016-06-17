@@ -5,13 +5,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 
 import nl.saxion.groep2.speelveld.kamertjeverhuren.model.GameModel;
 
 public class SettingsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    Spinner spinnerBoardSize;
+    private Spinner spinnerBoardSize;
+    private Button buttonTheme;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -29,6 +31,31 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         spinnerBoardSize.setAdapter(adapter);
+
+        // Button to activate or deactivate theme
+        buttonTheme = (Button)findViewById(R.id.buttonTheme);
+        setButtonThemeText();
+        buttonTheme.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                if(GameModel.getInstance().getTheme()==0){
+                    // If theme is off, turn theme on
+                    GameModel.getInstance().setTheme(1);
+                }else{
+                    // If theme i on, turn theme off
+                    GameModel.getInstance().setTheme(0);
+                }
+                setButtonThemeText();
+            }
+        });
+    }
+    // Sets the text of the theme button depending on if the theme is already on or not
+    private void setButtonThemeText(){
+        if(GameModel.getInstance().getTheme()==0){
+            buttonTheme.setText("on");
+        }else{
+            buttonTheme.setText("off");
+        }
     }
 
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {

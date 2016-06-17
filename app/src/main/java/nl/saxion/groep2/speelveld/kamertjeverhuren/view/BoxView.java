@@ -94,7 +94,12 @@ public class BoxView extends View {
             backgroundColorAnimator.setDuration(1600);
             backgroundColorAnimator.start();
 
-            AudioPlay.playAudio(getContext(), R.raw.explosion);
+            // Play the explosion sound corresponding to the theme
+            if(GameModel.getInstance().getTheme()==0) {
+                AudioPlay.playAudio(getContext(), R.raw.explosion);
+            }else{
+                AudioPlay.playAudio(getContext(), R.raw.explosion_2);
+            }
 
         }
 

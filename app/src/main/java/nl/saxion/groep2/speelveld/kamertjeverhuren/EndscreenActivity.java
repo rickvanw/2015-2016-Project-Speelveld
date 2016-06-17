@@ -1,6 +1,5 @@
 package nl.saxion.groep2.speelveld.kamertjeverhuren;
 
-import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -22,62 +21,59 @@ public class EndscreenActivity extends AppCompatActivity {
         TextView tvScore2 = (TextView) findViewById(R.id.tvScore2);
         TextView tvEndTime = (TextView) findViewById(R.id.tvEndTime);
         Button restartButton = (Button) findViewById(R.id.restartButton);
+
         Player player1 = GameModel.getInstance().getPlayer1();
         Player player2 = GameModel.getInstance().getPlayer2();
 
-        restartButton.setText("Restart");
+        // Restart button returns to GameAtivity with a result
         restartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 restartGame();
             }
         });
-        restartButton.setTextSize(30);
 
-        tvEndTime.setTextSize(20);
-        tvEndTime.setTextColor(Color.BLACK);
+        // Show the total gametime
         tvEndTime.setText(GameModel.getInstance().getEndTime());
 
-        tvEnd.setTextColor(Color.BLACK);
-        tvEnd.setTextSize(40);
-
-        tvScore2.setTextSize(20);
-
+        // Set colors and player names depending on who has won
         if (player1.getCurrentScore() > player2.getCurrentScore()) {
+            // When player 1 wins
+            // Set player 1 to top and set colors
             tvScore1.setTextColor(player1.getLineColor());
             tvScore2.setTextColor(player2.getLineColor());
-
-            tvScore1.setTextSize(30);
 
             tvEnd.setText("Player 1 Won !!");
             tvScore1.setText("Player 1  -  " + player1.getCurrentScore());
             tvScore2.setText("Player 2  -  " + player2.getCurrentScore());
-        } else if (player1.getCurrentScore() == player2.getCurrentScore()) {
-            tvScore1.setTextColor(player1.getLineColor());
-            tvScore2.setTextColor(player2.getLineColor());
-
-            tvScore1.setTextSize(20);
-
-            tvEnd.setText("Draw");
-            tvScore1.setText("Player 1  -  " + player1.getCurrentScore());
-            tvScore2.setText("Player 2  -  " + player2.getCurrentScore());
-        } else {
+        } else if (player1.getCurrentScore() < player2.getCurrentScore()) {
+            // When player 2 wins
+            // Set player 2 to top and set colors
             tvScore1.setTextColor(player2.getLineColor());
             tvScore2.setTextColor(player1.getLineColor());
-
-            tvScore1.setTextSize(30);
 
             tvEnd.setText("Player 2 Won !!");
             tvScore1.setText("Player 2  -  " + player2.getCurrentScore());
             tvScore2.setText("Player 1  -  " + player1.getCurrentScore());
+        } else {
+            // When there is a draw
+            tvScore1.setTextColor(player1.getLineColor());
+            tvScore2.setTextColor(player2.getLineColor());
+            // Set first scores to equal text sizes
+            tvScore1.setTextSize(20);
+
+            tvScore1.setText("Player 1  -  " + player1.getCurrentScore());
+            tvScore2.setText("Player 2  -  " + player2.getCurrentScore());
         }
     }
 
+    // Intercept back button behavior to return to GameActivity
     @Override
     public void onBackPressed() {
         restartGame();
     }
 
+    // Returns to GameActivity
     public void restartGame() {
         setResult(GameActivity.REQUEST_CODE);
         finish();
