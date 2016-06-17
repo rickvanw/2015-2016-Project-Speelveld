@@ -32,9 +32,12 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
     Button buttonPowerTakeBox, buttonPlaceBomb;
     public static final int REQUEST_CODE = 100;
     private CountDownTimer countDownTimer;
+    private CountDownTimer randomBombTimer;
     int secondsLeft = 0;
     private Chronometer chronometer;
     private LinearLayout llGameInfo;
+    int amountOfboxes = ((GameModel.getInstance().getAmountOfBoxesInRow()) * (GameModel.getInstance().getAmountOfBoxesInRow())-1);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,6 +116,8 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
 
         // Initialize gametime
         initGameTimer();
+
+        placeRandomBomb();
 
         checkIfPowerUpButtonShouldBeActive();
 
@@ -383,6 +388,25 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
             default:
         }
         return true;
+    }
+
+    public void placeRandomBomb(){
+        int bombTimerTime = (int) ((Math.random()*20000)+ 6000);
+        final int placeBombBox = (int) (Math.random() * amountOfboxes);
+        randomBombTimer = new CountDownTimer(bombTimerTime, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+
+            }
+
+            @Override
+            public void onFinish() {
+                GameModel.getInstance().getBoxViews().get(placeBombBox).setBomb();
+                randomBombTimer.start();
+            }
+        }.start();
+
+
     }
 
     @Override

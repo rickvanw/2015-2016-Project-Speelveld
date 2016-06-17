@@ -24,7 +24,7 @@ public class GameModel {
     }
 
     private GameModel() {
-        this.amountOfBoxesInRow = 2;
+        this.amountOfBoxesInRow = 4;
         this.gameBoardMargin = 40;
         player1 = new Player(1, Color.RED, Color.parseColor("#ff6666"));
         player2 = new Player(2, Color.BLUE, Color.parseColor("#6666ff"));
