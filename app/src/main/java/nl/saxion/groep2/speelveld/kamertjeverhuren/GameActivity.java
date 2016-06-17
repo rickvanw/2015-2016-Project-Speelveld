@@ -391,7 +391,6 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
 
     public void placeRandomBomb(){
         int bombTimerTime = (int) ((Math.random()*20000)+ 6000);
-        int amountOfBoxes = (int) GameModel.getInstance().getBoxViews().size();
            randomBombTimer = new CountDownTimer(bombTimerTime, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
@@ -400,7 +399,7 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
 
             @Override
             public void onFinish() {
-                int amountOfBoxes = (int) GameModel.getInstance().getBoxViews().size();
+                int amountOfBoxes = GameModel.getInstance().getBoxViews().size();
                 int placeBomb = (int) (Math.random()*amountOfBoxes);
                 GameModel.getInstance().getBoxViews().get(placeBomb).setBomb();
                 randomBombTimer.start();
