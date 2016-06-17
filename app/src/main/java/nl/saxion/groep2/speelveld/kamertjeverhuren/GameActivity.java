@@ -37,7 +37,7 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
     private Chronometer chronometer;
     private LinearLayout llGameInfo;
     int amountOfboxes = ((GameModel.getInstance().getAmountOfBoxesInRow()) * (GameModel.getInstance().getAmountOfBoxesInRow())-1);
-
+    int placeBombBox = (int) (Math.random() * amountOfboxes);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -392,7 +392,6 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
 
     public void placeRandomBomb(){
         int bombTimerTime = (int) ((Math.random()*20000)+ 6000);
-        final int placeBombBox = (int) (Math.random() * amountOfboxes);
         randomBombTimer = new CountDownTimer(bombTimerTime, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
@@ -402,7 +401,9 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
             @Override
             public void onFinish() {
                 GameModel.getInstance().getBoxViews().get(placeBombBox).setBomb();
+                placeBombBox = (int) (Math.random() * amountOfboxes);
                 randomBombTimer.start();
+
             }
         }.start();
 
