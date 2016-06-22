@@ -400,6 +400,10 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
     }
 
     public void placeRandomBomb(){
+
+        //timer to place random bomb
+        //to change the time of the timer, change the int bombTimerTime, there are 2 values. the values are in milliseconds. the math random generates a random
+        //int between the milliseconds you assigned to bombTimerTime
         int bombTimerTime = (int) ((Math.random()*40000)+ 25000);
            randomBombTimer = new CountDownTimer(bombTimerTime, 1000) {
             @Override
