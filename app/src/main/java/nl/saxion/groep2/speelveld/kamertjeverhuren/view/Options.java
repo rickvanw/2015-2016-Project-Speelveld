@@ -1,4 +1,4 @@
-package nl.saxion.groep2.speelveld.kamertjeverhuren.model;
+package nl.saxion.groep2.speelveld.kamertjeverhuren.view;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -10,6 +10,7 @@ import android.support.v7.app.AlertDialog;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.GameActivity;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.ManualActivity;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.SettingsActivity;
+import nl.saxion.groep2.speelveld.kamertjeverhuren.model.AudioPlay;
 
 public class Options extends DialogFragment {
 

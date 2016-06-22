@@ -25,7 +25,6 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text=""
             android:id="@+id/textViewTimer"
-            android:layout_above="@+id/linearlayout_game"
             android:layout_gravity="center_horizontal"/>
 
         <TextView
@@ -57,6 +56,7 @@
     <Button
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:layout_marginBottom="20sp"
         android:id="@+id/buttonPowerUpTakeBox"
         android:background="@drawable/takeoverbutton"
         android:layout_alignBottom="@+id/chronometer"

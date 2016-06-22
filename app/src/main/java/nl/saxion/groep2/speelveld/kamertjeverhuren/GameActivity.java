@@ -22,7 +22,7 @@ import java.util.ArrayList;
 
 import nl.saxion.groep2.speelveld.kamertjeverhuren.model.AudioPlay;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.model.GameModel;
-import nl.saxion.groep2.speelveld.kamertjeverhuren.model.Options;
+import nl.saxion.groep2.speelveld.kamertjeverhuren.view.Options;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.view.BoxView;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.view.LineView;
 import nl.saxion.groep2.speelveld.kamertjeverhuren.view.PointView;
