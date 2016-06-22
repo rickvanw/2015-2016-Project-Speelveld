@@ -104,7 +104,7 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
         }else{
             relativeLayout.setBackgroundResource(R.drawable.background_2);
         }
-        textCurrentPlayer.setText("Player " + GameModel.getInstance().getCurrentPlayer().getPlayerNumber() + " is aan de beurt");
+        textCurrentPlayer.setText("Player " + GameModel.getInstance().getCurrentPlayer().getPlayerNumber() + "'s turn");
         setTextPlayerScore();
 
         // Draw boxes
@@ -147,7 +147,7 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
 
             @Override
             public void onFinish() {
-                textViewTimer.setText("Tijd is om");
+                textViewTimer.setText("Time's up");
                 GameModel.getInstance().getCurrentPlayer().decreaseScore(1);
                 setTextPlayerScore();
             }
@@ -361,7 +361,7 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
         // The powerups will be deactivated when the players will switch
         GameModel.getInstance().getCurrentPlayer().setPowerUpTakeBoxActive(false);
         checkIfPowerUpButtonShouldBeActive();
-        textCurrentPlayer.setText("Player " + GameModel.getInstance().getCurrentPlayer().getPlayerNumber() + " is aan de beurt");
+        textCurrentPlayer.setText("Player " + GameModel.getInstance().getCurrentPlayer().getPlayerNumber() + "'s turn");
     }
 
     private void gameFinished() {
