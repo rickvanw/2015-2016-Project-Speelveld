@@ -42,7 +42,7 @@
             <TextView
                 android:id="@+id/tvManualText"
                 android:layout_width="wrap_content"
-                android:layout_height="700dp"
+                android:layout_height="wrap_content"
                 android:layout_alignEnd="@+id/tvManualTitle"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/tvManualTitle"
@@ -50,6 +50,54 @@
                 android:text="@string/txt_manual"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tvManualText2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/txt_manual2"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:layout_below="@+id/tvManualText"
+                android:layout_alignStart="@+id/tvManualText"
+                android:layout_alignEnd="@+id/tvManualTitle"
+                android:layout_marginTop="20dp" />
+
+            <TextView
+                android:id="@+id/tvManualText3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/txt_manual3"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:layout_below="@+id/tvManualText2"
+                android:layout_alignStart="@+id/tvManualText2"
+                android:layout_alignEnd="@+id/tvManualTitle"
+                android:layout_marginTop="20dp" />
+
+            <TextView
+                android:id="@+id/tvManualText4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/txt_manual4"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:layout_below="@+id/tvManualText3"
+                android:layout_alignStart="@+id/tvManualText3"
+                android:layout_alignEnd="@+id/tvManualTitle"
+                android:layout_marginTop="20dp" />
+
+            <TextView
+                android:id="@+id/tvManualText5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/txt_manual5"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:layout_below="@+id/tvManualText4"
+                android:layout_alignStart="@+id/tvManualText2"
+                android:layout_alignEnd="@+id/tvManualTitle"
+                android:layout_marginTop="20dp" />
 
             <ImageView
                 android:id="@+id/ivManual1"
@@ -63,27 +111,24 @@
                 android:id="@+id/ivManual2"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_alignParentEnd="true"
-                android:layout_below="@+id/ivManual1"
-                android:layout_marginTop="35dp"
-                android:background="@drawable/manual_box_done" />
+                android:background="@drawable/manual_box_done"
+                android:layout_alignBottom="@+id/tvManualText2"
+                android:layout_alignParentEnd="true" />
 
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_below="@+id/ivManual2"
-                android:layout_alignStart="@+id/ivManual2"
-                android:layout_marginTop="120dp"
-                android:background="@drawable/takeoverbutton" />
+                android:background="@drawable/takeoverbutton"
+                android:layout_alignTop="@+id/tvManualText4"
+                android:layout_alignParentEnd="true" />
 
             <ImageView
                 android:id="@+id/imageView2"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_alignTop="@+id/imageView"
+                android:layout_alignTop="@+id/tvManualText5"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="180dp"
                 android:background="@drawable/bombbutton" />
         </RelativeLayout>
     </ScrollView>
