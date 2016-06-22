@@ -95,12 +95,13 @@ public class BoxView extends View {
             backgroundColorAnimator.start();
 
             // Play the explosion sound corresponding to the theme
-            if(GameModel.getInstance().getTheme()==0) {
-                AudioPlay.playAudio(getContext(), R.raw.explosion);
-            }else{
-                AudioPlay.playAudio(getContext(), R.raw.explosion_2);
+            if (!AudioPlay.isMuted) {
+                if (GameModel.getInstance().getTheme() == 0) {
+                    AudioPlay.playAudio(getContext(), R.raw.explosion);
+                } else {
+                    AudioPlay.playAudio(getContext(), R.raw.explosion_2);
+                }
             }
-
         }
 
     }
