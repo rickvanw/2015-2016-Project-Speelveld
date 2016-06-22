@@ -52,9 +52,9 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
     // Sets the text of the theme button depending on if the theme is already on or not
     private void setButtonThemeText(){
         if(GameModel.getInstance().getTheme()==0){
-            buttonTheme.setText("on");
-        }else{
             buttonTheme.setText("off");
+        }else{
+            buttonTheme.setText("on");
         }
     }
 
