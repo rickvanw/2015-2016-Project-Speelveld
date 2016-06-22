@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Kamertje Verhuren</string>
+    <string name="app_name">Dots&amp;Boxes</string>
     <string name="placeholder">Placeholder</string>
     <string name="boardsize">BoardSize</string>
     <string name="txt_manual">The players have to take turns in tapping a line. \n \n Once the last line of a box is tapped, the point belongs to the player that placed the last line. \n  \n If a player has claimed a box, the same player can place another line.</string>
