@@ -18,6 +18,16 @@
         android:layout_alignParentEnd="true"
         android:orientation="vertical"
         android:id="@+id/linearlayout_game">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text=""
+            android:id="@+id/textViewTimer"
+            android:layout_above="@+id/linearlayout_game"
+            android:layout_gravity="center_horizontal"/>
+
         <TextView
             android:id="@+id/txt_player"
             android:layout_width="wrap_content"
@@ -36,15 +46,6 @@
             android:textSize="20sp" />
     </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text=""
-        android:id="@+id/textViewTimer"
-        android:layout_above="@+id/linearlayout_game"
-        android:layout_centerHorizontal="true" />
-
     <Chronometer
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -58,7 +59,7 @@
         android:layout_height="50dp"
         android:id="@+id/buttonPowerUpTakeBox"
         android:background="@drawable/takeoverbutton"
-        android:layout_above="@+id/chronometer"
+        android:layout_alignBottom="@+id/chronometer"
         android:layout_alignParentStart="true" />
 
     <Button
