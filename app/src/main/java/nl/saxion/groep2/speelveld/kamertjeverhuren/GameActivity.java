@@ -37,7 +37,7 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
     private CountDownTimer randomBombTimer;
     int secondsLeft = 0;
     private Chronometer chronometer;
-    private LinearLayout llGameInfo;
+    private RelativeLayout rlGame;
 
 
     @Override
@@ -45,7 +45,7 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        llGameInfo = (LinearLayout) findViewById(R.id.linearlayout_game);
+        rlGame = (RelativeLayout) findViewById(R.id.rl_game);
 
         // Get lowest screen width or height to create a square
         DisplayMetrics metrics = new DisplayMetrics();
@@ -130,7 +130,7 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
 
         checkIfPowerUpButtonShouldBeActive();
 
-        llGameInfo.setBackgroundColor(GameModel.getInstance().getCurrentPlayer().getBoxColor());
+        rlGame.setBackgroundColor(GameModel.getInstance().getCurrentPlayer().getBoxColor());
     }
 
     public void initCountDownTimer() {
@@ -355,10 +355,10 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
     private void switchPlayer() {
         if (GameModel.getInstance().getCurrentPlayer().equals(GameModel.getInstance().getPlayer1())) {
             GameModel.getInstance().setCurrentPlayer(GameModel.getInstance().getPlayer2());
-            llGameInfo.setBackgroundColor(GameModel.getInstance().getCurrentPlayer().getBoxColor());
+            rlGame.setBackgroundColor(GameModel.getInstance().getCurrentPlayer().getBoxColor());
         } else if (GameModel.getInstance().getCurrentPlayer().equals(GameModel.getInstance().getPlayer2())) {
             GameModel.getInstance().setCurrentPlayer(GameModel.getInstance().getPlayer1());
-            llGameInfo.setBackgroundColor(GameModel.getInstance().getCurrentPlayer().getBoxColor());
+            rlGame.setBackgroundColor(GameModel.getInstance().getCurrentPlayer().getBoxColor());
         }
         // The powerups will be deactivated when the players will switch
         GameModel.getInstance().getCurrentPlayer().setPowerUpTakeBoxActive(false);
