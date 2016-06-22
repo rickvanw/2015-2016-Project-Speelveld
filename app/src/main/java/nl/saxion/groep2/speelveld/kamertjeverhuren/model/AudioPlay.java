@@ -16,9 +16,7 @@ public class AudioPlay {
             mediaPlayer.release();
         }
         mediaPlayer = MediaPlayer.create(c, id);
-        if (!mediaPlayer.isPlaying()) {
-            mediaPlayer.start();
-        }
+        mediaPlayer.start();
     }
 
     public static void muteUnmute() {

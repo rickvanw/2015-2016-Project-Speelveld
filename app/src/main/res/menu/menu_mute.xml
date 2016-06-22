@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/new_game"
-        android:icon="@drawable/restart_button"
+        android:icon="@drawable/settings"
         app:showAsAction="always"
         android:title="Compose">
     </item>
