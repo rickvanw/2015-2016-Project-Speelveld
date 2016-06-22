@@ -74,7 +74,8 @@
                 android:layout_height="100dp"
                 android:layout_below="@+id/ivManual2"
                 android:layout_alignStart="@+id/ivManual2"
-                android:layout_marginTop="120dp" />
+                android:layout_marginTop="120dp"
+                android:background="@drawable/takeoverbutton" />
 
             <ImageView
                 android:id="@+id/imageView2"
@@ -82,7 +83,8 @@
                 android:layout_height="100dp"
                 android:layout_alignTop="@+id/imageView"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="180dp" />
+                android:layout_marginTop="180dp"
+                android:background="@drawable/bombbutton" />
         </RelativeLayout>
     </ScrollView>
 
