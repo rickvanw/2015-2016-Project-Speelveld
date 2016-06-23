@@ -2,85 +2,66 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin">
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
+        android:id="@+id/tv_boardsize"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="42dp"
-        android:layout_marginTop="82dp"
+        android:layout_alignBaseline="@+id/spinnerBoardSize"
         android:text="Boardsize" />
 
     <Spinner
         android:id="@+id/spinnerBoardSize"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView"
-        android:layout_alignBottom="@+id/textView"
         android:layout_alignParentEnd="true"
-        android:layout_toEndOf="@+id/textView"
+        android:layout_toEndOf="@+id/tv_boardsize"
         android:spinnerMode="dropdown" />
 
     <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
+        android:id="@+id/textview_theme"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/spinnerBoardSize"
-        android:layout_marginTop="39dp"
-        android:layout_toStartOf="@+id/spinnerBoardSize"
-        android:text="Theme" />
+        android:layout_alignBaseline="@+id/buttonTheme"
+        android:text="@string/theme" />
 
     <Button
         android:id="@+id/buttonTheme"
-        style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView3"
-        android:layout_marginLeft="15dp"
-        android:layout_toEndOf="@+id/textView3" />
+        android:layout_below="@+id/spinnerBoardSize"
+        android:layout_toEndOf="@+id/textview_theme" />
 
-    <RelativeLayout
-        android:id="@+id/rl_player1_name"
+    <TextView
+        android:id="@+id/tv_player1_name"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/et_player1_name"
+        android:text="Player 1's name" />
+
+    <EditText
+        android:id="@+id/et_player1_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/buttonTheme">
+        android:layout_below="@id/buttonTheme"
+        android:layout_toEndOf="@id/tv_player1_name" />
 
-        <TextView
-            android:id="@+id/tv_player1_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_alignBaseline="@+id/et_player1_name"
-            android:text="Player 1's name" />
+    <TextView
+        android:id="@+id/tv_player2_name"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/et_player2_name"
+        android:text="Player 2's name" />
 
-        <EditText
-            android:id="@+id/et_player1_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/tv_player1_name" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/rl_player2_name"
+    <EditText
+        android:id="@+id/et_player2_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/rl_player1_name">
-
-        <TextView
-            android:id="@+id/tv_player2_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_alignBaseline="@+id/et_player2_name"
-            android:text="Player 2's name" />
-
-        <EditText
-            android:id="@+id/et_player2_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/tv_player2_name" />
-    </RelativeLayout>
+        android:layout_below="@+id/et_player1_name"
+        android:layout_toEndOf="@id/tv_player2_name" />
 </RelativeLayout>

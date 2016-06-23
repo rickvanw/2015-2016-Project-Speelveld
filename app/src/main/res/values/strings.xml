@@ -7,4 +7,5 @@
     <string name="txt_manual3">If a player has claimed a box, the same player can place another line.</string>
     <string name="txt_manual4">A player can take one box from the other player by tapping the "take box" button and then selecting the box to claim.</string>
     <string name="txt_manual5">Each game, both players can place one bomb. The bomb can be placed by clicking the "place bomb" button and by then selecting the box to blow up.</string>
+    <string name="theme">Theme</string>
 </resources>
