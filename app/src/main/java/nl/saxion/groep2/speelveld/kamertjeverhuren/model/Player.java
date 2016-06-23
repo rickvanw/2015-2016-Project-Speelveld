@@ -4,6 +4,7 @@ public class Player {
     private int playerNumber, currentScore, lineColor, boxColor, powerUpTakeBox, powerUpPlaceBomb;
     private boolean powerUpTakeBoxActive = false;
     private boolean powerUpPlaceBombActive = false;
+    private String playerName;
 
     public Player(int playerNumber, int lineColor, int boxColor) {
         this.playerNumber = playerNumber;
@@ -25,6 +26,10 @@ public class Player {
     public void decreaseScore(int amount) {
         // score should not have a negative value
         currentScore = Math.max(currentScore -= amount, 0);
+    }
+
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
     }
 
     public void decreasePowerUpTakeBox() {
@@ -86,5 +91,13 @@ public class Player {
 
     public boolean isPowerUpPlaceBombActive() {
         return powerUpPlaceBombActive;
+    }
+
+    public String getPlayerName() {
+        if(playerName == null)
+        {
+            return "Player "+playerNumber;
+        }
+        return playerName;
     }
 }

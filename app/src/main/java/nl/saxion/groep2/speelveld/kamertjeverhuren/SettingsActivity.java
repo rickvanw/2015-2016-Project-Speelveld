@@ -2,10 +2,13 @@ package nl.saxion.groep2.speelveld.kamertjeverhuren;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 import nl.saxion.groep2.speelveld.kamertjeverhuren.model.GameModel;
@@ -46,6 +49,44 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
                     GameModel.getInstance().setTheme(0);
                 }
                 setButtonThemeText();
+            }
+        });
+
+        // functionality for usernames
+        EditText player1 = (EditText) findViewById(R.id.et_player1_name);
+        EditText player2 = (EditText) findViewById(R.id.et_player2_name);
+
+        player1.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                GameModel.getInstance().getPlayer1().setPlayerName(""+s);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        player2.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                GameModel.getInstance().getPlayer2().setPlayerName(""+s);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
     }

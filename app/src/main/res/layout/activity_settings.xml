@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Boardsize"
-        android:id="@+id/textView"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:layout_marginStart="42dp"
         android:layout_marginTop="82dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:text="Boardsize" />
 
     <Spinner
+        android:id="@+id/spinnerBoardSize"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/spinnerBoardSize"
         android:layout_alignBaseline="@+id/textView"
         android:layout_alignBottom="@+id/textView"
         android:layout_alignParentEnd="true"
@@ -24,20 +25,62 @@
         android:spinnerMode="dropdown" />
 
     <TextView
+        android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Theme"
-        android:id="@+id/textView3"
-        android:layout_marginTop="39dp"
         android:layout_below="@+id/spinnerBoardSize"
-        android:layout_toStartOf="@+id/spinnerBoardSize" />
+        android:layout_marginTop="39dp"
+        android:layout_toStartOf="@+id/spinnerBoardSize"
+        android:text="Theme" />
 
     <Button
+        android:id="@+id/buttonTheme"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/buttonTheme"
-        android:layout_alignTop="@+id/textView3"
-        android:layout_toEndOf="@+id/textView3"
-        android:layout_marginLeft="15dp" />
+        android:layout_alignBaseline="@+id/textView3"
+        android:layout_marginLeft="15dp"
+        android:layout_toEndOf="@+id/textView3" />
+
+    <RelativeLayout
+        android:id="@+id/rl_player1_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonTheme">
+
+        <TextView
+            android:id="@+id/tv_player1_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_alignBaseline="@+id/et_player1_name"
+            android:text="Player 1's name" />
+
+        <EditText
+            android:id="@+id/et_player1_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/tv_player1_name" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_player2_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rl_player1_name">
+
+        <TextView
+            android:id="@+id/tv_player2_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_alignBaseline="@+id/et_player2_name"
+            android:text="Player 2's name" />
+
+        <EditText
+            android:id="@+id/et_player2_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/tv_player2_name" />
+    </RelativeLayout>
 </RelativeLayout>

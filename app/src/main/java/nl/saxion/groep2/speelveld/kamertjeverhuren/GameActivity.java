@@ -104,7 +104,7 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
         }else{
             relativeLayout.setBackgroundResource(R.drawable.background_2);
         }
-        textCurrentPlayer.setText("Player " + GameModel.getInstance().getCurrentPlayer().getPlayerNumber() + "'s turn");
+        textCurrentPlayer.setText(GameModel.getInstance().getCurrentPlayer().getPlayerName() + "'s turn");
         setTextPlayerScore();
 
         // Draw boxes
@@ -325,7 +325,7 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
 
     // Set the player scores on the display
     private void setTextPlayerScore() {
-        textPlayerScore.setText("Player 1: " + GameModel.getInstance().getPlayer1().getCurrentScore() + " - Player 2: " + GameModel.getInstance().getPlayer2().getCurrentScore());
+        textPlayerScore.setText(GameModel.getInstance().getPlayer1().getPlayerName()+ ": " + GameModel.getInstance().getPlayer1().getCurrentScore() +" "+ GameModel.getInstance().getPlayer2().getPlayerName()+": " + GameModel.getInstance().getPlayer2().getCurrentScore());
     }
 
     // This methods makes sure that the powerUp button is only available when it's not already used for the current player.
@@ -363,7 +363,7 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
         // The powerups will be deactivated when the players will switch
         GameModel.getInstance().getCurrentPlayer().setPowerUpTakeBoxActive(false);
         checkIfPowerUpButtonShouldBeActive();
-        textCurrentPlayer.setText("Player " + GameModel.getInstance().getCurrentPlayer().getPlayerNumber() + "'s turn");
+        textCurrentPlayer.setText(GameModel.getInstance().getCurrentPlayer().getPlayerName() + "'s turn");
     }
 
     private void gameFinished() {
