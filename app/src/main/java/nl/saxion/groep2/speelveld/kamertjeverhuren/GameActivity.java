@@ -427,4 +427,10 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         newGame();
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        randomBombTimer.cancel();
+    }
 }
