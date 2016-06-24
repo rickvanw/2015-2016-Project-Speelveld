@@ -428,4 +428,9 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
         newGame();
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        randomBombTimer.cancel();
+    }
 }
