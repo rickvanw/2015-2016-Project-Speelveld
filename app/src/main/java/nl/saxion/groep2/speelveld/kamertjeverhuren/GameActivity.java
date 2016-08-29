@@ -40,6 +40,8 @@ public class GameActivity extends AppCompatActivity implements LineView.Callback
     private RelativeLayout rlGame;
 
 
+    // just a test
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
